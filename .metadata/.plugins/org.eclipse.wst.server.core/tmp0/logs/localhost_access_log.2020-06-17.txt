@@ -115,3 +115,12 @@
 0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:21:09 +0900] "GET /Lecture_Evaluation/js/jquery.min.js HTTP/1.1" 200 89476
 0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:21:09 +0900] "GET /Lecture_Evaluation/js/bootstrap.min.js HTTP/1.1" 200 60174
 0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:21:09 +0900] "GET /favicon.ico HTTP/1.1" 404 1085
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:33:43 +0900] "GET /Lecture_Evaluation/index.jsp HTTP/1.1" 200 2252
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:33:43 +0900] "GET /Lecture_Evaluation/css/bootstrap.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:33:43 +0900] "GET /Lecture_Evaluation/js/jquery.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:33:43 +0900] "GET /Lecture_Evaluation/css/custom.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:33:43 +0900] "GET /Lecture_Evaluation/js/bootstrap.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:33:44 +0900] "GET /Lecture_Evaluation/index.jsp HTTP/1.1" 200 2252
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:34:10 +0900] "GET /Lecture_Evaluation/index.jsp? HTTP/1.1" 200 2252
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:35:12 +0900] "GET /Lecture_Evaluation/index.jsp? HTTP/1.1" 200 2253
+0:0:0:0:0:0:0:1 - - [17/Jun/2020:23:35:25 +0900] "GET /Lecture_Evaluation/index.jsp? HTTP/1.1" 200 2253
