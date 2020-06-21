@@ -52,10 +52,10 @@ public class EvaluationDTO {
 	public void setSemesterDivide(String semesterDivide) {
 		this.semesterDivide = semesterDivide;
 	}
-	public String getLectureDivde() {
+	public String getLectureDivide() {
 		return lectureDivde;
 	}
-	public void setLectureDivde(String lectureDivde) {
+	public void setLectureDivide(String lectureDivde) {
 		this.lectureDivde = lectureDivde;
 	}
 	public String getEvaluationTitle() {

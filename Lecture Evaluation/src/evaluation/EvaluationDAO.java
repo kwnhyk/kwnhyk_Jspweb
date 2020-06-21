@@ -19,17 +19,20 @@ public int write(EvaluationDTO evaluationDTO) {
 		try {
 			conn= DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				if(rs.getString(1).equals(userPassword)) {
-					return 1; //성공
-				}
-				else {
-					return 0;//비번 틀림
-				}
-			}
-			return -1 ;//아이디 없음
+			pstmt.setString(1, evaluationDTO.getUserID());
+			pstmt.setString(2, evaluationDTO.getLectureName());
+			pstmt.setString(3, evaluationDTO.getProfessorName());
+			pstmt.setInt(4, evaluationDTO.getLectureYear());
+			pstmt.setString(5, evaluationDTO.getSemesterDivide());
+			pstmt.setString(6, evaluationDTO.getLectureDivide());
+			pstmt.setString(7, evaluationDTO.getEvaluationTitle());
+			pstmt.setString(8, evaluationDTO.getEvaluationContent());
+			pstmt.setString(9, evaluationDTO.getTotalScore());
+			pstmt.setString(10, evaluationDTO.getCreditScore());
+			pstmt.setString(11, evaluationDTO.getCharacterScore());
+			pstmt.setString(12, evaluationDTO.getLectureScore());
+			return pstmt.executeUpdate();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -49,6 +52,6 @@ public int write(EvaluationDTO evaluationDTO) {
 					e.printStackTrace();
 			}
 		}
-		return -2;//데이터베이스 오류
+		return -1;//데이터베이스 오류
 	}
 }

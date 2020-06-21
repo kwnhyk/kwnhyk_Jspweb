@@ -94,7 +94,7 @@
         <section class="container">
         	<form method="get" action="./index.jsp" class="form-inline mt-3">
         	
-        		<select name="LectureDivde" class="form-control mx-1 mt-2">
+        		<select name="LectureDivide" class="form-control mx-1 mt-2">
         			<option value="전체"> 전체</option>
         			<option value="전공"> 전공</option>
         			<option value="교양"> 교양</option>
@@ -272,7 +272,7 @@
         								</div>
         								<div class="form-group col-sm-4">
         									<label>수강 학기</label>
-        									<select name="semesterDivde" class="form-control">
+        									<select name="semesterDivide" class="form-control">
         										<option value="1학기" selected>1학기</option>
         										<option value="여름학기" >여름학기</option>
         										<option value="2학기" >2학기</option>
@@ -300,14 +300,14 @@
         							</div>
         							<div class="form-group">
         								<label>제목</label>
-        								<input type="text" name="evaluationTime" class="form-control"maxlength="30">
+        								<input type="text" name="evaluationTitle" class="form-control"maxlength="30">
         								
         								
         							</div>
         							<div class="form-group">
         								<label>내용</label>
         								
-        								<textarea  name="evaluatinContent" class="form-control"
+        								<textarea  name="evaluationContent" class="form-control"
         								 maxlength="2048" style="height:180px;"></textarea>
         								 
         							</div>
@@ -324,7 +324,7 @@
         								</div>
         								<div class="form-group col-sm-3">
         									<label>인성</label>
-        									<select name="totalScore" class="form-control">
+        									<select name="characterScore" class="form-control">
         										<option value="A" selected>A</option>
         										<option value="B" >B</option>
         										<option value="C" >C</option>
@@ -334,7 +334,7 @@
         								</div>
         								<div class="form-group col-sm-3">
         									<label>강의</label>
-        									<select name="totalScore" class="form-control">
+        									<select name="lectureScore" class="form-control">
         										<option value="A" selected>A</option>
         										<option value="B" >B</option>
         										<option value="C" >C</option>
@@ -344,7 +344,7 @@
         								</div>
         								<div class="form-group col-sm-3">
         									<label>성적</label>
-        									<select name="totalScore" class="form-control">
+        									<select name="creditScore" class="form-control">
         										<option value="A" selected>A</option>
         										<option value="B" >B</option>
         										<option value="C" >C</option>
