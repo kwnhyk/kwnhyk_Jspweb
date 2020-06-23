@@ -10,6 +10,20 @@
         <link rel="stylesheet" href="./css/bootstrap.min.css" >
         <!-- 커스텀CSS추가 -->
         <link rel="stylesheet" href="./css/custom.css" >
+             <!-- 커스텀Navbar추가 -->
+        <link rel="stylesheet" href="./css/custom-theme.min.css">
+   
+           <!--점보트론 스타일 적용-->
+         
+<style type="text/css">
+      .jumbotron{
+      	
+        background-image: url('images/jumbotron.jpg');
+        background-size: cover;
+        text-shadow: black 0.2em 0.2em 0.2em;
+        color:white;
+      }
+</style>
     </head>
     <body>
       <%
@@ -30,7 +44,7 @@
     	
     
     %>
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <nav class="navbar navbar-expand-lg navbar-darkgray">
             <a class="navbar-brand" href="index.jsp">강의평가 웹 사이트</a>
             <button
                 class="navbar-toggler"
@@ -81,6 +95,13 @@
             	</form>
             </div>
         </nav>
+        	<div class="jumbotron " >
+        		<h1 class ="text-center">세상의 모든 강의평</h1>
+        		<p class="text-center" ><br><br>강의를 평가하자</p>
+        		
+        	
+        	</div>
+        
         <section class="container mt-3" style="max-width:560px;">
         	<form method="post" action="./userRegisterAction.jsp">
         		<div class="form-group">
