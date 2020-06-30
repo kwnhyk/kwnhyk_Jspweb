@@ -1,25 +1,25 @@
-
-# Created by https://www.gitignore.io/api/java,gradle
-
-### Gradle ###
-.gradle
+node_modules/
+.vscode/
+.gradle/
+.settings/
+bin/
 build/
+temp/
+Debug/
+Release/
+Lecture Evaluation/
+Servers/
 
-# Ignore Gradle GUI config
-gradle-app.setting
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
-# Eclipse
+package-lock.json
+.DS_Store
 .classpath
 .project
-.settings/
-
-bin
-
-# Mac
-.DS_Store
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+*.war
+*.ear
+*.out
+*.exe
+hs_err_pid*
