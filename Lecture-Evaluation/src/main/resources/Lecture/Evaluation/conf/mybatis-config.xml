@@ -25,11 +25,9 @@
   </environments>
   
   <mappers>
-    <mapper resource="Lecture/Evaluation/mapper/BoardMapper.xml"/>
-    <mapper resource="Lecture/Evaluation/mapper/LessonMapper.xml"/>
-    <mapper resource="Lecture/Evaluation/mapper/MemberMapper.xml"/>
-    <mapper resource="Lecture/Evaluation/mapper/PhotoBoardMapper.xml"/>
-    <mapper resource="Lecture/Evaluation/mapper/PhotoFileMapper.xml"/>
+    <mapper resource="Lecture/Evaluation/mapper/EvaluationMapper.xml"/>
+    <mapper resource="Lecture/Evaluation/mapper/UserMapper.xml"/>
+    <mapper resource="Lecture/Evaluation/mapper/LikeyMapper.xml"/>
   </mappers>
 </configuration>
 
