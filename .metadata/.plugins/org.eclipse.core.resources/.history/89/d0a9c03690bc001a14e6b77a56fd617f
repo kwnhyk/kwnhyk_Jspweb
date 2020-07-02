@@ -1,5 +1,0 @@
-# key=value
-jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://localhost:3306/LectureEvaluation?serverTimezone=UTC
-jdbc.username=root
-jdbc.password=1111

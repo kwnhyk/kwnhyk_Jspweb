@@ -9,6 +9,7 @@ Debug/
 Release/
 Lecture Evaluation/
 Servers/
+.metadata
 
 package-lock.json
 .DS_Store
