@@ -62,26 +62,36 @@
    	 characterScore,
    	 likeCount
    	 ) 
-    values(#{title})
+    values(#{userID},   #{lectureName},
+   	#{professorName},
+   	#{lectureYear},
+   	 #{semesterDivide},
+   	#{ lectureDivide},
+   	 #{evaluationTitle},
+   	#{ evaluationContent},
+   	 #{totalScore},
+   	 #{creditScore},
+   	#{ characterScore},
+   	 #{likeCount})
   </insert>
   
-  <select id="selectDetail" resultMap="EvaluationMap" parameterType="int">
-    select 
+  <select id="selectId" resultMap="EvaluationMap" parameterType="int">
+    SELECT userID
+     FROM EVALUATION 
+     WHERE evaluationID =#{evaluationID}
     
-    from 
-     
-    where 
-     =#{no}
+   
   </select>
   
-  <update id="updateBoard" parameterType="EvaluationDTO">
-    update j set
-      jj=#{title}
-    where jjj=#{no}
+  <update id="updateLike" parameterType="EvaluationDTO">
+    update evaluation set
+      likeCount=#{likeCount+1}
+    where evaluationID=#{evaluationID}
   </update>
   
   <delete id="deleteBoard" parameterType="int">
-    delete from j
-    where jjj=#{no}
+    DELETE FROM EVALUATION 
+    WHERE evaluationID = #{evaluationID}
+   
   </delete>
 </mapper>
