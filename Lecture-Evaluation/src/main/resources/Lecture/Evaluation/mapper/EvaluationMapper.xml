@@ -48,7 +48,7 @@
      evaluationID DESC LIMIT " + pageNumber*5 + ","+pageNumber*5 +6;
   </select>
   
-  <insert id="writeEvaluation" parameterType="EvaluationDTO">
+  <insert id="write" parameterType="EvaluationDTO">
     INSERT INTO EVALUATION(#{userID ,jdbcType=VARCHAR},
     lectureName,
    	professorName,
@@ -75,7 +75,7 @@
    	 #{likeCount})
   </insert>
   
-  <select id="selectId" resultMap="EvaluationMap" parameterType="int">
+  <select id="getUserID" resultMap="EvaluationMap" parameterType="int">
     SELECT userID
      FROM EVALUATION 
      WHERE evaluationID =#{evaluationID}
@@ -83,13 +83,13 @@
    
   </select>
   
-  <update id="updateLike" parameterType="EvaluationDTO">
+  <update id="like" parameterType="EvaluationDTO">
     update evaluation set
       likeCount=#{likeCount+1}
     where evaluationID=#{evaluationID}
   </update>
   
-  <delete id="deleteBoard" parameterType="int">
+  <delete id="delete" parameterType="int">
     DELETE FROM EVALUATION 
     WHERE evaluationID = #{evaluationID}
    

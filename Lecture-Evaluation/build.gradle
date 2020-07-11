@@ -39,13 +39,32 @@ dependencies {
 	  compile "com.sun.mail:javax.mail"
 	   implementation 'org.apache.commons:commons-email:1.5'
   
+// JSTL API 및 구현 라이브러리
+  implementation 'jstl:jstl:1.2'
+   // Mail API
+  
+  compile "com.sun.mail:javax.mail"
+  
+  compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.0'
+  
+  implementation 'org.apache.commons:commons-email:1.5'
+  
   implementation 'javax.mail:mailapi:1.4.3'
 // https://mvnrepository.com/artifact/mysql/mysql-connector-java
 	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
 	 compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
 	 // https://mvnrepository.com/artifact/org.mybatis/mybatis
 compile group: 'org.mybatis', name: 'mybatis', version: '3.5.5'
+ 
+  // log4j 2.x 라이브러리
+  implementation 'org.apache.logging.log4j:log4j-core:2.13.1'
+   // Spring webMVC 라이브러리
+  implementation 'org.springframework:spring-webmvc:5.2.5.RELEASE'
+    // Spring JDBC 관련 라이브러리
+  implementation 'org.springframework:spring-jdbc:5.2.5.RELEASE'
 	 
+ // Mybatis를 Spring IoC와 연결하는 어댑터 라이브러리
+  implementation 'org.mybatis:mybatis-spring:2.0.4'
 
     
 }

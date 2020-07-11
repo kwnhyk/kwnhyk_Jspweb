@@ -6,6 +6,16 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.net.URLEncoder" %>
 
+
+<%-- 
+<jsp:usebean id ="userID"
+class="Lecture.Evaluation.user.UserDTO"
+scope="session"/>
+
+
+
+
+--%>
 <%
 
 	String userID = null;

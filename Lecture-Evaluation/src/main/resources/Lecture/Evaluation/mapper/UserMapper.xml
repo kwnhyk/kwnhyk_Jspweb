@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="UserMapper">
+
+  <resultMap type="Lecture.Evaluation.user.UserDTO" id="UserMap">
+    <id column="userID"   property="userID"/>
+    <result column="userPassword"  property="userPassword"/>
+    <result column="userEmail"    property="userEmail"/>
+    <result column="userEmailHash" property="userEmailHash"/>
+    <result column="userEmailChecked" property="userEmailChecked"/>
+   
+    
+  </resultMap>
+  
+  <select id="login" resultMap="UserMap">
+   SELECT
+    	userPassword 
+    FROM
+     	USER  
+    
+   
+
+    where 
+		 userID =#{userID}
+					
+   
+  </select>
+  
+  <insert id="join" parameterType="UserDTO">
+    INSERT INTO USER (userID ,
+    	userPassword,
+    	userEmail,
+    	userEmailHash,
+    	userEmailChecked
+    
+   	 ) 
+    values(#{userID},   #{userPassword},
+   	#{professorName},
+   	#{userEmail},
+   	 #{userEmailHash},
+   	0
+   
+   	
+  </insert>
+  
+  <select id="selectId" resultMap="EvaluationMap" parameterType="int">
+    SELECT userID
+     FROM EVALUATION 
+     WHERE evaluationID =#{evaluationID}
+    
+   
+  </select>
+  
+  <update id="updateLike" parameterType="UserDTO">
+    update evaluation set
+      likeCount=#{likeCount+1}
+    where evaluationID=#{evaluationID}
+  </update>
+  
+  <delete id="deleteBoard" parameterType="int">
+    DELETE FROM EVALUATION 
+    WHERE evaluationID = #{evaluationID}
+   
+  </delete>
+</mapper>
