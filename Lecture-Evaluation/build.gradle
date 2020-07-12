@@ -24,6 +24,18 @@ repositories {
     jcenter()
 }
 
+tasks.withType(JavaCompile) {
+    // 프로젝트의 소스 파일 인코딩을 gradle에게 알려준다.
+    options.encoding = 'UTF-8' 
+
+    // 소스 파일을 작성할 때 사용할 자바 버전
+    sourceCompatibility = '1.8'
+
+    // 자바 클래스를 실행시킬 JVM의 최소 버전
+    targetCompatibility = '1.8'
+}
+
+
 dependencies {
   
 
@@ -63,6 +75,12 @@ compile group: 'org.mybatis', name: 'mybatis', version: '3.5.5'
 	 
  // Mybatis를 Spring IoC와 연결하는 어댑터 라이브러리
   implementation 'org.mybatis:mybatis-spring:2.0.4'
-
+ // Apache HttpComponents 라이브러리
+  implementation 'org.apache.httpcomponents.client5:httpclient5:5.0'
+  // https://mvnrepository.com/artifact/org.springframework/spring-context
+compile group: 'org.springframework', name: 'spring-context', version: '5.2.7.RELEASE'
+  // https://mvnrepository.com/artifact/org.springframework/spring-context-support
+compile group: 'org.springframework', name: 'spring-context-support', version: '5.2.7.RELEASE'
+  
     
 }

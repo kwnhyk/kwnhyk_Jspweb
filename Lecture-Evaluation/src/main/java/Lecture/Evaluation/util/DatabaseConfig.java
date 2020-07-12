@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 
 // Spring IoC 컨테이너에서 사용할 Properties 파일을 로딩하기
-@PropertySource("classpath:com/eomcs/lms/conf/jdbc.properties")
+@PropertySource("classpath:Lecture/Evaluation/conf/jdbc.properties")
 public class DatabaseConfig {
 
   static Logger logger = LogManager.getLogger(DatabaseConfig.class);

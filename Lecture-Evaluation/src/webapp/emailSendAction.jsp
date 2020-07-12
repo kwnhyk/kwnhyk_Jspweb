@@ -14,8 +14,8 @@
 <%@ page import="Lecture.Evaluation.util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
 
+
 <%
-	UserDAO userDAO = new UserDAO();
 	String userID = null;
 	if(session.getAttribute("userID")!=null){
 		userID = (String) session.getAttribute("userID");
@@ -31,9 +31,9 @@
 	return;
 	
 	 }
-	
-
-	
+ %>
+<%--
+		UserDAO userDAO = new UserDAO();
 	boolean emailChecked = userDAO.getUserEmailChecked(userID);
 	if(emailChecked==true){
 		PrintWriter script = response.getWriter();
@@ -90,7 +90,7 @@
 
 		
 	
-	%>
+	--%>
 
 <!DOCTYPE html>
 <html>
@@ -128,7 +128,7 @@
             			
             			<%
             			
-            			if(userID  == null){
+            			if(userID == null){
             				%>
             				<a class="dropdown-item" href="userLogin.jsp">로그인</a>
                 			<a class="dropdown-item" href="userJoin.jsp">회원가입</a>

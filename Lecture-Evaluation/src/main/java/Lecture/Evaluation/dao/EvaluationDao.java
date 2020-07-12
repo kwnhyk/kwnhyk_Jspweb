@@ -1,7 +1,8 @@
 package Lecture.Evaluation.dao;
 
-import Lecture.Evaluation.util.DatabaseUtil;
+import Lecture.Evaluation.evaluation.EvaluationDTO;
 import java.util.List;
+import java.util.Map;
 
 public interface EvaluationDao {
 
@@ -9,20 +10,21 @@ public int insert(EvaluationDTO evaluationDTO) throws Exception;
 		
 	
 	
-	default List<EvaluationDTO> getList(Map<String, Object> params)
-			throws Exception
-	{
-	return null;
-	}
+	public List<EvaluationDTO> getList(Map<String, Object> params)
+			throws Exception;
+	
+	
+	public List<EvaluationDTO> findByEvaluationId(int no) throws Exception;
+	public List<EvaluationDTO> findByLikeNo(int no) throws Exception;
 	public int like(int evaluationID)throws Exception; 
 		
 	
 	
-public int delete(int evaluationID) throws Exception;
+	public int delete(int evaluationID) throws Exception;
 		
 		
 	
-public EvaluationDTO getUserID(int evaluationID) throws Exception;
+	public EvaluationDTO getUserID(int evaluationID) throws Exception;
 	
 	
 
