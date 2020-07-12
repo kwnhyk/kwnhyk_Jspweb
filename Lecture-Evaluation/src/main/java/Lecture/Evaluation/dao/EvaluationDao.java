@@ -3,7 +3,7 @@ package Lecture.Evaluation.dao;
 import Lecture.Evaluation.util.DatabaseUtil;
 import java.util.List;
 
-public interface EvaluationDAO2 {
+public interface EvaluationDao {
 
 public int insert(EvaluationDTO evaluationDTO) throws Exception;
 		

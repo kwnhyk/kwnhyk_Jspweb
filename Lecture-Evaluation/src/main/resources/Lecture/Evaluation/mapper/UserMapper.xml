@@ -48,8 +48,8 @@
   
   <select id="selectId" resultMap="EvaluationMap" parameterType="int">
     SELECT userID
-     FROM EVALUATION 
-     WHERE evaluationID =#{evaluationID}
+     FROM user 
+     WHERE userID =#{UserID}
     
    
   </select>
@@ -61,8 +61,17 @@
   </update>
   
   <delete id="deleteBoard" parameterType="int">
-    DELETE FROM EVALUATION 
-    WHERE evaluationID = #{evaluationID}
+    DELETE FROM USER 
+    WHERE userID = #{userID}
    
   </delete>
+  <!-- 회원 인증키(난수) 생성 -->
+	<insert id="GetKey" parameterType="Map">
+		update user set userKey = #{param2} where userId = #{param1}
+	</insert>
+	<!-- 회원 인증키(난수) Y로 변경 -->
+	<update id="alter_userKey" parameterType="Map">
+		update user set userKey = 'Y' where userId = #{param1} and userKey = #{param2}
+	</update>
+
 </mapper>

@@ -34,10 +34,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     // https://mvnrepository.com/artifact/javax.activation/activation
 	compile group: 'javax.activation', name: 'activation', version: '1.1.1'
-// https://mvnrepository.com/artifact/javax.mail/javax.mail-api
-	compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
-	  compile "com.sun.mail:javax.mail"
-	   implementation 'org.apache.commons:commons-email:1.5'
+
+	
   
 // JSTL API 및 구현 라이브러리
   implementation 'jstl:jstl:1.2'
