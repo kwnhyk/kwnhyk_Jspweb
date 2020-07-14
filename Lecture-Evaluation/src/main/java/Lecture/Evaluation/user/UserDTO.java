@@ -8,6 +8,7 @@ public class UserDTO {
 	private String userEmail;
 	private String userEmailHash;
 	private boolean userEmailChecked;
+	 private String alterKey;
 
 	public String getUserID() {
 		return userID;
@@ -61,6 +62,14 @@ public class UserDTO {
 		this.userEmail = userEmail;
 		this.userEmailHash = userEmailHash;
 		this.userEmailChecked = userEmailChecked;
+	}
+
+	public String getAlterKey() {
+		return alterKey;
+	}
+
+	public void setAlterKey(String alterKey) {
+		this.alterKey = alterKey;
 	}
 	
 	

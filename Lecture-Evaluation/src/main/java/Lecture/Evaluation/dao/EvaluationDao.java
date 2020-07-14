@@ -10,12 +10,11 @@ public int insert(EvaluationDTO evaluationDTO) throws Exception;
 		
 	
 	
+	
 	public List<EvaluationDTO> getList(Map<String, Object> params)
 			throws Exception;
 	
 	
-	public List<EvaluationDTO> findByEvaluationId(int no) throws Exception;
-	public List<EvaluationDTO> findByLikeNo(int no) throws Exception;
 	public int like(int evaluationID)throws Exception; 
 		
 	

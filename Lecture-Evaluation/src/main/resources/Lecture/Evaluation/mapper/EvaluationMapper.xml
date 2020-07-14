@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="EvaluationMapper">
+<mapper namespace="Lecture.Evaluation.dao.EvaluationDao">
 
   <resultMap type="Lecture.Evaluation.evaluation.EvaluationDTO" id="EvaluationMap">
     <id column="evaluationID"   property="evaluationID"/>
@@ -18,38 +18,56 @@
     <result column="totalScore" property="totalScore"/>
     <result column="creditScore" property="creditScore"/>
     <result column="characterScore" property="characterScore"/>
+    <result column="lectureScore" property="lectureScore"/>
     <result column="likeCount" property="likeCount"/>
     
     
   </resultMap>
   
-  <select id="selectList" resultMap="EvaluationMap">
-    select 
-    	evaluationID,
-      userID, 
-      lectureName, 
-      professorName, 
-      lectureYear,
-      semesterDivide,
-      lectureDivide,
-      evaluationTitle,
-      evaluationContent,
-      totalScore,
-      creditScore,
-      characterScore,
-      likeCount
+  <select id="getList" resultMap="EvaluationMap">
+    SELECT 
+    *
       
-    from 
+    FROM 
       EVALUATION
-    where lectureDivide like #{lecutreDivide} AND CONCAT(lectureName,professorName,evaluationTitle,evaluationContent)
-    like #{search}
+    WHERE lectureDivide 
+    <include refid="search"></include>
 						
-    order by 
-     evaluationID DESC LIMIT " + pageNumber*5 + ","+pageNumber*5 +6;
+     LIMIT #{pageNumber}*5 ,#{pageNumber}*5 +6
   </select>
+  <select id="listSearchCount" resultType="int">
+    SELECT
+        count(evaluationID)
+    FROM
+        EVALUATION
+    WHERE
+        evaluationID > 0
+    <include refid="search"></include>        
+    </select>
   
-  <insert id="write" parameterType="EvaluationDTO">
-    INSERT INTO EVALUATION(#{userID ,jdbcType=VARCHAR},
+  <sql id="search">
+  <if test="searchType !=null">
+  	<if test="searchType=='최신순'.toString()">
+  	Like ('%',#{lectureDivide},'%') AND
+  	CONCAT(lectureName,professorName,evaluationTitle,evaluationContent)
+  	LIKE ('%',#{search},'%')
+  	ORDER BY evaluationID DESC
+  	
+  	</if>
+  	<if test="searchType=='추천순'.toString()">
+  	Like ('%',#{lectureDivide},'%') AND
+  	CONCAT(lectureName,professorName,evaluationTitle,evaluationContent)
+  	LIKE ('%',#{search},'%')
+  	ORDER BY likeCount DESC
+  	
+  	</if>
+  
+  </if>
+  
+  </sql>
+  <insert id="insert" parameterType="EvaluationDTO">
+    INSERT INTO EVALUATION(#{evaluationID ,jdbcType=INTEGER},
+    userID,
     lectureName,
    	professorName,
    	lectureYear,
@@ -60,9 +78,12 @@
    	 totalScore,
    	 creditScore,
    	 characterScore,
+   	 lectureScore,
    	 likeCount
    	 ) 
-    values(#{userID},   #{lectureName},
+    values(
+    #{userID},  
+     #{lectureName},
    	#{professorName},
    	#{lectureYear},
    	 #{semesterDivide},
@@ -72,7 +93,7 @@
    	 #{totalScore},
    	 #{creditScore},
    	#{ characterScore},
-   	 #{likeCount})
+   	 0)
   </insert>
   
   <select id="getUserID" resultMap="EvaluationMap" parameterType="int">
@@ -83,9 +104,9 @@
    
   </select>
   
-  <update id="like" parameterType="EvaluationDTO">
+  <update id="like" parameterType="int">
     update evaluation set
-      likeCount=#{likeCount+1}
+      likeCount=likeCount+1
     where evaluationID=#{evaluationID}
   </update>
   
