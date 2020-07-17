@@ -10,8 +10,10 @@ public interface UserDao {
 		
 		
 	 public UserDTO findById(String userID) throws Exception;
+	 public UserDTO findByIdAndPassword(Map<String,Object> map) throws Exception;
 	 public boolean getUserEmailChecked(String userID) throws Exception;
+	 public boolean setUserEmailChecked(String userID)throws Exception;
+	 public String getUserEmail(String userID) throws Exception;
 	 int alterKey(Map<String, Object> params); // 유저 인증키 생성 메서드
-	  
 	  int alterUserKey(Map<String, Object> params); //유저 인증키 Y로 바꿔주는 메서드
 }

@@ -1,5 +1,7 @@
 package Lecture.Evaluation.service.impl;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,4 +25,26 @@ public class UserServiceImpl implements UserService {
 		return userDao.findById(userID);
 	}
 
+	 @Override
+	  public UserDTO getUser(String email, String password) throws Exception {
+	    HashMap<String, Object> params = new HashMap<>();
+	    params.put("email", email);
+	    params.put("password", password);
+	    return userDao.findByIdAndPassword(params);
+	  }
+	 @Override
+	public boolean getUserEmailChecked(String userID) throws Exception {
+		 return userDao.getUserEmailChecked(userID);
+	 
+	 }
+	 @Override
+	public String getUserEmail(String userID) throws Exception {
+		 
+		 return userDao.getUserEmail(userID);
+	}
+	 @Override
+	public boolean setUserEmailChecked(String userID) throws Exception {
+		 
+		 return userDao.setUserEmailChecked(userID);
+	}
 }

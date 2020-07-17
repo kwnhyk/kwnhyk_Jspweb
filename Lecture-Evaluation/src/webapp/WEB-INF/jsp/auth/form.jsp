@@ -1,26 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.net.URLEncoder" %>
-
-
-<%-- 
-<jsp:usebean id ="userID"
-class="Lecture.Evaluation.user.UserDTO"
-scope="session"/>
-
-
-
-
---%>
-<%
-
-	String userID = null;
-
-	if(session.getAttribute("userID")!=null){
-		userID = (String) session.getAttribute("userID");
-	}
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,10 +7,10 @@ scope="session"/>
         <meta name="viewport" content="width=device-width, initial=scale=1,shrink-to-fit=no" />
         <title>강의평가 웹 사이트</title>
         <!-- 부트스트랩CSS추가 -->
-        <link rel="stylesheet" href="./css/bootstrap.css" >
+        <link rel="stylesheet" href="./css/bootstrap.min.css" >
         <!-- 커스텀CSS추가 -->
         <link rel="stylesheet" href="./css/custom.css" >
-        <!-- 커스텀Navbar추가 -->
+          <!-- 커스텀Navbar추가 -->
         <link rel="stylesheet" href="./css/custom-theme.min.css">
    
         <!--점보트론 스타일 적용-->
@@ -45,11 +24,29 @@ scope="session"/>
         color:white;
       }
 </style>
-        
     </head>
     <body>
-   		<div class="header fixed-top">
-        <nav class="navbar navbar-expand-lg navbar-darkgray">
+      <%
+    	String userID =null;
+    	if(session.getAttribute("userID")!=null){
+    		userID =(String)session.getAttribute("userID");
+    	}
+    	
+    	
+    
+    %>
+    <script>
+		const error = '${loginOn}';
+	if(error != '') {
+   	 if(error == '1') {
+	      Swal.fire({
+            icon : 'error',
+            title : '로그인이 된 상태입니다!'
+        });
+    }
+}
+</script>
+    <nav class="navbar navbar-expand-lg navbar-darkgray">
             <a class="navbar-brand" href="index.jsp">강의평가 웹 사이트</a>
             <button
                 class="navbar-toggler"
@@ -62,18 +59,7 @@ scope="session"/>
             <div id="navbar" class="collapse navbar-collapse">
             	<ul class="navbar-nav mr-auto">
             		<li class="nav-item active">
-            		<%
-            			if(userID!=null){
-            		%>
-            			<a class="nav-link" href="main2.jsp">평가</a>
-            			
-            			<% 
-            			}else{
-            			%>
-            			<a class="nav-link" href="main2.jsp">참여</a>
-            			<%
-            			}
-            			%>
+            			<a class="nav-link" href="index.jsp">메인</a>
             		</li>
             		<li class="nav-item dropdown">
             			<a class="nav-link dropdown-toggle" id="dropdown" data-toggle="dropdown">
@@ -111,9 +97,6 @@ scope="session"/>
             	</form>
             </div>
         </nav>
-        </div>
-      
-        
         	<div class="jumbotron " >
         		<h1 class ="text-center">세상의 모든 강의평</h1>
         		<p class="text-center" ><br><br>강의를 평가하자</p>
@@ -121,61 +104,54 @@ scope="session"/>
         	
         	</div>
         
-        
-        
-       
-     
-		<div class="container">
- 
-  			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-   			 <!-- Indicators -->
-   				 <ol class="carousel-indicators">
-      				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      				<li data-target="#myCarousel" data-slide-to="1"></li>
-      				<li data-target="#myCarousel" data-slide-to="2"></li>
-    			</ol>
-
-		    <!-- Wrapper for slides -->
-		    <div class="carousel-inner">
-		      <div class="carousel-item active">
-		        <img src="images/carousel1.jpg"  style="width:100%;">
-		      </div>
-		
-		      <div class="carousel-item">
-		        <img src="images/carousel2.jpg"  style="width:100%;">
-		      </div>
-		    
-		      <div class="carousel-item">
-		        <img src="images/carousel3.jpg" style="width:100%;">
-		      </div>
-		    </div>
-		
-		    <!-- Left and right controls -->
-		    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-		      <span class="carousel-control-prev-icon"></span>
-		      <span class="sr-only">Previous</span>
-		    </a>
-		    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-		      <span class="carousel-control-next-icon"></span>
-		      <span class="sr-only">Next</span>
-		    </a>
-		  </div>
-		</div>
-       
-        		
-        			<p class="text-center">
-        			<a class="btn button-custom" href="./main2.jsp" role="button">참여</a>
-        			</p>
+        <section class="container mt-3" style="max-width:560px;">
+        	<form method="post" action="./userLoginAction.jsp">
+        		<div class="form-group">
+        			<label>아이디</label>
+        			<input type="text" name="userID" class="form-control">
+        				
+        		</div>
+        		<div class="form-group">
+        			<label>비밀번호</label>
+        			<input type="password" name="userPassword" class="form-control">
+        			
+        		</div>
+        		<button type="submit" class="btn btn-primary">로그인</button>
         	
         	
-        		
-		     
+        	</form>
+        	
+        </section>
+      
+       
 		<footer class="bg-dark mt-4 p-5 text-center" style="color:#FFFFFF;">
 		
 			Copyright &copy; 2020 권혁윤 All Rights Reserved.
 		</footer>
+		//로그인 실패시 에러 처리
+
+<script>
+		const error = '${loginError}';
+	if(error != '') {
+   	 if(error == '1') {
+	      Swal.fire({
+            icon : 'error',
+            title : '이메일 인증을 완료해주세요!'
+        });
+    } else if(error == '2') {
+	      Swal.fire({
+            icon : 'error',
+            title : '죄송합니다. 아이디 또는 비밀번호가 유효하지 않습니다.'
+        });
+    }
+}
+</script>
+		<!-- sweet alert2 -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		<script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
         <!-- 제이쿼리 자바스크립트 추가하기 -->
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="js/bootstrap.js"></script>
+        
+        <script src="./js/jquery.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
     </body>
 </html>

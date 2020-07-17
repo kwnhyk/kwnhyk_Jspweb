@@ -25,6 +25,7 @@ public int insert(EvaluationDTO evaluationDTO) throws Exception;
 	
 	public EvaluationDTO getUserID(int evaluationID) throws Exception;
 	
+	public int listSearchCount(int evaluationID) throws Exception;
 	
 
 }

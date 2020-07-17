@@ -126,7 +126,28 @@
 		
 			Copyright &copy; 2020 권혁윤 All Rights Reserved.
 		</footer>
+		//로그인 실패시 에러 처리
+<script>
+		const error = '${loginError}';
+	if(error != '') {
+   	 if(error == '1') {
+	      Swal.fire({
+            icon : 'error',
+            title : '이메일 인증을 완료해주세요!'
+        });
+    } else if(error == '2') {
+	      Swal.fire({
+            icon : 'error',
+            title : '죄송합니다. 아이디 또는 비밀번호가 유효하지 않습니다.'
+        });
+    }
+}
+</script>
+		<!-- sweet alert2 -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		<script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
         <!-- 제이쿼리 자바스크립트 추가하기 -->
+        
         <script src="./js/jquery.min.js"></script>
         <script src="./js/bootstrap.min.js"></script>
     </body>

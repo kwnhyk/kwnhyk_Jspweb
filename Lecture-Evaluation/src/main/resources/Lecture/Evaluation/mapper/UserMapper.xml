@@ -15,7 +15,7 @@
     
   </resultMap>
   
-  <select id="login" resultMap="UserMap">
+  <select id="login" resultMap="int">
    SELECT
     	userPassword 
     FROM
@@ -46,32 +46,47 @@
    	
   </insert>
   
-  <select id="selectId" resultMap="EvaluationMap" parameterType="int">
+  <select id="findById" resultMap="UserMap" parameterType="string">
     SELECT userID
-     FROM user 
+     FROM USER 
      WHERE userID =#{UserID}
     
    
   </select>
   
-  <update id="updateLike" parameterType="UserDTO">
-    update evaluation set
-      likeCount=#{likeCount+1}
-    where evaluationID=#{evaluationID}
+  <select id="findByIdAndPassword" resultMap="UserMap" parameterType="map">
+    SELECT userID,userPassword
+     FROM USER 
+     WHERE userID =#{UserID} and userPassword=userPassword(#{userPassword})
+    
+   
+  </select>
+   <select id="getUserEmailChecked" resultMap="boolean" parameterType="string">
+   SELECT userEmailChecked 
+   FROM USER 
+   WHERE userID = #{userID}
+   
+  </select>
+   <select id="getUserEmail" resultMap="String" parameterType="string">
+	SELECT userEmail 
+	FROM USER 
+	WHERE userID = #{userID}
+   
+  </select>
+  <update id="setUserEmailChecked" parameterType="string">
+   UPDATE USER 
+   SET userEmailChecked = true 
+   WHERE userID =#{userID}
   </update>
   
-  <delete id="delete" parameterType="int">
-    DELETE FROM USER 
-    WHERE userID = #{userID}
-   
-  </delete>
+ 
   <!-- 회원 인증키(난수) 생성 -->
-	<insert id="GetKey" parameterType="Map">
-		update user set userKey = #{param2} where userId = #{param1}
+	<insert id="alterKey" parameterType="map">
+		UPDATE USER SET userKey = #{userKey} WHERE userID = #{userID}
 	</insert>
 	<!-- 회원 인증키(난수) Y로 변경 -->
-	<update id="alter_userKey" parameterType="Map">
-		update user set userKey = 'Y' where userId = #{param1} and userKey = #{param2}
+	<update id="alterUserKey" parameterType="map">
+		UPDATE USER SET userKey = 'Y' WHERE userID = #{userID} and userKey = #{userKey}
 	</update>
 
 </mapper>
