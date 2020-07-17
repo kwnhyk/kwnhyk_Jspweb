@@ -35,7 +35,7 @@ public class AuthController{
 	    }
 	    
 	    
-	 
+	
 	@RequestMapping("login")
 	  public String login(HttpSession session, String id, String password, Model model)
 	      throws Exception {
@@ -44,7 +44,8 @@ public class AuthController{
 	    UserDTO user = userService.getUser(id, password);
 	    System.out.println("User============>" + user);
 	    if (user != null) {
-	      if (user.getAlterKey().equals("Y")) {
+	    	if(user.isUserEmailChecked()) {
+	    //  if (user.getAlterKey().equals("Y")) {
 	        // 로그인 시 유저 정보가 세션에 "userID"로 저장됨.
 	        session.setAttribute("userID", user);
 	        return "redirect:../main2.jsp";

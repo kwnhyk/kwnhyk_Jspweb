@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="Lecture.Evaluation.user.UserDAO" %>
 <%@ page import="Lecture.Evaluation.evaluation.EvaluationDTO" %>
-<%@ page import="Lecture.Evaluation.evaluation.EvaluationDAO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.net.URLEncoder" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -56,21 +55,12 @@
     		script.println("<script>");
     		script.println("alert('로그인을 해주세요');");
     		
-    		script.println("location.href='userLogin.jsp'");
+    		script.println("location.href='app/auth/form.jsp'");
     		script.println("</script>");
     		script.close();
     		return;
     	}
-    	boolean emailChecked = new UserDAO().getUserEmailChecked(userID);
-    	if(emailChecked==false){
-    		PrintWriter script = response.getWriter();
-    		script.println("<script>");
-    		
-    		script.println("location.href='emailSendConfirm.jsp'");
-    		script.println("</script>");
-    		script.close();
-    		return;
-    	}
+    	
     
     %>
         <nav class="navbar navbar-expand-lg navbar-darkgray">
@@ -144,7 +134,7 @@
         		<a class ="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
 	
         	</form>
-<%
+<%--
 	ArrayList<EvaluationDTO> evaluationList = new ArrayList<EvaluationDTO>();
 	evaluationList = new EvaluationDAO().getList(lectureDivide, searchType, search, pageNumber);
 	if(evaluationList !=null)
@@ -156,7 +146,7 @@
 		
 
 
-%>
+--%>
         	  <div class="card bg-light mt-3">
         
         	<div class="card-header bg-light">
