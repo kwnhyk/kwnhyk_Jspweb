@@ -34,7 +34,7 @@ public class MybatisConfig {
     // SqlSessionFactory 이다.
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
     sqlSessionFactoryBean.setDataSource(dataSource);
-    sqlSessionFactoryBean.setTypeAliasesPackage("Team.project.domain");
+    sqlSessionFactoryBean.setTypeAliasesPackage("Lecture.Evaluation.domain");
     sqlSessionFactoryBean.setMapperLocations(//
         // Spring IoC 컨테이너를 통해 SQL 맵퍼 파일의 위치 정보를 가져온다.
         appCtx.getResources("classpath:Lecture/Evaluation/mapper/*Mapper.xml"));

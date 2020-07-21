@@ -134,7 +134,7 @@
         		<a class ="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
 	
         	</form>
-<%--
+
 	ArrayList<EvaluationDTO> evaluationList = new ArrayList<EvaluationDTO>();
 	evaluationList = new EvaluationDAO().getList(lectureDivide, searchType, search, pageNumber);
 	if(evaluationList !=null)
@@ -146,7 +146,7 @@
 		
 
 
---%>
+
         	  <div class="card bg-light mt-3">
         
         	<div class="card-header bg-light">

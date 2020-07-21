@@ -1,15 +1,15 @@
 package Lecture.Evaluation.web;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import Lecture.Evaluation.service.MailSendService;
 import Lecture.Evaluation.service.UserService;
 import Lecture.Evaluation.user.UserDTO;
 
@@ -18,11 +18,10 @@ import Lecture.Evaluation.user.UserDTO;
 public class AuthController{
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private MailSendService mailsender;
+	
 	
 
-	  @RequestMapping("form")
+	  @GetMapping("form")
 	  public String form(HttpSession session ,Model model) {
 	    UserDTO user = (UserDTO) session.getAttribute("userID");
 	    if (user != null) {
@@ -33,14 +32,13 @@ public class AuthController{
 	    	
 	    return "/WEB-INF/jsp/auth/form.jsp";
 	    }
-	    
-	    
+
 	
-	@RequestMapping("login")
+	@PostMapping("login")
 	  public String login(HttpSession session, String id, String password, Model model)
 	      throws Exception {
 	    System.out.println("login()=============>" + id + password);
-	    session.removeAttribute("loginUser");
+	    session.removeAttribute("userID");
 	    UserDTO user = userService.getUser(id, password);
 	    System.out.println("User============>" + user);
 	    if (user != null) {
@@ -55,24 +53,17 @@ public class AuthController{
 	      }
 	    } else {
 	      session.invalidate();
-	      model.addAttribute("loginError", 2); // 이메일이 유효하지 않은 경우
+	      model.addAttribute("loginError", 2); // 아이디 유효하지 않은 경우
 	      return "/WEB-INF/jsp/auth/form.jsp";
 	    }
 	  }
-	@RequestMapping("signup")
-	  public void signup(UserDTO user, Model model, HttpServletRequest request,
-	      HttpServletResponse response) throws Exception {
-	    if (userService.getId(user.getUserID()) != null) {
-	      response.setStatus(400);
-	    }
-	    if (userService.join(user) > 0) {
-	      // 인증 메일 보내기 메서드
-	      mailsender.mailSendWithKey(user.getUserEmail(), user.getUserID(), request);
-	      response.setStatus(200);
-	    } else {
-	      throw new Exception("회원을 추가할 수 없습니다.");
-	    }
-	  }
+	@GetMapping("logout")
+		public String logout(HttpServletRequest req) {
+			req.getSession().invalidate();
+			return "/WEB-INF/jsp/main.jsp";
+		
+	}
+
   // 회원가입 컨트롤러
 /*	@RequestMapping(value = "/userRegisterAction", method = RequestMethod.POST)
 	public String userRegPass(UserDTO userDTO, Model model, HttpServletRequest request) {

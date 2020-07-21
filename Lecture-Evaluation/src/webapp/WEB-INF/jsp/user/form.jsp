@@ -1,22 +1,43 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+trimDirectiveWhitespaces="true"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../header.jsp"/>
+      <%--
+    	String userID =null;
+    	if(session.getAttribute("userID")!=null){
+    		userID =(String)session.getAttribute("userID");
+    	}
+    	if(userID !=null){
+    		PrintWriter script = response.getWriter();
+    		script.println("<script>");
+    		script.println("alert('로그인이 된 상태입니다.');");
+    		
+    		script.println("location.href='index.jsp'");
+    		script.println("</script>");
+    		script.close();
+    		return;
+    	}
+    	
     
+    --%>
     <script>
-		const error = '${loginOn}';
-	if(error != '') {
-   	 if(error == '1') {
-	      Swal.fire({
-            icon : 'error',
-            title : '로그인이 된 상태입니다!'
-        });
-    }
-}
-</script>
-    <nav class="navbar navbar-expand-lg navbar-darkgray">
-            <a class="navbar-brand" href="index.jsp">강의평가 웹 사이트</a>
+    	const error = '${loginOn}';
+    	if(error!=''){
+    	if(error=='1'){
+    		 Swal.fire({
+    	            icon : 'error',
+    	            title : '로그인이 된 상태입니다!'
+    	        });
+    	    }    		
+    	}
+    
+    
+    </script>
+     <nav class="navbar navbar-expand-lg navbar-darkgray">
+            <a class="navbar-brand" href="../main.jsp">강의평가 웹 사이트</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -37,23 +58,23 @@
             			
             			<div class="dropdown-menu" aria-labelledby="dropdown">
             			
-            			<c:if test="${empty userID}">
-            				<a class="dropdown-item" href="../auth/form">로그인</a>
-                			<a class="dropdown-item" href="../auth/userJoin">회원가입</a>
-            			</c:if>
-            
+            		<c:if test="${empty userID}">
+            				<a class="dropdown-item" href="userLogin.jsp">로그인</a>
+                			<a class="dropdown-item" href="userJoin.jsp">회원가입</a>
+            				
+             		</c:if>
+            			 <c:if test="${empty userID}">
             		
-            			<c:if test="${not empty userID}">
             			
-            				<a class="dropdown-item" href="../auth/logout">로그아웃</a>
+            				<a class="dropdown-item" href="userLogout.jsp">로그아웃</a>
             			
-            			</c:if>
-            			
+            		</c:if>
+            		
             			</div>	
             			</li>
             			
             	</ul>
-            	<form action="./index.jsp" method="get"class="form-inline my-2 my-lg-0">
+            		<form action="./index.jsp" method="get"class="form-inline my-2 my-lg-0">
             		<input type="text" name="search" class="form-control mr-sm-2" type="search" placeholder="내용을 입력하세요."aria-label="search">
             		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
             	</form>
@@ -67,7 +88,7 @@
         	</div>
         
         <section class="container mt-3" style="max-width:560px;">
-        	<form method="post" action="./userLoginAction.jsp">
+        	<form method="post" action="./userRegisterAction.jsp">
         		<div class="form-group">
         			<label>아이디</label>
         			<input type="text" name="userID" class="form-control">
@@ -78,7 +99,12 @@
         			<input type="password" name="userPassword" class="form-control">
         			
         		</div>
-        		<button type="submit" class="btn btn-primary">로그인</button>
+        		<div class="form-group">
+        			<label>이메일</label>
+        			<input type="email" name="userEmail" class="form-control">
+        			
+        		</div>
+        		<button type="submit" class="btn btn-primary">회원가입</button>
         	
         	
         	</form>
@@ -86,22 +112,4 @@
         </section>
       
        
-	
-
-<script>
-		const error = '${loginError}';
-	if(error != '') {
-   	 if(error == '1') {
-	      Swal.fire({
-            icon : 'error',
-            title : '이메일 인증을 완료해주세요!'
-        });
-    } else if(error == '2') {
-	      Swal.fire({
-            icon : 'error',
-            title : '죄송합니다. 아이디 또는 비밀번호가 유효하지 않습니다.'
-        });
-    }
-}
-	</script>
-<jsp:include page="../footer.jsp"/>
+	<jsp:include page="../footer.jsp"/>
