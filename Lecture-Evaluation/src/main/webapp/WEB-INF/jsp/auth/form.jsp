@@ -14,7 +14,14 @@
         <link rel="stylesheet" href="/Lecture-Evaluation/css/custom.css" >
              <!-- 커스텀Navbar추가 -->
         <link rel="stylesheet" href="/Lecture-Evaluation/css/custom-theme.min.css">
-   
+    
+<!-- sweet alert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
+   <!-- 제이쿼리 자바스크립트 추가하기 -->
+        
+        <script src="/Lecture-Evaluation/js/jquery.min.js"></script>
+        <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
            <!--점보트론 스타일 적용-->
          
 <style type="text/css">
@@ -45,8 +52,28 @@
     }
 }
 </script>
+
+<script>
+
+//로그인 실패시 에러 처리
+const error = '${loginError}';
+if(error != '') {
+  if(error == '1') {
+	      Swal.fire({
+          icon : 'error',
+          title : '이메일 인증을 완료해주세요!'
+      });
+  } else if(error == '2') {
+	      Swal.fire({
+          icon : 'error',
+          title : '죄송합니다. 아이디 또는 비밀번호가 유효하지 않습니다.'
+      });
+  }
+}
+
+	</script>
     <nav class="navbar navbar-expand-lg navbar-darkgray">
-            <a class="navbar-brand" href="index.jsp">강의평가 웹 사이트</a>
+            <a class="navbar-brand" href="/Lecture-Evaluation/">강의평가 웹 사이트</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -118,34 +145,14 @@
        
 	
 
-<script>
-		const error = '${loginError}';
-	if(error != '') {
-   	 if(error == '1') {
-	      Swal.fire({
-            icon : 'error',
-            title : '이메일 인증을 완료해주세요!'
-        });
-    } else if(error == '2') {
-	      Swal.fire({
-            icon : 'error',
-            title : '죄송합니다. 아이디 또는 비밀번호가 유효하지 않습니다.'
-        });
-    }
-}
-	</script>
 <footer class="bg-dark mt-4 p-5 text-center" style="color:#FFFFFF;">
 		
 			Copyright &copy; 2020 권혁윤 All Rights Reserved.
 		</footer>
 
-		<!-- sweet alert2 -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-	<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/ >
-        <!-- 제이쿼리 자바스크립트 추가하기 -->
-        
-        <script src="/Lecture-Evaluation/js/jquery.min.js"></script>
-        <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
+		
+	
+     
         
     </body>
 </html>

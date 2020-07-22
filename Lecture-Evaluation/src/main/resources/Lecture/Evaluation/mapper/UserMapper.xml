@@ -29,7 +29,7 @@
    	
    	#{userEmail},
    	 #{userEmailHash}
-   
+ 
    )
    	
   </insert>

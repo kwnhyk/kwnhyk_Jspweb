@@ -30,7 +30,7 @@ public class EvaluationController {
 	    	
 	    	model.addAttribute("loginOn",2);
 	    	
-	    	   return "/WEB-INF/jsp/auth/form.jsp";
+	    	   return "redirect:auth/form";
 	    	
 	    }
 	    

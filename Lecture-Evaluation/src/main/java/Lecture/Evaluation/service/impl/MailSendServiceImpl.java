@@ -63,7 +63,7 @@ public class MailSendServiceImpl implements MailSendService {
 		int resultCnt =0;
 		
 		Map<String,Object> params = new HashMap<>();
-		params.put("userId", userId);
+		params.put("userID", userId);
 		params.put("userEmailHash", userEmailHash);
 		resultCnt = userDao.alterUserKey(params);
 		
@@ -74,23 +74,23 @@ public class MailSendServiceImpl implements MailSendService {
 	
 	// 회원가입 발송 이메일(인증키 발송)
 	@Override
-	public void mailSendWithKey(String email, String userId, String password,HttpServletRequest request) {
+	public void mailSendWithKey(String email, String userID, String password,HttpServletRequest request) {
 		
 		String userEmailHash = getKey(false, 20);
 		
 		Map<String,Object> params = new HashMap<>();
-		params.put("userId", userId);
+		params.put("userID", userID);
 		params.put("userEmailHash", userEmailHash);
 		
 		if(userDao.alterKey(params)>0){
 		
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h2>강의 평가를 위한 이메일 인증입니다!</h2><br><br>" 
-				+ "<h3>" + userId + "님</h3>" + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " 
-				+ "<a href='http://localhost:8080" + request.getContextPath() + "/keyalter?user_id="+ userId +"&password="+password+"&user_key="+userEmailHash+"'>인증하기</a></p>"
+				+ "<h3>" + userID + "님</h3>" + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " 
+				+ "<a href='http://localhost:8080" + request.getContextPath() + "/keyalter?user_id="+ userID +"&password="+password+"&user_key="+userEmailHash+"'>인증하기</a></p>"
 				+ "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
 		try {
-			mail.setSubject(String.format("[본인인증]%s 님의 인증메일입니다",userId), "utf-8");
+			mail.setSubject(String.format("[본인인증]%s 님의 인증메일입니다",userID), "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
 			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
 			mailSender.send(mail);

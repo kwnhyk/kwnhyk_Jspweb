@@ -24,22 +24,28 @@ public class AuthController{
 	private MailSendService mailsender;
 	
 
-	  @GetMapping("form")
-	  public String form(HttpSession session ,Model model) {
-	    UserDTO user = (UserDTO) session.getAttribute("userID");
-	    if (user != null) {
-	    	model.addAttribute("loginOn",1);
-	      return "redirect:../main2.jsp";
-	    }else {
-	    	
-	    	model.addAttribute("loginOn",2);
-	    	
-	    	
-	    	
-	    }
-	    return "/WEB-INF/jsp/auth/form.jsp";
-	    }
-
+	  
+		  @GetMapping("form")
+		  public String form(HttpSession session ,Model model) {
+		    UserDTO user = (UserDTO) session.getAttribute("userID");
+		    if (user != null) {
+		    	model.addAttribute("loginOn",1);
+		      return "redirect:evaluation/form";
+		    }else {
+		    	
+		    	model.addAttribute("loginOn",2);
+		    	
+		    	   return "/WEB-INF/jsp/auth/form.jsp";
+		    	
+		    }
+		    
+		    
+		    	
+		 
+		    }
+	    
+	   
+	
 	
 	@PostMapping("login")
 	  public String login(HttpSession session, String id, String password, Model model)
@@ -77,7 +83,7 @@ public class AuthController{
 	@GetMapping("logout")
 		public String logout(HttpServletRequest req) {
 			req.getSession().invalidate();
-			return "/Lecture-Evaluation/index.html";
+			return "Lecture-Evaluation/index.html";
 		
 	}
 
