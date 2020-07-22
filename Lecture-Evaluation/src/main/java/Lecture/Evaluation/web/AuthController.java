@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import Lecture.Evaluation.service.MailSendService;
 import Lecture.Evaluation.service.UserService;
 import Lecture.Evaluation.user.UserDTO;
 
@@ -18,7 +20,8 @@ import Lecture.Evaluation.user.UserDTO;
 public class AuthController{
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private MailSendService mailsender;
 	
 
 	  @GetMapping("form")
@@ -27,9 +30,13 @@ public class AuthController{
 	    if (user != null) {
 	    	model.addAttribute("loginOn",1);
 	      return "redirect:../main2.jsp";
-	    }
-	    
+	    }else {
 	    	
+	    	model.addAttribute("loginOn",2);
+	    	
+	    	
+	    	
+	    }
 	    return "/WEB-INF/jsp/auth/form.jsp";
 	    }
 
@@ -42,7 +49,8 @@ public class AuthController{
 	    UserDTO user = userService.getUser(id, password);
 	    System.out.println("User============>" + user);
 	    if (user != null) {
-	    	if(user.isUserEmailChecked()) {
+	    	if(user.getAlterKey().equals("Y")) {
+	    	//	user.isUserEmailChecked()
 	    //  if (user.getAlterKey().equals("Y")) {
 	        // 로그인 시 유저 정보가 세션에 "userID"로 저장됨.
 	        session.setAttribute("userID", user);
@@ -57,10 +65,19 @@ public class AuthController{
 	      return "/WEB-INF/jsp/auth/form.jsp";
 	    }
 	  }
+	@GetMapping(value = "keyalter")
+	  public String keyalterConfirm(@RequestParam("userID") String userID, String password,
+	      @RequestParam("userEmailHash") String key) throws Exception {
+
+	    mailsender.alterUserKey(userID, key); // mailsender의 경우 @Autowired
+	    
+	    
+	    return "redirect:login?userID=" + userID + "&password=" + password;
+	  }
 	@GetMapping("logout")
 		public String logout(HttpServletRequest req) {
 			req.getSession().invalidate();
-			return "/WEB-INF/jsp/main.jsp";
+			return "/Lecture-Evaluation/index.html";
 		
 	}
 

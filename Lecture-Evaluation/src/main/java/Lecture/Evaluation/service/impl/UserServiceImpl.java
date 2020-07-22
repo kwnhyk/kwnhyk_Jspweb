@@ -26,25 +26,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	 @Override
-	  public UserDTO getUser(String email, String password) throws Exception {
+	  public UserDTO getUser(String userID, String password) throws Exception {
 	    HashMap<String, Object> params = new HashMap<>();
-	    params.put("email", email);
-	    params.put("password", password);
+	    params.put("userID", userID);
+	    params.put("userPassword", password);
 	    return userDao.findByIdAndPassword(params);
 	  }
+	
 	 @Override
-	public boolean getUserEmailChecked(String userID) throws Exception {
-		 return userDao.getUserEmailChecked(userID);
-	 
-	 }
-	 @Override
-	public String getUserEmail(String userID) throws Exception {
+	public String getEmail(String userID) throws Exception {
 		 
 		 return userDao.getUserEmail(userID);
 	}
-	 @Override
-	public boolean setUserEmailChecked(String userID) throws Exception {
-		 
-		 return userDao.setUserEmailChecked(userID);
-	}
+	
 }

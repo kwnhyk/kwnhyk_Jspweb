@@ -2,16 +2,46 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="../header.jsp"/>
-    
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial=scale=1,shrink-to-fit=no" />
+        <title>강의평가 웹 사이트</title>
+        <!-- 부트스트랩CSS추가 -->
+        <link rel="stylesheet" href="/Lecture-Evaluation/css/bootstrap.min.css" >
+        <!-- 커스텀CSS추가 -->
+        <link rel="stylesheet" href="/Lecture-Evaluation/css/custom.css" >
+             <!-- 커스텀Navbar추가 -->
+        <link rel="stylesheet" href="/Lecture-Evaluation/css/custom-theme.min.css">
+   
+           <!--점보트론 스타일 적용-->
+         
+<style type="text/css">
+      .jumbotron{
+      	
+        background-image: url('/Lecture-Evaluation/images/jumbotron.jpg');
+        background-size: cover;
+        text-shadow: black 0.2em 0.2em 0.2em;
+        color:white;
+      }
+</style>
+    </head>
+    <body>
     <script>
-		const error = '${loginOn}';
-	if(error != '') {
-   	 if(error == '1') {
+		const lgerror = '${loginOn}';
+	if(lgerror != '') {
+   	 if(lgerror == '1') {
 	      Swal.fire({
             icon : 'error',
             title : '로그인이 된 상태입니다!'
         });
+    }else if(lgerror =='2'){
+    	
+    	Swal.fire({
+    		icon:'error',
+    		title:'로그인 해주세요!'
+    	});		
     }
 }
 </script>
@@ -28,7 +58,7 @@
             <div id="navbar" class="collapse navbar-collapse">
             	<ul class="navbar-nav mr-auto">
             		<li class="nav-item active">
-            			<a class="nav-link" href="index.jsp">메인</a>
+            			<a class="nav-link" href="/Lecture-Evaluation/">메인</a>
             		</li>
             		<li class="nav-item dropdown">
             			<a class="nav-link dropdown-toggle" id="dropdown" data-toggle="dropdown">
@@ -39,7 +69,7 @@
             			
             			<c:if test="${empty userID}">
             				<a class="dropdown-item" href="../auth/form">로그인</a>
-                			<a class="dropdown-item" href="../auth/userJoin">회원가입</a>
+                			<a class="dropdown-item" href="../user/form">회원가입</a>
             			</c:if>
             
             		
@@ -67,7 +97,7 @@
         	</div>
         
         <section class="container mt-3" style="max-width:560px;">
-        	<form method="post" action="./userLoginAction.jsp">
+        	<form method="post" action="../auth/login">
         		<div class="form-group">
         			<label>아이디</label>
         			<input type="text" name="userID" class="form-control">
@@ -104,4 +134,19 @@
     }
 }
 	</script>
-<jsp:include page="../footer.jsp"/>
+<footer class="bg-dark mt-4 p-5 text-center" style="color:#FFFFFF;">
+		
+			Copyright &copy; 2020 권혁윤 All Rights Reserved.
+		</footer>
+
+		<!-- sweet alert2 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+	<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/ >
+        <!-- 제이쿼리 자바스크립트 추가하기 -->
+        
+        <script src="/Lecture-Evaluation/js/jquery.min.js"></script>
+        <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
+        
+    </body>
+</html>
+

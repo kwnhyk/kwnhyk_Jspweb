@@ -10,7 +10,8 @@
 		<script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
         <!-- 제이쿼리 자바스크립트 추가하기 -->
         
-        <script src="./js/jquery.min.js"></script>
-        <script src="./js/bootstrap.min.js"></script>
+        <script src="/Lecture-Evaluation/js/jquery.min.js"></script>
+        <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
+        
     </body>
 </html>

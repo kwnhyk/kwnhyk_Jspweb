@@ -2,6 +2,7 @@ package Lecture.Evaluation.service.impl;
 
 import Lecture.Evaluation.dao.UserDao;
 import Lecture.Evaluation.service.MailSendService;
+import Lecture.Evaluation.service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,11 @@ public class MailSendServiceImpl implements MailSendService {
 
 	@Autowired
 	 JavaMailSender mailSender;
-	@Autowired
-	 SqlSessionTemplate sqlSession;
-	 UserDao userDao;
+	 @Autowired
+	  UserDao userDao;
+	  @Autowired
+	  UserService userService;
+	
 	
 	// 이메일 난수 만드는 메서드
 	private String init() {
@@ -57,34 +59,35 @@ public class MailSendServiceImpl implements MailSendService {
 		return init();
 	}
 	@Override
-	public int alterUserKey(String userId, String key) {
+	public int alterUserKey(String userId, String userEmailHash) {
 		int resultCnt =0;
-		userDao = sqlSession.getMapper(UserDao.class);
+		
 		Map<String,Object> params = new HashMap<>();
 		params.put("userId", userId);
-		params.put("key", key);
+		params.put("userEmailHash", userEmailHash);
 		resultCnt = userDao.alterUserKey(params);
 		
 		return resultCnt;
 		
 	}
+
 	
 	// 회원가입 발송 이메일(인증키 발송)
 	@Override
-	public void mailSendWithKey(String email, String userId, HttpServletRequest request) {
+	public void mailSendWithKey(String email, String userId, String password,HttpServletRequest request) {
 		
-		String key = getKey(false, 20);
-		userDao = sqlSession.getMapper(UserDao.class);
+		String userEmailHash = getKey(false, 20);
+		
 		Map<String,Object> params = new HashMap<>();
 		params.put("userId", userId);
-		params.put("key", key);
+		params.put("userEmailHash", userEmailHash);
 		
 		if(userDao.alterKey(params)>0){
 		
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h2>강의 평가를 위한 이메일 인증입니다!</h2><br><br>" 
 				+ "<h3>" + userId + "님</h3>" + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " 
-				+ "<a href='http://localhost:8080" + request.getContextPath() + "/keyalter?user_id="+ userId +"&user_key="+key+"'>인증하기</a></p>"
+				+ "<a href='http://localhost:8080" + request.getContextPath() + "/keyalter?user_id="+ userId +"&password="+password+"&user_key="+userEmailHash+"'>인증하기</a></p>"
 				+ "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
 		try {
 			mail.setSubject(String.format("[본인인증]%s 님의 인증메일입니다",userId), "utf-8");

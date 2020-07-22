@@ -44,7 +44,7 @@ public class UserController {
 	    }
 	    if (userService.join(user) > 0) {
 	      // 인증 메일 보내기 메서드
-	      mailsender.mailSendWithKey(user.getUserEmail(), user.getUserID(), request);
+	      mailsender.mailSendWithKey(user.getUserEmail(), user.getUserID(),user.getUserPassword() ,request);
 	      response.setStatus(200);
 	    } else {
 	      throw new Exception("회원을 추가할 수 없습니다.");

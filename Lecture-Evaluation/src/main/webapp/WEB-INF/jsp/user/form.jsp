@@ -59,14 +59,14 @@ trimDirectiveWhitespaces="true"%>
             			<div class="dropdown-menu" aria-labelledby="dropdown">
             			
             		<c:if test="${empty userID}">
-            				<a class="dropdown-item" href="userLogin.jsp">로그인</a>
-                			<a class="dropdown-item" href="userJoin.jsp">회원가입</a>
+            				<a class="dropdown-item" href="../auth/form">로그인</a>
+                			<a class="dropdown-item" href="../user/form">회원가입</a>
             				
              		</c:if>
             			 <c:if test="${empty userID}">
             		
             			
-            				<a class="dropdown-item" href="userLogout.jsp">로그아웃</a>
+            				<a class="dropdown-item" href="../auth/logout">로그아웃</a>
             			
             		</c:if>
             		
@@ -88,7 +88,7 @@ trimDirectiveWhitespaces="true"%>
         	</div>
         
         <section class="container mt-3" style="max-width:560px;">
-        	<form method="post" action="./userRegisterAction.jsp">
+        	<form method="post" action="../user/signup">
         		<div class="form-group">
         			<label>아이디</label>
         			<input type="text" name="userID" class="form-control">

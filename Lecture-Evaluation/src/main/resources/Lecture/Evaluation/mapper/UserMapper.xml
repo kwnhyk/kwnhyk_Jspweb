@@ -15,78 +15,58 @@
     
   </resultMap>
   
-  <select id="login" resultMap="int">
-   SELECT
-    	userPassword 
-    FROM
-     	USER  
-    
-   
-
-    where 
-		 userID =#{userID}
-					
-   
-  </select>
+  
   
   <insert id="join" parameterType="UserDTO">
     INSERT INTO USER (userID ,
     	userPassword,
     	userEmail,
-    	userEmailHash,
-    	userEmailChecked
+    	userEmailHash
+    	
     
    	 ) 
     values(#{userID},   #{userPassword},
-   	#{professorName},
+   	
    	#{userEmail},
-   	 #{userEmailHash},
-   	0
+   	 #{userEmailHash}
    
+   )
    	
   </insert>
   
-  <select id="findById" resultMap="UserMap" parameterType="string">
-    SELECT userID
+  <select id="findById" resultMap="UserMap" parameterType="String">
+    SELECT *
      FROM USER 
-     WHERE userID =#{UserID}
+     WHERE userID =#{userID}
     
    
   </select>
   
-  <select id="findByIdAndPassword" resultMap="UserMap" parameterType="map">
-    SELECT userID,userPassword
+  <select id="findByIdAndPassword" resultMap="UserMap" parameterType="Map">
+    SELECT *
      FROM USER 
-     WHERE userID =#{UserID} and userPassword=userPassword(#{userPassword})
+     WHERE userID =#{userID} and userPassword=#{userPassword}
     
    
   </select>
-   <select id="getUserEmailChecked" resultMap="boolean" parameterType="string">
-   SELECT userEmailChecked 
-   FROM USER 
-   WHERE userID = #{userID}
-   
-  </select>
-   <select id="getUserEmail" resultMap="String" parameterType="string">
+  
+ 
+   <select id="getUserEmail" resultType="String" parameterType="String">
 	SELECT userEmail 
 	FROM USER 
 	WHERE userID = #{userID}
    
   </select>
-  <update id="setUserEmailChecked" parameterType="string">
-   UPDATE USER 
-   SET userEmailChecked = true 
-   WHERE userID =#{userID}
-  </update>
+  
   
  
   <!-- 회원 인증키(난수) 생성 -->
-	<insert id="alterKey" parameterType="map">
-		UPDATE USER SET userKey = #{userKey} WHERE userID = #{userID}
-	</insert>
+	<update id="alterKey" parameterType="Map">
+		UPDATE USER SET userEmailHash = #{userEmailHash} WHERE userID = #{userID}
+	</update>
 	<!-- 회원 인증키(난수) Y로 변경 -->
-	<update id="alterUserKey" parameterType="map">
-		UPDATE USER SET userKey = 'Y' WHERE userID = #{userID} and userKey = #{userKey}
+	<update id="alterUserKey" parameterType="Map">
+		UPDATE USER SET userEmailHash = 'Y' WHERE userID = #{userID} and userEmailHash = #{userEmailHash}
 	</update>
 
 </mapper>
