@@ -25,7 +25,7 @@ public class AuthController{
 	
 
 	  
-		  @GetMapping("form")
+		  @RequestMapping("form")
 		  public String form(HttpSession session ,Model model) {
 		    UserDTO user = (UserDTO) session.getAttribute("userID");
 		    if (user != null) {
@@ -47,12 +47,12 @@ public class AuthController{
 	   
 	
 	
-	@PostMapping("login")
-	  public String login(HttpSession session, String id, String password, Model model)
+	@RequestMapping("login")
+	  public String login(HttpSession session, String userID, String password, Model model)
 	      throws Exception {
-	    System.out.println("login()=============>" + id + password);
+	    System.out.println("login()=============>" + userID + password);
 	    session.removeAttribute("userID");
-	    UserDTO user = userService.getUser(id, password);
+	    UserDTO user = userService.getUser(userID, password);
 	    System.out.println("User============>" + user);
 	    if (user != null) {
 	    	if(user.getAlterKey().equals("Y")) {
@@ -60,7 +60,7 @@ public class AuthController{
 	    //  if (user.getAlterKey().equals("Y")) {
 	        // 로그인 시 유저 정보가 세션에 "userID"로 저장됨.
 	        session.setAttribute("userID", user);
-	        return "redirect:../main2.jsp";
+	        return "redirect:../evaluation/form";
 	      } else {
 	        model.addAttribute("loginError", 1); // 이메일 인증을 안 한 경우
 	        return "/WEB-INF/jsp/emailSendConfirm.jsp";
@@ -72,11 +72,12 @@ public class AuthController{
 	    }
 	  }
 	@GetMapping(value = "keyalter")
-	  public String keyalterConfirm(@RequestParam("userID") String userID, String password,
+	  public String keyalterConfirm(@RequestParam("userID") String id, String password,
 	      @RequestParam("userEmailHash") String key) throws Exception {
 
-	    mailsender.alterUserKey(userID, key); // mailsender의 경우 @Autowired
-	    
+	    mailsender.alterUserKey(id, key); // mailsender의 경우 @Autowired
+	    UserDTO user = userService.getId(id);
+	    String userID = user.getUserID();
 	    
 	    return "redirect:login?userID=" + userID + "&password=" + password;
 	  }

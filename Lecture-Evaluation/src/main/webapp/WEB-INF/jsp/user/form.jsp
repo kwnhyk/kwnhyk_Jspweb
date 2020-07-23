@@ -15,6 +15,16 @@ trimDirectiveWhitespaces="true"%>
         <link rel="stylesheet" href="/Lecture-Evaluation/css/custom.css" >
              <!-- 커스텀Navbar추가 -->
         <link rel="stylesheet" href="/Lecture-Evaluation/css/custom-theme.min.css">
+         <!-- 제이쿼리 자바스크립트 추가하기 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+               <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
+<!-- sweet alert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
+  
+        
+     
+        
    
            <!--점보트론 스타일 적용-->
          
@@ -48,19 +58,8 @@ trimDirectiveWhitespaces="true"%>
     	
     
     --%>
-    <script>
-    	const error = '${loginOn}';
-    	if(error!=''){
-    	if(error=='1'){
-    		 Swal.fire({
-    	            icon : 'error',
-    	            title : '로그인이 된 상태입니다!'
-    	        });
-    	    }    		
-    	}
-    
-    
-    </script>
+      
+      
      <nav class="navbar navbar-expand-lg navbar-darkgray">
             <a class="navbar-brand" href="../main.jsp">강의평가 웹 사이트</a>
             <button
@@ -88,7 +87,7 @@ trimDirectiveWhitespaces="true"%>
                 			<a class="dropdown-item" href="../user/form">회원가입</a>
             				
              		</c:if>
-            			 <c:if test="${empty userID}">
+            			 <c:if test="${not empty userID}">
             		
             			
             				<a class="dropdown-item" href="../auth/logout">로그아웃</a>
@@ -113,28 +112,151 @@ trimDirectiveWhitespaces="true"%>
         	</div>
         
         <section class="container mt-3" style="max-width:560px;">
-        	<form method="post" action="../user/signup">
+        	<form method='post'action='signup'enctype='multipart/form-data'>
         		<div class="form-group">
         			<label>아이디</label>
-        			<input type="text" name="userID" class="form-control">
+        			<input type="text" name="userID" class="form-control"id="idInput">
         				
         		</div>
         		<div class="form-group">
         			<label>비밀번호</label>
-        			<input type="password" name="userPassword" class="form-control">
+        			<input type="password" name="userPassword" class="form-control"id="passwordInput">
+        			
+        			
+        		</div>
+        		<div class="form-group">
+        			<label>비밀번호 재확인</label>
+        			<input type="password"  class="form-control" id="passwordInput2" placeholder="비밀번호 재확인">
+        			
         			
         		</div>
         		<div class="form-group">
         			<label>이메일</label>
-        			<input type="email" name="userEmail" class="form-control">
-        			
+        			<input type="email" name="userEmail" class="form-control"id="emailInput">
+        			<label class="text-primary mt-2 font-weight-bold" id="form-label" style="height:2em;">
+        비밀번호는 8자 이상이어야 하며, 숫자/소문자/특수문자를 모두 포함해야 합니다.
+        </label>
         		</div>
-        		<button type="submit" class="btn btn-primary">회원가입</button>
+        		<button id="completeBtn" type="button" class="btn btn-primary">회원가입</button>
         	
         	
         	</form>
         	
         </section>
-      
-       
-	<jsp:include page="../footer.jsp"/>
+        <script>
+    	const error = '${loginOn}';
+    	if(error!=''){
+    	if(error=='1'){
+    		 Swal.fire({
+    	            icon : 'error',
+    	            title : '로그인이 된 상태입니다!'
+    	        });
+    	    }    		
+    	}
+    
+    
+    
+  
+        const emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+        const passwordReg = /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
+
+        $('#completeBtn').click(function(event){
+        	event.preventDefault();
+        	if($('#idInput').val() === '' || $('#passwordInput').val()=== '' ||  $('#emailInput').val()=== ''){
+        	
+        		$('#form-label').html("모든 정보를 입력해주세요.");
+        	
+        	}else{
+        		let userID = $('#idInput').val();
+        		let password = $('#passwordInput').val();
+        		let password2 = $('#passwordInput2').val();
+        		let email = $('#emailInput').val();
+				if(emailReg.test(String(email).toLowerCase())=== false){
+					$('#emailInput').focus();
+					$('#form-label').html(" 올바른 이메일 형식을 입력해주세요.");
+				}
+					else if(passwordReg.test(password)===false){
+					$('#form-label').html(" 비밀번호는 6자 이상이어야 하며, 숫자/소문자/특수문자를 모두 포함해야 합니다.");
+					}else if(password!=password2){
+						
+						$('#passwordInput2').focus();
+						$('#form-label').html("비밀번호와 재확인이 일치하지 않습니다");
+						
+						
+					}
+					else if(emailReg.test(String(email).toLowerCase())===true && passwordReg.test(password)===true){
+						$.ajax({
+						
+							url:'signup',
+							method:'POST',
+							data:{
+								userEmail:$('#emailInput').val(),
+								userID:$('#idInput').val(),
+								userPassword:$('#passwordInput').val()
+							},
+							beforeSend:function(){
+		            			var width = 0;
+		                  var height = 0;
+		                  var left = 0;
+		                  var top = 0;
+		                  width = 100;
+		                  height = 100;
+		                  top = ( $(window).height() - height ) / 2 + $(window).scrollTop();
+		                  left = ( $(window).width() - width ) / 2 + $(window).scrollLeft();
+		                  if($("#div_ajax_load_image").length != 0) {
+		                         $("#div_ajax_load_image").css({
+		                                "top": top+"px",
+		                                "left": left+"px"
+		                         });
+		                         $("#div_ajax_load_image").show();
+		                  }
+		                  else {
+		                         $('body').append('<div id="div_ajax_load_image" style="position:absolute; top:' 
+		                         + top + 'px; left:' + left + 'px; width:' + width + 'px; height:' + height 
+		                         + 'px; z-index:9999; background:#7fffd4; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; "><img src="/Lecture-Evaluation/images/loading.gif" style="width:100px; height:100px;"></div>');
+		                        }
+		            		},
+		            		complete: function () {
+		                  $("#div_ajax_load_image").hide();
+		                },
+							 statusCode:{
+				                	400:function(){
+				                		$('#form-label').html("이미 회원으로 가입된 이메일입니다.");
+				                	},
+				                	200:function(){
+				                	    Swal.fire({
+				                	            icon : 'success',
+				                	            title : '회원가입을 완료하기 위해 이메일을 인증해주세요!'
+				                	        }).then((result) => {
+				                                    if (result.value) {
+				                	        	           location.href="../auth/form";
+				                                    }
+				                          });
+				                  }
+				            	}//statusCode
+					          }); // ajax
+				        }
+				      }//else      
+				    });//click
+							
+				    
+				    $("input").keydown(function(key) {
+				        if (key.keyCode == 13) {
+				          $("#completeBtn").trigger("click");
+				        }
+				    });
+        </script>
+    
+
+<footer class="bg-dark mt-4 p-5 text-center" style="color:#FFFFFF;">
+		
+			Copyright &copy; 2020 권혁윤 All Rights Reserved.
+		</footer>
+
+		     
+    </body>
+</html>
+
+		
+	

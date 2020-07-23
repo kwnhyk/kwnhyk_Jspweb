@@ -10,7 +10,7 @@
     <result column="userPassword"  property="userPassword"/>
     <result column="userEmail"    property="userEmail"/>
     <result column="userEmailHash" property="userEmailHash"/>
-    <result column="userEmailChecked" property="userEmailChecked"/>
+   
    
     
   </resultMap>
@@ -29,7 +29,7 @@
    	
    	#{userEmail},
    	 #{userEmailHash}
- 
+ 	
    )
    	
   </insert>

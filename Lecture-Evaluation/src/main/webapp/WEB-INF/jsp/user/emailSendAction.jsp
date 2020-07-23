@@ -1,19 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="javax.mail.Transport" %>
-<%@ page import="javax.mail.Message" %>
-<%@ page import="javax.mail.Address" %>
 
-<%@ page import="javax.mail.internet.InternetAddress" %>
-<%@ page import="javax.mail.Session" %>
-<%@ page import="javax.mail.internet.MimeMessage" %>
-<%@ page import="javax.mail.Authenticator" %>
-<%@ page import="Lecture.Evaluation.util.Gmail" %>
-<%@ page import="java.util.Properties" %>
-<%@ page import="Lecture.Evaluation.user.UserDAO" %>
-<%@ page import="Lecture.Evaluation.util.SHA256" %>
-<%@ page import="java.io.PrintWriter" %>
 
 
 
@@ -27,10 +15,12 @@
         <link rel="stylesheet" href="/Lecture-Evaluation/css/bootstrap.min.css" >
         <!-- 커스텀CSS추가 -->
         <link rel="stylesheet" href="/Lecture-Evaluation/css/custom.css" >
+        <!-- 제이쿼리 자바스크립트 추가하기 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     </head>
     <body>
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index.jsp">강의평가 웹 사이트</a>
+            <a class="navbar-brand" href="app/">강의평가 웹 사이트</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -42,7 +32,7 @@
             <div id="navbar" class="collapse navbar-collapse">
             	<ul class="navbar-nav mr-auto">
             		<li class="nav-item active">
-            			<a class="nav-link" href="index.jsp">메인</a>
+            			<a class="nav-link" href="app/evaluation/form">메인</a>
             		</li>
             		<li class="nav-item dropdown">
             			<a class="nav-link dropdown-toggle" id="dropdown" data-toggle="dropdown">
@@ -55,7 +45,7 @@
                 			<a class="dropdown-item" href="../user/form">회원가입</a>
             				
              		</c:if>
-            			 <c:if test="${empty userID}">
+            			 <c:if test="${not empty userID}">
             		
             			
             				<a class="dropdown-item" href="../auth/logout">로그아웃</a>
@@ -83,8 +73,7 @@
 		
 			Copyright &copy; 2020 권혁윤 All Rights Reserved.
 		</footer>
-        <!-- 제이쿼리 자바스크립트 추가하기 -->
-        <script src="/Lecture-Evaluation/js/jquery.min.js"></script>
+      
         <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
     </body>
 </html>

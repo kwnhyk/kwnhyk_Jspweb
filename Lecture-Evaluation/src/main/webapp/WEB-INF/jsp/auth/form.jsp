@@ -18,10 +18,9 @@
 <!-- sweet alert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
-   <!-- 제이쿼리 자바스크립트 추가하기 -->
-        
-        <script src="/Lecture-Evaluation/js/jquery.min.js"></script>
-        <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
+    <!-- 제이쿼리 자바스크립트 추가하기 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+               <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
            <!--점보트론 스타일 적용-->
          
 <style type="text/css">

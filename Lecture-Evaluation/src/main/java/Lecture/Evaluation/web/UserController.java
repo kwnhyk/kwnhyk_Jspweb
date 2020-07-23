@@ -23,10 +23,7 @@ public class UserController {
 	
 	
 	
-	@GetMapping("emailSend")
-	public String emailSend() {
-		return "/WEB-INF/jsp/user/emailSendAction.jsp";
-	}
+
 	@GetMapping("form")
 	public String form() {
 	
@@ -34,9 +31,8 @@ public class UserController {
 	
 	}
 	
-	
 	@PostMapping("signup")
-	  public String signup(UserDTO user, Model model, HttpServletRequest request,
+	  public void signup(UserDTO user, Model model, HttpServletRequest request,
 	      HttpServletResponse response) throws Exception {
 	    if (userService.getId(user.getUserID()) != null) {
 	      response.setStatus(400);
@@ -45,7 +41,7 @@ public class UserController {
 	      // 인증 메일 보내기 메서드
 	      mailsender.mailSendWithKey(user.getUserEmail(), user.getUserID(),user.getUserPassword() ,request);
 	      response.setStatus(200);
-	      return "redirect:/user/emailSend";
+	      
 	    } else {
 	      throw new Exception("회원을 추가할 수 없습니다.");
 	    }
