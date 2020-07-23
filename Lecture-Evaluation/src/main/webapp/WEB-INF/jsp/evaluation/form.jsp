@@ -86,12 +86,12 @@
             			<div class="dropdown-menu" aria-labelledby="dropdown">
             			
             			
-            			<c:if test="${empty userID}">
+            			<c:if test="${empty loginUser}">
             				<a class="dropdown-item" href="userLogin.jsp">로그인</a>
                 			<a class="dropdown-item" href="userJoin.jsp">회원가입</a>
             				
             			</c:if>
-            			<c:if test="${empty userID }">
+            			<c:if test="${not empty loginUser }">
             		
             		            				<a class="dropdown-item" href="userLogout.jsp">로그아웃</a>
             			
@@ -127,7 +127,7 @@
         		<a class ="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#reportModal">신고</a>
 	
         	</form>
-<% 
+<%-- 
 	ArrayList<EvaluationDTO> evaluationList = new ArrayList<EvaluationDTO>();
 	evaluationList = new EvaluationDAO().getList(lectureDivide, searchType, search, pageNumber);
 	if(evaluationList !=null)
@@ -135,7 +135,7 @@
 			if(i==5) break;
 			EvaluationDTO evaluation = evaluationList.get(i);
 			
-			%>
+			--%>
 		
 
 
@@ -144,24 +144,24 @@
         
         	<div class="card-header bg-light">
         		<div class="row">
-        			<div class="col-8 text-left"><%= evaluation.getLectureName() %>&nbsp;<small><%= evaluation.getProfessorName() %></small></div>
+        			<div class="col-8 text-left">${evalList.LectureName}&nbsp;<small>${evalList.ProfessorName}</small></div>
         			<div class="col-4 text-right">
-        				종합<span style="color:red;"><%= evaluation.getTotalScore() %></span>
+        				종합<span style="color:red;">${evalList.TotalScore}</span>
         				</div>
         				</div>
         				</div>
         			
         				<div class="card-body">
         				<h5 class="card-title">
-        			<%=evaluation.getEvaluationTitle() %>&nbsp;<small>(<%= evaluation.getLectureYear()%> 년 <%=evaluation.getSemesterDivide() %>)</small>
+        			${evalList.EvaluationTitle}&nbsp;<small>(${evalList.LectureYear} 년 ${evalList.SemesterDivide})</small>
         				</h5>
-        				<p class="card-text"><%=evaluation.getEvaluationContent() %></p>
+        				<p class="card-text">${evalList.EvaluationContent}</p>
         				<div class="row">
         					<div class="col-9 text-left">
-        						성적<span style="color: red;"><%= evaluation.getCreditScore() %></span>
-        						인성<span style="color: red;"><%= evaluation.getCharacterScore() %></span>
-        						강의<span style="color: red;"><%= evaluation.getLectureScore() %></span>
-        						<span style="color:green;">(추천:<%= evaluation.getLikeCount() %>)</span>
+        						성적<span style="color: red;">${evalList.CreditScore}</span>
+        						인성<span style="color: red;">${evalList.CharacterScore}</span>
+        						강의<span style="color: red;">${evalList.LectureScore}</span>
+        						<span style="color:green;">(추천:${evalList.LikeCount})</span>
         						
         						
         						
@@ -169,8 +169,8 @@
         						
         						</div>
         						<div class="col-3 text-right">
-        						<a onclick="return confirm('추천하시겠습니까?')"href="./likeAction.jsp?evaluationID=<%=evaluation.getEvaluationID()%>">추천</a>
-        						<a onclick="return confirm('삭제하시겠습니까?')"href="./deleteAction.jsp?evaluationID=<%=evaluation.getEvaluationID()%>">삭제</a>
+        						<a onclick="return confirm('추천하시겠습니까?')"href="./likeAction.jsp?evaluationID=${evalList.EvaluationID}">추천</a>
+        						<a onclick="return confirm('삭제하시겠습니까?')"href="./deleteAction.jsp?evaluationID=${evalList.EvaluationID}">삭제</a>
         						
         						
         						</div>
@@ -179,9 +179,7 @@
         				</div>
         				</div>
         				
-<%
-}
-%>        				
+  				
 		</section>
         <ul class ="pagination justify-content-center mt-3">
         	<li class="page-item">
@@ -201,27 +199,28 @@
  </li>
  
  <li>
- <%
+ <c:if test="${evalList.size()<6}">
+ <%--
  	if(evaluationList.size()<6){
  		
  		
  	
-%> 
+--%> 
  <a class="page-link disabled">다음</a>      	
- 
-<%
+ </c:if>
+<%--
  	}else{
  
-%>
+--%>
  
  	<a class ="page-link" href="./index.jsp?lectureDivide= <%= URLEncoder.encode(lectureDivide,"UTF-8")%>&searchType=
  	<%=URLEncoder.encode(searchType,"UTF-8") %>&search=<%= URLEncoder.encode(search,"UTF-8") %>&pageNumber= 
  	<%=pageNumber+1%>">다음</a>
 
-<%
+<%--
  	
  	}
-%>
+--%>
  </li>
         </ul>
       

@@ -12,29 +12,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import Lecture.Evaluation.domain.EvaluationDTO;
+import Lecture.Evaluation.service.EvaluationService;
 import Lecture.Evaluation.service.UserService;
 import Lecture.Evaluation.user.UserDTO;
-import Team.project.domain.Clazz;
-import Team.project.domain.User;
 
 @Controller
 @RequestMapping("/evaluation")
 public class EvaluationController {
 	
+	@Autowired
+	EvaluationService evaluationService;
 	
 	    
 	   @GetMapping("form")
 	    public String list(HttpSession session) throws Exception {
-	      int no = -1;
-	      if (session.getAttribute("userID") != null) {
-	        no = ((UserDTO) session.getAttribute("userID")).getUserID();
-	      }
-	      List<EvaluationDTO> evalList = evaluationService.list(no);
+		   String lectureDivide = "전체";
+	    	String searchType = "최신순";
+	    	String search = "";
+	    	int pageNumber =0;
+	      List<EvaluationDTO> evalList = evaluationService.list(lectureDivide,searchType,search,pageNumber);
 	      if (evalList != null) {
 	        System.out.println("수업목록==========>" + evalList);
 	        session.setAttribute("evalList", evalList);
 	      }
-	      return "/WEB-INF/jsp/evaluation/list.jsp";
+	      return "/WEB-INF/jsp/evaluation/form.jsp";
 	    }
 	    
 

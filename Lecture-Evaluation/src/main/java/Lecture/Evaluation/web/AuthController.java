@@ -1,5 +1,6 @@
 package Lecture.Evaluation.web;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,12 +23,13 @@ public class AuthController{
 	private UserService userService;
 	@Autowired
 	private MailSendService mailsender;
-	
+	  @Autowired
+	  ServletContext servletContext;
 
 	  
 		  @RequestMapping("form")
 		  public String form(HttpSession session ,Model model) {
-		    UserDTO user = (UserDTO) session.getAttribute("userID");
+		    UserDTO user = (UserDTO) session.getAttribute("loginUser");
 		    if (user != null) {
 		    	model.addAttribute("loginOn",1);
 		      return "redirect:evaluation/form";
@@ -51,16 +53,16 @@ public class AuthController{
 	  public String login(HttpSession session, String userID, String password, Model model)
 	      throws Exception {
 	    System.out.println("login()=============>" + userID + password);
-	    session.removeAttribute("userID");
+	    session.removeAttribute("loginUser");
 	    UserDTO user = userService.getUser(userID, password);
 	    System.out.println("User============>" + user);
 	    if (user != null) {
-	    	if(user.getAlterKey().equals("Y")) {
+	    	if(user.getUserEmailHash().equals("Y")) {
 	    	//	user.isUserEmailChecked()
 	    //  if (user.getAlterKey().equals("Y")) {
 	        // 로그인 시 유저 정보가 세션에 "userID"로 저장됨.
-	        session.setAttribute("userID", user);
-	        return "redirect:../evaluation/form";
+	        session.setAttribute("loginUser", user);
+	        return "redirect:../user/form";
 	      } else {
 	        model.addAttribute("loginError", 1); // 이메일 인증을 안 한 경우
 	        return "/WEB-INF/jsp/emailSendConfirm.jsp";
@@ -81,10 +83,10 @@ public class AuthController{
 	    
 	    return "redirect:login?userID=" + userID + "&password=" + password;
 	  }
-	@GetMapping("logout")
-		public String logout(HttpServletRequest req) {
-			req.getSession().invalidate();
-			return "Lecture-Evaluation/index.html";
+	@RequestMapping("logout")
+		public String logout(HttpSession session) {
+		session.invalidate();
+			return "redirect:../../index.jsp";
 		
 	}
 
