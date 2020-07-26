@@ -66,7 +66,8 @@
   
   </sql>
   <insert id="insert" parameterType="EvaluationDTO">
-    INSERT INTO EVALUATION(#{evaluationID ,jdbcType=INTEGER},
+    INSERT INTO EVALUATION(
+    evaluationID,
     userID,
     lectureName,
    	professorName,
@@ -82,18 +83,20 @@
    	 likeCount
    	 ) 
     values(
+   #{evaluationID ,jdbcType=INTEGER},
     #{userID},  
      #{lectureName},
    	#{professorName},
    	#{lectureYear},
    	 #{semesterDivide},
-   	#{ lectureDivide},
+   	#{lectureDivide},
    	 #{evaluationTitle},
-   	#{ evaluationContent},
+   	#{evaluationContent},
    	 #{totalScore},
    	 #{creditScore},
-   	#{ characterScore},
-   	 0)
+   	#{characterScore},
+   	#{lectureScore},
+   '0')
   </insert>
   
   <select id="getUserID" resultMap="EvaluationMap" parameterType="int">

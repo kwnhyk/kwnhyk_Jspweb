@@ -36,17 +36,20 @@ public class LoginUserFilter implements Filter {
       throws IOException, ServletException {
     HttpServletRequest req = (HttpServletRequest) request;
     HttpServletResponse res = (HttpServletResponse) response;
-    UserDTO user = (UserDTO)req.getSession().getAttribute("loginUser");
-    if (user != null) {
-      chain.doFilter(req, res);
-      return;
+    String servletPath = req.getServletPath();
+    System.out.println(servletPath);
+
+    if (servletPath.endsWith("add") || //
+        servletPath.endsWith("delete") || //
+        servletPath.endsWith("update")) {
+      UserDTO loginUser = (UserDTO) req.getSession().getAttribute("loginUser");
+      if (loginUser == null) {
+        res.sendRedirect("../auth/login");
+        return;
+      }
     }
-    String path = req.getRequestURI();
-    if (path.contains("/auth") || path.contains("/user/form") || path.contains("/user/add") || path.contains("signup")) {
-      chain.doFilter(req, res);
-      return;
-    }
-    res.setStatus(403);
-    res.sendRedirect(contextPath + "/app/auth/form");
+
+    chain.doFilter(request, response);
+
   }
 }

@@ -28,7 +28,7 @@
 
 
      <nav class="navbar navbar-expand-lg navbar-darkgray">
-            <a class="navbar-brand" href="index.jsp">강의평가 웹 사이트</a>
+            <a class="navbar-brand" href="/Lecture-Evaluation/">강의평가 웹 사이트</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -40,7 +40,7 @@
             <div id="navbar" class="collapse navbar-collapse">
             	<ul class="navbar-nav mr-auto">
             		<li class="nav-item active">
-            			<a class="nav-link" href="index.jsp">메인</a>
+            			<a class="nav-link" href="/Lecture-Evaluation/">메인</a>
             		</li>
             		<li class="nav-item dropdown">
             			<a class="nav-link dropdown-toggle" id="dropdown" data-toggle="dropdown">
@@ -51,13 +51,13 @@
             			
             			
             			<c:if test="${empty loginUser}">
-            				<a class="dropdown-item" href="userLogin.jsp">로그인</a>
-                			<a class="dropdown-item" href="userJoin.jsp">회원가입</a>
+            				<a class="dropdown-item" href="../auth/form">로그인</a>
+                			<a class="dropdown-item" href="../user/form">회원가입</a>
             				
             			</c:if>
             			<c:if test="${not empty loginUser }">
             		
-            		            				<a class="dropdown-item" href="userLogout.jsp">로그아웃</a>
+            		            				<a class="dropdown-item" href="../auth/logout">로그아웃</a>
             			
             			</c:if>
             			
@@ -103,7 +103,7 @@
         					</button>
         				</div>
         					<div class="modal-body">
-        						<form action="./evaluationRegisterAction.jsp" method="post">
+        						<form action="write" method="post">
         							<div class="form-row">
         								<div class="form-group col-sm-6">
         									<label>강의명</label>

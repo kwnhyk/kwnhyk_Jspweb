@@ -21,6 +21,7 @@
     <!-- 제이쿼리 자바스크립트 추가하기 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
+         
            <!--점보트론 스타일 적용-->
          
 <style type="text/css">
@@ -134,14 +135,66 @@ if(error != '') {
         			<input type="password" name="userPassword" class="form-control">
         			
         		</div>
-        		<button type="submit" class="btn btn-primary">로그인</button>
-        	
+        		
+        		 <div class="form-group  mt-3 "align="center">
+        		
+        		<button type="submit" class="btn btn-primary ">로그인</button>
+        		
+        		
+        		 </div>
+        		  	 <div class="form-group  mt-3 "align="center">
+        		  
+				   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v7.0&appId=3297077403647118&autoLogAppEvents=1" nonce="9UWqJO10"></script>  
+        		<div class="fb-login-button" data-size="large" data-button-type="login_with" data-layout="default"
+        		 data-auto-logout-link="false" data-use-continue-as="false" data-width=""
+        		 data-scope="public_profile,email"
+        		 data-onlogin="checkLoginState();"
+        		 align="center">
+        	</div>
+        </div>
+      
         	
         	</form>
         	
         </section>
       
        
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '3297077403647118',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v7.0'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+  
+  function checkLoginState() {
+        FB.getLoginStatus(function(response) { 
+            if (response.status == 'connected') { // 로그인이 정상적으로 되었을 때,
+                requestAutoLogin(response.authResponse.accessToken);
+            
+            } else { // 로그인이 되지 않았을 때,
+                alert("페이스북 로그인을 취소했습니다.");
+            }
+        });
+    }
+    
+  function requestAutoLogin(accessToken) {
+      location.href = "facebookLogin?accessToken=" + accessToken;
+  }
+</script>
 	
 
 <footer class="bg-dark mt-4 p-5 text-center" style="color:#FFFFFF;">
