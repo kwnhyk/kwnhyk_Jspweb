@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Lecture.Evaluation.domain.UserDTO;
 
-@WebFilter("/app/*")
+
 public class LoginUserFilter implements Filter {
   private String contextPath;
 

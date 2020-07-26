@@ -145,8 +145,8 @@ public class AuthController{
 
 	      // 액세스토큰이 무효하다면, 다시 로그인 입력 폼으로 보낸다.
 	      session.invalidate();
-	      model.addAttribute("refreshUrl", "2;url=form");
-	      return "auth/login";
+	     // model.addAttribute("refreshUrl", "2;url=form");
+	      return "/app/auth/form";
 	    }
 
 	    UserDTO user = userService.getId(email);
@@ -163,9 +163,9 @@ public class AuthController{
 
 	    logger.info("세션에 로그인 사용자 정보를 보관한다.");
 	    session.setAttribute("loginUser", user);
-	    model.addAttribute("refreshUrl", "2;url=../../index.html");
+	  //  model.addAttribute("refreshUrl", "2;url=../../index.html");
 
-	    return "auth/login";
+	    return "/app/auth/form";
 	  }
   // 회원가입 컨트롤러
 /*	@RequestMapping(value = "/userRegisterAction", method = RequestMethod.POST)
