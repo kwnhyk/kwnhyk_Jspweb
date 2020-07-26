@@ -5,7 +5,7 @@
   
 <mapper namespace="Lecture.Evaluation.dao.EvaluationDao">
 
-  <resultMap type="Lecture.Evaluation.evaluation.EvaluationDTO" id="EvaluationMap">
+  <resultMap type="Lecture.Evaluation.domain.EvaluationDTO" id="EvaluationMap">
     <id column="evaluationID"   property="evaluationID"/>
     <result column="userID"  property="userID"/>
     <result column="lectureName"    property="lectureName"/>
@@ -33,7 +33,7 @@
     WHERE lectureDivide 
     <include refid="search"></include>
 						
-     LIMIT #{pageNumber}*5 ,#{pageNumber}*5 +6
+     LIMIT 0 ,6
   </select>
   <select id="listSearchCount" resultType="int">
     SELECT
@@ -48,16 +48,16 @@
   <sql id="search">
   <if test="searchType !=null">
   	<if test="searchType=='최신순'.toString()">
-  	Like ('%',#{lectureDivide},'%') AND
+  	Like CONCAT ('%',#{lectureDivide},'%') AND
   	CONCAT(lectureName,professorName,evaluationTitle,evaluationContent)
-  	LIKE ('%',#{search},'%')
+  	LIKE CONCAT('%',#{search},'%')
   	ORDER BY evaluationID DESC
   	
   	</if>
   	<if test="searchType=='추천순'.toString()">
-  	Like ('%',#{lectureDivide},'%') AND
+  	Like CONCAT('%',#{lectureDivide},'%') AND
   	CONCAT(lectureName,professorName,evaluationTitle,evaluationContent)
-  	LIKE ('%',#{search},'%')
+  	LIKE CONCAT('%',#{search},'%')
   	ORDER BY likeCount DESC
   	
   	</if>

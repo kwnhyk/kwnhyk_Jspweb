@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Lecture.Evaluation.dao.UserDao;
+import Lecture.Evaluation.domain.UserDTO;
 import Lecture.Evaluation.service.UserService;
-import Lecture.Evaluation.user.UserDTO;
 @Service
 public class UserServiceImpl implements UserService {
 

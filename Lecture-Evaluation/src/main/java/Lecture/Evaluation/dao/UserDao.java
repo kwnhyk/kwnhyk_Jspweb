@@ -2,7 +2,8 @@ package Lecture.Evaluation.dao;
 
 import java.util.Map;
 
-import Lecture.Evaluation.user.UserDTO;
+import Lecture.Evaluation.domain.UserDTO;
+
 
 public interface UserDao {
 	

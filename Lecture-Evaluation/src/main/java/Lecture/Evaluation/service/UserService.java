@@ -1,6 +1,6 @@
 package Lecture.Evaluation.service;
 
-import Lecture.Evaluation.user.UserDTO;
+import Lecture.Evaluation.domain.UserDTO;
 
 public interface UserService {
 

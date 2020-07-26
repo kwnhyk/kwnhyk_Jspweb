@@ -36,7 +36,7 @@ public class LoginUserFilter implements Filter {
       throws IOException, ServletException {
     HttpServletRequest req = (HttpServletRequest) request;
     HttpServletResponse res = (HttpServletResponse) response;
-    UserDTO user = (UserDTO)req.getSession().getAttribute("userID");
+    UserDTO user = (UserDTO)req.getSession().getAttribute("loginUser");
     if (user != null) {
       chain.doFilter(req, res);
       return;

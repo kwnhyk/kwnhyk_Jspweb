@@ -19,33 +19,7 @@
         <link rel="stylesheet" href="./css/custom-theme.min.css">
     </head>
     <body>
-    <%
-    	request.setCharacterEncoding("UTF-8");
-    	String lectureDivide = "전체";
-    	String searchType = "최신순";
-    	String search = "";
-    	int pageNumber =0;
-    	if(request.getParameter("lectureDivide")!=null){
-    		lectureDivide = request.getParameter("lectureDivide");
-    	}
-    	if(request.getParameter("searchType")!=null){
-    		searchType = request.getParameter("searchType");
-    	}
-    	if(request.getParameter("search")!=null){
-    		search = request.getParameter("search");
-    	}
-    	if(request.getParameter("pageNumber")!=null){
-    		try{
-    		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-    	}catch(Exception e){
-    		System.out.println("검색 페이지 번호 오류");
-    		
-    	}
-    		
-    	
-    	}
-    		
-  %>
+   
      <script>
 		const error = '${loginOn}';
 	if(error != '') {
@@ -112,13 +86,13 @@
         	
         		<select name="lectureDivide" class="form-control mx-1 mt-2">
         			<option value="전체"> 전체</option>
-        			<option value="전공" <% if(lectureDivide.equals("전공"))out.println("selected"); %>>전공</option>
-        			<option value="교양"<% if(lectureDivide.equals("교양"))out.println("selected"); %>>교양</option>
-        			<option value="기타" <% if(lectureDivide.equals("기타"))out.println("selected"); %>>기타</option>
+        			<option value="전공">전공</option>
+        			<option value="교양">교양</option>
+        			<option value="기타" >기타</option>
         		</select>
         		<select name="searchType" class="form-control mx-1 mt-2">
         			<option value="최신순"> 최신순</option>
-        			<option value="추천순" <% if(searchType.equals("추천순"))out.println("selected"); %>>추천순</option>
+        			<option value="추천순">추천순</option>
         		</select>
         		<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요">
         		<button type="submit" class="btn btn-primary mx-1 mt-2">검색</button>
@@ -144,24 +118,24 @@
         
         	<div class="card-header bg-light">
         		<div class="row">
-        			<div class="col-8 text-left">${evalList.LectureName}&nbsp;<small>${evalList.ProfessorName}</small></div>
+        			<div class="col-8 text-left">${evalList.lectureName}&nbsp;<small>${evalList.professorName}</small></div>
         			<div class="col-4 text-right">
-        				종합<span style="color:red;">${evalList.TotalScore}</span>
+        				종합<span style="color:red;">${evalList.totalScore}</span>
         				</div>
         				</div>
         				</div>
         			
         				<div class="card-body">
         				<h5 class="card-title">
-        			${evalList.EvaluationTitle}&nbsp;<small>(${evalList.LectureYear} 년 ${evalList.SemesterDivide})</small>
+        			${evalList.evaluationTitle}&nbsp;<small>(${evalList.lectureYear} 년 ${evalList.semesterDivide})</small>
         				</h5>
-        				<p class="card-text">${evalList.EvaluationContent}</p>
+        				<p class="card-text">${evalList.evaluationContent}</p>
         				<div class="row">
         					<div class="col-9 text-left">
-        						성적<span style="color: red;">${evalList.CreditScore}</span>
-        						인성<span style="color: red;">${evalList.CharacterScore}</span>
-        						강의<span style="color: red;">${evalList.LectureScore}</span>
-        						<span style="color:green;">(추천:${evalList.LikeCount})</span>
+        						성적<span style="color: red;">${evalList.creditScore}</span>
+        						인성<span style="color: red;">${evalList.characterScore}</span>
+        						강의<span style="color: red;">${evalList.lectureScore}</span>
+        						<span style="color:green;">(추천:${evalList.likeCount})</span>
         						
         						
         						
@@ -169,8 +143,8 @@
         						
         						</div>
         						<div class="col-3 text-right">
-        						<a onclick="return confirm('추천하시겠습니까?')"href="./likeAction.jsp?evaluationID=${evalList.EvaluationID}">추천</a>
-        						<a onclick="return confirm('삭제하시겠습니까?')"href="./deleteAction.jsp?evaluationID=${evalList.EvaluationID}">삭제</a>
+        						<a onclick="return confirm('추천하시겠습니까?')"href="./likeAction.jsp?evaluationID=${evalList.evaluationID}">추천</a>
+        						<a onclick="return confirm('삭제하시겠습니까?')"href="./deleteAction.jsp?evaluationID=${evalList.evaluationID}">삭제</a>
         						
         						
         						</div>
@@ -183,19 +157,11 @@
 		</section>
         <ul class ="pagination justify-content-center mt-3">
         	<li class="page-item">
-<%
- 	if(pageNumber <=0){
-%> 
+
  <a class="page-link disabled">이전</a>      	
-<%
- 	}else{
-%>
- 	<a class ="page-link" href="./index.jsp?lectureDivide= <%= URLEncoder.encode(lectureDivide,"UTF-8")%>&searchType=
- 	<%=URLEncoder.encode(searchType,"UTF-8") %>&search=<%= URLEncoder.encode(search,"UTF-8") %>&pageNumber= 
- 	<%=pageNumber-1%>">이전</a>
-<%
- 	}
-%>
+
+ 	
+
  </li>
  
  <li>
@@ -213,10 +179,7 @@
  
 --%>
  
- 	<a class ="page-link" href="./index.jsp?lectureDivide= <%= URLEncoder.encode(lectureDivide,"UTF-8")%>&searchType=
- 	<%=URLEncoder.encode(searchType,"UTF-8") %>&search=<%= URLEncoder.encode(search,"UTF-8") %>&pageNumber= 
- 	<%=pageNumber+1%>">다음</a>
-
+ 
 <%--
  	
  	}

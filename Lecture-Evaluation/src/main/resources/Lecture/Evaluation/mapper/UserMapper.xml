@@ -5,7 +5,7 @@
   
 <mapper namespace="Lecture.Evaluation.dao.UserDao">
 
-  <resultMap type="Lecture.Evaluation.user.UserDTO" id="UserMap">
+  <resultMap type="Lecture.Evaluation.domain.UserDTO" id="UserMap">
     <id column="userID"   property="userID"/>
     <result column="userPassword"  property="userPassword"/>
     <result column="userEmail"    property="userEmail"/>

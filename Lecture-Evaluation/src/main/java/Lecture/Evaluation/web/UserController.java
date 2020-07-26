@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import Lecture.Evaluation.domain.UserDTO;
 import Lecture.Evaluation.service.MailSendService;
 import Lecture.Evaluation.service.UserService;
-import Lecture.Evaluation.user.UserDTO;
 @Controller
 @RequestMapping("/user")
 public class UserController {
