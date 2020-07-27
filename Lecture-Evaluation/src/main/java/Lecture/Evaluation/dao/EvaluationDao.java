@@ -9,7 +9,7 @@ import Lecture.Evaluation.domain.EvaluationDTO;
 public interface EvaluationDao {
 
 public int insert(EvaluationDTO evaluationDTO) throws Exception;
-		
+		public List<EvaluationDTO> findAll() throws Exception;
 	
 	
 	

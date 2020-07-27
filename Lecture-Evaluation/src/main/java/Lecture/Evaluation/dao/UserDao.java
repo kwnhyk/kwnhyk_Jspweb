@@ -8,9 +8,10 @@ import Lecture.Evaluation.domain.UserDTO;
 public interface UserDao {
 	
 	 public  int join(UserDTO userDTO) throws Exception ;
-		
+	
 
-	 public UserDTO findById(String userID) throws Exception;
+	 public String findById(String userID) throws Exception;
+	 public UserDTO UserfindById(String userID) throws Exception;
 	 public UserDTO findByIdAndPassword(Map<String,Object> map) throws Exception;
 	
 	 

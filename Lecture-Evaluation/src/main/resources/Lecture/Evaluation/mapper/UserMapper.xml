@@ -34,7 +34,7 @@
    	
   </insert>
   
-  <select id="findById" resultMap="UserMap" parameterType="String">
+  <select id="findById" resultType="String" parameterType="String">
     SELECT *
      FROM USER 
      WHERE userID =#{userID}

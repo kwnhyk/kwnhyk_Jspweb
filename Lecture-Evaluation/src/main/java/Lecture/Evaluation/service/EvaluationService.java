@@ -12,10 +12,10 @@ public interface EvaluationService {
 
 	
 	
-	List<EvaluationDTO> list(String lectureDivide,String searchType,String search ,int pageNumber) throws Exception ;
+	List<EvaluationDTO> list(String lectureDivide,String searchType,String search ) throws Exception ;
 	
  int write(EvaluationDTO evaluationDTO) throws Exception;
-		
+		List<EvaluationDTO> getAll()throws Exception;
 	
 	
 	

@@ -106,6 +106,14 @@
     
    
   </select>
+  <select id="findAll" resultMap="EvaluationMap">
+  SELECT *
+  
+  from EVALUATION
+  ORDER BY evaluationID DESC
+  
+  
+  </select>
   
   <update id="like" parameterType="int">
     update evaluation set

@@ -19,12 +19,12 @@ public class EvaluationServiceImpl implements EvaluationService {
 		this.evaluationDao= evaluationDao;
 	}
 	@Override
-	  public List<EvaluationDTO> list(String lectureDivide,String searchType,String search ,int pageNumber) throws Exception {
+	  public List<EvaluationDTO> list(String lectureDivide,String searchType,String search ) throws Exception {
 		HashMap<String,Object> params = new HashMap<>();
 		params.put("lectureDivide", lectureDivide);
 		params.put("searchType", searchType);
 		params.put("search", search);
-		params.put("pageNumber", pageNumber);
+		
 	    return evaluationDao.getList(params);
 	  }
 	@Override
@@ -48,5 +48,11 @@ public class EvaluationServiceImpl implements EvaluationService {
 	public EvaluationDTO getUserID(int evaluationID) throws Exception {
 		return evaluationDao.findByevaluationId(evaluationID);
 	}
+	@Override
+	
+	public List<EvaluationDTO> getAll() throws Exception {
+		return evaluationDao.findAll();
+	}
+	
 	
 }

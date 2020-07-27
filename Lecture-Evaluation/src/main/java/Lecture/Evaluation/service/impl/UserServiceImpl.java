@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	@Override
-	public UserDTO getId(String userID) throws Exception {
+	public String getId(String userID) throws Exception {
 		
 		return userDao.findById(userID);
 	}
@@ -37,6 +37,10 @@ public class UserServiceImpl implements UserService {
 	public String getEmail(String userID) throws Exception {
 		 
 		 return userDao.getUserEmail(userID);
+	}
+	 @Override
+	public UserDTO get(String userID) throws Exception {
+		 return userDao.UserfindById(userID);
 	}
 	
 }

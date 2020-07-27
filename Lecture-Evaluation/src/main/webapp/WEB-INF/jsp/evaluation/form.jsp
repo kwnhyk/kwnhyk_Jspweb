@@ -60,12 +60,12 @@
             			<div class="dropdown-menu" aria-labelledby="dropdown">
             			
             			
-            			<c:if test="${empty loginUser}">
+            			<c:if test="${empty sessionScope.loginUser}">
             				<a class="dropdown-item" href="userLogin.jsp">로그인</a>
                 			<a class="dropdown-item" href="userJoin.jsp">회원가입</a>
             				
             			</c:if>
-            			<c:if test="${not empty loginUser }">
+            			<c:if test="${not empty sessionScope.loginUser }">
             		
             		            				<a class="dropdown-item" href="userLogout.jsp">로그아웃</a>
             			
@@ -86,7 +86,7 @@
         	
         		<select name="lectureDivide" class="form-control mx-1 mt-2">
         			<option value="전체"> 전체</option>
-        			<option value="전공">전공</option>
+        			<option value="전공"<c:out value="${evalAll.lectureDivide =='전공'?'selected':'' }"/>>전공</option>
         			<option value="교양">교양</option>
         			<option value="기타" >기타</option>
         		</select>

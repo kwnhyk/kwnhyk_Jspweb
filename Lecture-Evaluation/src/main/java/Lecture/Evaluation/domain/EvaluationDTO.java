@@ -1,13 +1,12 @@
 package Lecture.Evaluation.domain;
 
-import java.io.Serializable;
 
-public class EvaluationDTO implements Serializable {
+public class EvaluationDTO  {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	
 	int evaluationID;
 	String userID;
 	String lectureName;

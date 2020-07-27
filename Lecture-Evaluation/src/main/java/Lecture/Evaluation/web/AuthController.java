@@ -44,7 +44,7 @@ public class AuthController{
 	  
 	  @GetMapping("form")
 	  public String form(HttpSession session) {
-		 UserDTO user =(UserDTO) session.getAttribute("loginUser");
+		 String user =(String) session.getAttribute("loginUser");
 		 if(user !=null) {
 		    
 		    return "redirect:../evaluation/list";
@@ -66,6 +66,7 @@ public class AuthController{
 	    }
 	    response.addCookie(cookie);
 	    UserDTO user = userService.getUser(userID, userPassword);
+	    String userid =userService.getId(userID);
 	    System.out.println("User============>" + user);
 	    if (user != null) {
 	    	if(user.getUserEmailHash().equals("Y")) {
@@ -74,7 +75,7 @@ public class AuthController{
 	    //  if (user.getAlterKey().equals("Y")) {
 	        // 로그인 시 유저 정보가 세션에 "userID"로 저장됨.
 	    		
-	        session.setAttribute("loginUser", user);
+	    		session.setAttribute("loginUser", userid);
 	        
 	        System.out.println("good Y");
 	        String url = "redirect:../evaluation/list";
@@ -101,7 +102,7 @@ public class AuthController{
 	      @RequestParam("userEmailHash") String key) throws Exception {
 
 	    mailsender.alterUserKey(id, key); // mailsender의 경우 @Autowired
-	    UserDTO user = userService.getId(id);
+	    String user = userService.getId(id);
 	   // String userID = user.getUserID();
 	    
 	    return "/WEB-INF/jsp/user/emailSendAction.jsp";
@@ -149,7 +150,7 @@ public class AuthController{
 	      return "/app/auth/form";
 	    }
 
-	    UserDTO user = userService.getId(email);
+	    UserDTO user = userService.get(email);
 	    if (user == null) {
 	      // 현재 서버에 등록되지 않았다면, 새 사용자로 자동 등록한다.
 	    	user = new UserDTO();
