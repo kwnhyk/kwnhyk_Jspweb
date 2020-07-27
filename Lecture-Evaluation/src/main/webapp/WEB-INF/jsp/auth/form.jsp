@@ -102,13 +102,14 @@ if(error != '') {
             		
             			<c:if test="${not empty userID}">
             			
-            				<a class="dropdown-item" href="../auth/logout">로그아웃</a>
-            			
+            				<a class="dropdown-item" onclick="fbLogout();" href="../auth/logout">로그아웃</a>
+            				
             			</c:if>
             			
             			</div>	
             			</li>
             			
+            				
             	</ul>
             	<form action="./index.jsp" method="get"class="form-inline my-2 my-lg-0">
             		<input type="text" name="search" class="form-control mr-sm-2" type="search" placeholder="내용을 입력하세요."aria-label="search">
@@ -186,7 +187,10 @@ if(error != '') {
                 requestAutoLogin(response.authResponse.accessToken);
             
             } else { // 로그인이 되지 않았을 때,
-                alert("페이스북 로그인을 취소했습니다.");
+                Swal.fire({
+                	icon:'error',
+                	title:'페이스북 로그인을 취소했습니다.'
+                });
             }
         });
     }
@@ -194,6 +198,7 @@ if(error != '') {
   function requestAutoLogin(accessToken) {
       location.href = "facebookLogin?accessToken=" + accessToken;
   }
+
 </script>
 	
 

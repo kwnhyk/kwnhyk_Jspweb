@@ -15,7 +15,6 @@ import Lecture.Evaluation.domain.EvaluationDTO;
 import Lecture.Evaluation.domain.UserDTO;
 import Lecture.Evaluation.service.EvaluationService;
 import Lecture.Evaluation.service.UserService;
-import Team.project.domain.User;
 
 @Controller
 @RequestMapping("/evaluation")
@@ -39,7 +38,7 @@ public class EvaluationController {
 	       System.out.println("수업목록==========>" + evalList);
 	       model.addAttribute("evalList", evalList);
 	     }
-	      return "/WEB-INF/jsp/board/list.jsp";
+	      return "/WEB-INF/jsp/evaluation/list.jsp";
 	    }
 	    @PostMapping("write")
 	    public String write(HttpSession session,EvaluationDTO evaluationDTO,UserDTO userID,Model model) throws Exception{
@@ -51,7 +50,7 @@ public class EvaluationController {
 	    	result=evaluationService.write(evaluationDTO);
 	    	if(result==-1) {
 	    		model.addAttribute("error",1);
-	    		return "/WEB-INF/jsp/board/list.jsp";
+	    		return "/app/evaluation/list";
 	    	}
 	    	else { 
 	    		

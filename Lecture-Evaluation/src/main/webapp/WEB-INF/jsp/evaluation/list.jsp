@@ -65,9 +65,15 @@
             			
             			</div>	
             			</li>
+            			<c:if test="${not empty userID}">
             			<li class="nav-item active">
+            				<a class="nav-link" href="../evaluation/list">강의평가</a>
+            				</li>
+            				<li class="nav-item active">
             				<a class="nav-link" href="../board/form">게시판</a>
             				</li>
+            				</c:if>
+            			
             			
             	</ul>
             	<form action="./index.jsp" method="get"class="form-inline my-2 my-lg-0">
