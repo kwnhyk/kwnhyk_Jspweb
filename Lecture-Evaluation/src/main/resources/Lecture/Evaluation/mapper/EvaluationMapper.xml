@@ -46,6 +46,7 @@
     </select>
   
   <sql id="search">
+ 
   <if test="searchType !=null">
   	<if test="searchType=='최신순'">
   	Like CONCAT ('%',#{lectureDivide},'%') AND

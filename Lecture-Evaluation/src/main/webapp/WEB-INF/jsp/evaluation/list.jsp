@@ -88,10 +88,10 @@
         	<form method="post" action="list" class="form-inline mt-3">
         	
         		<select name="lectureDivide" class="form-control mx-1 mt-2">
-        			<option value="전체"<c:out value="${map.lectureDivide =='전체'?'selected':'' }"/>> 전체</option>
-        			<option value="전공"<c:out value="${map.lectureDivide =='전공'?'selected':'' }"/>>전공</option>
+        			<option value="전체"> 전체</option>
+        			<option value="전공"<c:if test="${map.lectureDivide =='전공'}">selected</c:if>>전공</option>
         			<option value="교양"<c:out value="${map.lectureDivide =='교양'?'selected':'' }"/>>교양</option>
-        			<option value="기타"<c:out value="${map.lectureDivide =='기타'?'selected':'' }"/>>기타</option>
+        			<option value="기타"<c:if test="${map.lectureDivide =='기타'}">selected</c:if>>기타</option>
         		</select>
         		<select name="searchType" class="form-control mx-1 mt-2">
         			<option value="최신순"> 최신순</option>

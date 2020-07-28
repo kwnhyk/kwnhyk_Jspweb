@@ -30,25 +30,29 @@ public class EvaluationController {
 
 	  
 	   @RequestMapping("list")
-	    public ModelAndView list(EvaluationDTO eval,@RequestParam(defaultValue="전체")String lectureDivide,
+	    public ModelAndView list(EvaluationDTO eval,@RequestParam(defaultValue="")String lectureDivide,
 	    		@RequestParam(defaultValue="최신순")String searchType,@RequestParam(defaultValue="")String search) throws Exception {
 		 
 		   if(lectureDivide.equals("전체")) {
 			   lectureDivide ="";
-		   }		 
+		   	 }
 		   // List<EvaluationDTO> evalAll = evaluationService.getAll();
-		   List<EvaluationDTO> list = evaluationService.list(lectureDivide,searchType,search);
+		  
+			   List<EvaluationDTO> list = evaluationService.list(lectureDivide,searchType,search);
 		   
 		   ModelAndView mav = new ModelAndView();
 		   
 		   Map<String,Object> map = new HashMap<String,Object>();
 		   map.put("list", list);
-		   map.put("lectrueDivide", lectureDivide);
+		   map.put("lectureDivide", lectureDivide);
 		   map.put("searchType", searchType);
 		   map.put("search", search);
 		   mav.addObject("map", map);
 		   mav.setViewName("evaluation/list");
-		   
+		   System.out.println("이게 바로셀렉");
+		   System.out.println("map==" +map);
+		   return mav;
+		  
 			 //  if(lectureDivide.equals("전체")){
 				 //  lectureDivide ="";
 				//   System.out.println("수업목록 =====>"+evalAll);
@@ -56,7 +60,7 @@ public class EvaluationController {
 				   
 			   
 			  // }  
-			   System.out.println("map==" +map);
+			 
 			  
 			
 			 
@@ -66,7 +70,7 @@ public class EvaluationController {
 	   
 	   
 	 //   }
-	   return mav;
+	  
 	   }
 	    @PostMapping("write")
 	    public String write(HttpSession session,@ModelAttribute("evalDTO") EvaluationDTO eval,Model model) throws Exception{
