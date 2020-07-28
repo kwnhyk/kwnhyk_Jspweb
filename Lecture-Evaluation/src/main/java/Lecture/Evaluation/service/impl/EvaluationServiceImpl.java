@@ -2,6 +2,7 @@ package Lecture.Evaluation.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class EvaluationServiceImpl implements EvaluationService {
 	}
 	@Override
 	  public List<EvaluationDTO> list(String lectureDivide,String searchType,String search ) throws Exception {
-		HashMap<String,Object> params = new HashMap<>();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("lectureDivide", lectureDivide);
 		params.put("searchType", searchType);
 		params.put("search", search);

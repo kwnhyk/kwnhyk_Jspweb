@@ -1,6 +1,8 @@
 package Lecture.Evaluation.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import Lecture.Evaluation.domain.EvaluationDTO;
 import Lecture.Evaluation.domain.UserDTO;
@@ -25,33 +29,44 @@ public class EvaluationController {
 	
 
 	  
-	   @GetMapping("list")
-	    public String list(Model model) throws Exception {
-		   List<EvaluationDTO> evalAll = evaluationService.getAll();
-		   
-			   
+	   @RequestMapping("list")
+	    public ModelAndView list(EvaluationDTO eval,@RequestParam(defaultValue="전체")String lectureDivide,
+	    		@RequestParam(defaultValue="최신순")String searchType,@RequestParam(defaultValue="")String search) throws Exception {
 		 
-		   String lectureDivide = "전체";
-	    	String searchType = "최신순";
-	    	String search = "";
-	    		
-			   if(lectureDivide=="전체") {
+		   if(lectureDivide.equals("전체")) {
+			   lectureDivide ="";
+		   }		 
+		   // List<EvaluationDTO> evalAll = evaluationService.getAll();
+		   List<EvaluationDTO> list = evaluationService.list(lectureDivide,searchType,search);
+		   
+		   ModelAndView mav = new ModelAndView();
+		   
+		   Map<String,Object> map = new HashMap<String,Object>();
+		   map.put("list", list);
+		   map.put("lectrueDivide", lectureDivide);
+		   map.put("searchType", searchType);
+		   map.put("search", search);
+		   mav.addObject("map", map);
+		   mav.setViewName("evaluation/list");
+		   
+			 //  if(lectureDivide.equals("전체")){
+				 //  lectureDivide ="";
+				//   System.out.println("수업목록 =====>"+evalAll);
 				   
-				   System.out.println("수업목록 =====>"+evalAll);
-				   model.addAttribute("evalAll",evalAll);
 				   
-			   }
-			   System.out.println("evalAll==" +evalAll);
+			   
+			  // }  
+			   System.out.println("map==" +map);
 			  
 			
-	    //  List<EvaluationDTO> evalList = evaluationService.list(lectureDivide,searchType,search);
+			 
 	   //   if (evalList != null) {
 	     //  System.out.println("수업목록==========>" + evalList);
 	     //  model.addAttribute("evalList", evalList);
 	   
 	   
 	 //   }
-	   return "/WEB-INF/jsp/evaluation/list.jsp";
+	   return mav;
 	   }
 	    @PostMapping("write")
 	    public String write(HttpSession session,@ModelAttribute("evalDTO") EvaluationDTO eval,Model model) throws Exception{

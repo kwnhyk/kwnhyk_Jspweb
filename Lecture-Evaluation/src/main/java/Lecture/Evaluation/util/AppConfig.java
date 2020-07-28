@@ -1,9 +1,12 @@
 package Lecture.Evaluation.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
 	// Spring IoC 컨테이너가 탐색할 패키지 설정
@@ -21,8 +24,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 		  public AppConfig() {
 		    logger.debug("AppConfig 객체 생성!");
 		  }
-		}
 	
+	 @Bean
+	  public ViewResolver viewResolver() {
+	    InternalResourceViewResolver vr = new InternalResourceViewResolver(//
+	        "/WEB-INF/jsp/", // prefix
+	        ".jsp" // suffix
+	    );
+	    return vr;
+	  }
+	 }
 
 	 
 	  // Spring IoC 컨테이너에 수동으로 객체를 등록하고 싶다면,

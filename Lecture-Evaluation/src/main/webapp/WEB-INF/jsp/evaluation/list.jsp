@@ -76,24 +76,26 @@
             			
             			
             	</ul>
-            	<form action="./index.jsp" method="get"class="form-inline my-2 my-lg-0">
+            	<form action="list" method="post"class="form-inline my-2 my-lg-0">
             		<input type="text" name="search" class="form-control mr-sm-2" type="search" placeholder="내용을 입력하세요."aria-label="search">
             		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
             	</form>
             </div>
         </nav>
+        	
         <section class="container">
-        	<form method="get" action="./index.jsp" class="form-inline mt-3">
+      
+        	<form method="post" action="list" class="form-inline mt-3">
         	
         		<select name="lectureDivide" class="form-control mx-1 mt-2">
-        			<option value="전체"> 전체</option>
-        			<option value="전공">전공</option>
-        			<option value="교양">교양</option>
-        			<option value="기타" >기타</option>
+        			<option value="전체"<c:out value="${map.lectureDivide =='전체'?'selected':'' }"/>> 전체</option>
+        			<option value="전공"<c:out value="${map.lectureDivide =='전공'?'selected':'' }"/>>전공</option>
+        			<option value="교양"<c:out value="${map.lectureDivide =='교양'?'selected':'' }"/>>교양</option>
+        			<option value="기타"<c:out value="${map.lectureDivide =='기타'?'selected':'' }"/>>기타</option>
         		</select>
         		<select name="searchType" class="form-control mx-1 mt-2">
         			<option value="최신순"> 최신순</option>
-        			<option value="추천순">추천순</option>
+        			<option value="추천순"<c:out value="${map.searchType =='추천순'?'selected':'' }"/>>추천순</option>
         		</select>
         		<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요">
         		<button type="submit" class="btn btn-primary mx-1 mt-2">검색</button>
@@ -103,8 +105,8 @@
 	
         	</form>
         	
-        	
-        	<c:forEach 	var="list" items="${evalAll}">
+        	  <c:forEach 	var="list" items="${map.list}">
+        
         	<div class="card bg-light mt-3">
         	<div class="card-header bg-light">
         		<div class="row">

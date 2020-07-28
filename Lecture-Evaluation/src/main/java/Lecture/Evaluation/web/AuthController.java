@@ -49,7 +49,7 @@ public class AuthController{
 		    
 		    return "redirect:../evaluation/list";
 		  }
-		 return "/WEB-INF/jsp/auth/form.jsp";
+		 return "auth/form";
 	  }
 	
 
@@ -85,14 +85,14 @@ public class AuthController{
 	      } else {
 	    	  System.out.println("not Y");
 	        model.addAttribute("loginError", 1); // 이메일 인증을 안 한 경우
-	        String url = "/WEB-INF/jsp/auth/form.jsp";
+	        String url = "auth/form";
 	        return new ModelAndView(url);
 	       
 	      }
 	    } else {
 	      session.invalidate();
 	      model.addAttribute("loginError", 2); // 아이디 유효하지 않은 경우
-	      String url = "/WEB-INF/jsp/auth/form.jsp";
+	      String url = "auth/form";
 	        return new ModelAndView(url);
 	       
 	    }
@@ -105,7 +105,7 @@ public class AuthController{
 	    String user = userService.getId(id);
 	   // String userID = user.getUserID();
 	    
-	    return "/WEB-INF/jsp/user/emailSendAction.jsp";
+	    return "user/emailSendAction";
 	  }
 	@RequestMapping("logout")
 		public String logout(HttpSession session) {
