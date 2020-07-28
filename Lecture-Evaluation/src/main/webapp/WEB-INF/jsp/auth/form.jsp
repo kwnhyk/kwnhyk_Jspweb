@@ -95,14 +95,14 @@ if(error != '') {
             			<div class="dropdown-menu" aria-labelledby="dropdown">
             			
             			<c:if test="${empty userID}">
-            				<a class="dropdown-item" href="../auth/form">로그인</a>
+            				<a class="dropdown-item" href="/auth/form">로그인</a>
                 			<a class="dropdown-item" href="../user/form">회원가입</a>
             			</c:if>
             
             		
             			<c:if test="${not empty userID}">
             			
-            				<a class="dropdown-item" onclick="fbLogout();" href="../auth/logout">로그아웃</a>
+            				<a class="dropdown-item" onclick="fbLogout();" href="/auth/logout">로그아웃</a>
             				
             			</c:if>
             			

@@ -86,6 +86,10 @@ public class EvaluationController {
 	    		model.addAttribute("error",1);
 	    		return "/app/evaluation/list";
 	    	}
+	    		
+	    		
+	    	
+	    	
 	    	else { 
 	    		
 	    		

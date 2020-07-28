@@ -52,8 +52,8 @@ trimDirectiveWhitespaces="true"%>
             			<div class="dropdown-menu" aria-labelledby="dropdown">
             			
             		<c:if test="${empty loginUser}">
-            				<a class="dropdown-item" href="../auth/form">로그인</a>
-                			<a class="dropdown-item" href="../user/form">회원가입</a>
+            				<a class="dropdown-item" href="app/auth/form">로그인</a>
+                			<a class="dropdown-item" href="app/user/form">회원가입</a>
             				
              		</c:if>
             			 <c:if test="${not empty loginUser}">

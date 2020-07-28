@@ -27,7 +27,7 @@ public class UserController {
 	@GetMapping("form")
 	public String form() {
 	
-		return "/WEB-INF/jsp/user/form.jsp";
+		return "user/form";
 	
 	}
 	

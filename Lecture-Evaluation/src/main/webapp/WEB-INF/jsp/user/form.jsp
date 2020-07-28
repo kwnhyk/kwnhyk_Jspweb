@@ -61,7 +61,7 @@ trimDirectiveWhitespaces="true"%>
       
       
      <nav class="navbar navbar-expand-lg navbar-darkgray">
-            <a class="navbar-brand" href="../main.jsp">강의평가 웹 사이트</a>
+            <a class="navbar-brand" href="/Lecture-Evaluation/">강의평가 웹 사이트</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -73,7 +73,7 @@ trimDirectiveWhitespaces="true"%>
             <div id="navbar" class="collapse navbar-collapse">
             	<ul class="navbar-nav mr-auto">
             		<li class="nav-item active">
-            			<a class="nav-link" href="index.jsp">메인</a>
+            			<a class="nav-link" href="/Lecture-Evaluation/">메인</a>
             		</li>
             		<li class="nav-item dropdown">
             			<a class="nav-link dropdown-toggle" id="dropdown" data-toggle="dropdown">

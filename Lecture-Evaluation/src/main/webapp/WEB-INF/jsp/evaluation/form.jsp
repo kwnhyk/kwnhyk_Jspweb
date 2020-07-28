@@ -28,12 +28,14 @@
             icon : 'error',
             title : '로그인이 된 상태입니다!'
         });
+	     
     }else{
     	
     	Swal.fire({
     		icon:'error',
     		title:'로그인 해주세요!'
     	});		
+    	 history.back();
     }
 }
 </script>

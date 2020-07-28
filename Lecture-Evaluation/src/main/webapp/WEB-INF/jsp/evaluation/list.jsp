@@ -150,7 +150,37 @@
         		
         	
         	</section>
+        	<script>
+        	function validateForm(){
         	
+        		let lectureName = document.getElementById("lectureName");
+        		let professorName = document.getElementById("professorName");
+        		
+        		
+        		let evaluationTitle = document.getElementById("evaluationTitle");
+        		let evaluationContent = document.getElementById("evaluationContent");
+        		
+        		
+        	
+        		if(lectureName.value == "" || professorName.value== ""||evaluationTitle.value=="" ||evaluationContent.value=="" 
+        				){
+        		
+        		
+        		Swal.fire({
+        			icon:'error',
+        			title:'입력이 없습니다.'
+        			});
+        		
+        		return false;
+        		
+        		}
+        		
+        	
+        		}
+        	
+        
+        	
+        	</script>
         	
         	
         	<%-- 등록 모달창  -------------------------- --%>
@@ -166,16 +196,16 @@
         					</button>
         				</div>
         					<div class="modal-body">
-        						<form action="write" method="post">
+        						<form name="register" onsubmit="return validateForm();" action="write" method="post">
         							<div class="form-row">
         								<div class="form-group col-sm-6">
         									<label>강의명</label>
-        									<input type="text" name="lectureName" class="form-control" maxlength="20">
+        									<input type="text" id="lectureName" name="lectureName" class="form-control" maxlength="20">
         								</div>
         								
         								<div class="form-group col-sm-6">
         									<label>교수명</label>
-        									<input type="text" name="professorName" class="form-control" maxlength="20">
+        									<input type="text" id="professorName"name="professorName" class="form-control" maxlength="20">
         								
         								</div>
         							</div>
@@ -230,14 +260,14 @@
         							</div>
         							<div class="form-group">
         								<label>제목</label>
-        								<input type="text" name="evaluationTitle" class="form-control"maxlength="30">
+        								<input type="text" id="evaluationTitle"name="evaluationTitle" class="form-control"maxlength="30">
         								
         								
         							</div>
         							<div class="form-group">
         								<label>내용</label>
         								
-        								<textarea  name="evaluationContent" class="form-control"
+        								<textarea id="evaluationContent" name="evaluationContent" class="form-control"
         								 maxlength="2048" style="height:180px;"></textarea>
         								 
         							</div>
