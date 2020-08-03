@@ -8,14 +8,8 @@ public class BoardVO {
 	private String content;
 	private String writer;
 	private Date regdate;
-	private int viewcnt;
-	private int bno;
-	public int getBno() {
-		return bno;
-	}
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
+	private Double viewcnt;
+	private Integer bno;
 	public String getTitle() {
 		return title;
 	}
@@ -40,13 +34,19 @@ public class BoardVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public int getViewcnt() {
+	public Double getViewcnt() {
 		return viewcnt;
 	}
-	public void setViewcnt(int viewcnt) {
+	public void setViewcnt(Double viewcnt) {
 		this.viewcnt = viewcnt;
 	}
-	public BoardVO(String title, String content, String writer, Date regdate, int viewcnt, int bno) {
+	public Integer getBno() {
+		return bno;
+	}
+	public void setBno(Integer bno) {
+		this.bno = bno;
+	}
+	public BoardVO(String title, String content, String writer, Date regdate, Double viewcnt, Integer bno) {
 		super();
 		this.title = title;
 		this.content = content;
@@ -54,11 +54,6 @@ public class BoardVO {
 		this.regdate = regdate;
 		this.viewcnt = viewcnt;
 		this.bno = bno;
-	}
-	@Override
-	public String toString() {
-		return "BoardVO [title=" + title + ", content=" + content + ", writer=" + writer + ", regdate=" + regdate
-				+ ", viewcnt=" + viewcnt + ", bno=" + bno + "]";
 	}
 	
 }

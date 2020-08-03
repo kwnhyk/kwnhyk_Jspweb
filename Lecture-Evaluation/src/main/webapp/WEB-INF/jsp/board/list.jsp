@@ -1,33 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial=scale=1,shrink-to-fit=no" />
-        <title>∞≠¿«∆Ú∞° ¿• ªÁ¿Ã∆Æ</title>
-        <!-- ∫Œ∆ÆΩ∫∆Æ∑¶CSS√ﬂ∞° -->
-        <link rel="stylesheet" href="/Lecture-Evaluation/css/bootstrap.min.css" >
-        <!-- ƒøΩ∫≈“CSS√ﬂ∞° -->
-        <link rel="stylesheet" href="/Lecture-Evaluation/css/custom.css" >
-             <!-- ƒøΩ∫≈“Navbar√ﬂ∞° -->
-        <link rel="stylesheet" href="/Lecture-Evaluation/css/custom-theme.min.css">
-         <!-- ¡¶¿Ãƒı∏Æ ¿⁄πŸΩ∫≈©∏≥∆Æ √ﬂ∞°«œ±‚ -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-               <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
-<!-- sweet alert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
-  
-
+<%@ include file="/WEB-INF/jsp/header.jsp" %>
 
 </head>
 <body>
 	
 
      <nav class="navbar navbar-expand-lg navbar-darkgray">
-            <a class="navbar-brand" href="/Lecture-Evaluation/">∞≠¿«∆Ú∞° ¿• ªÁ¿Ã∆Æ</a>
+            <a class="navbar-brand" href="/Lecture-Evaluation/">Í∞ïÏùòÌèâÍ∞Ä Ïõπ ÏÇ¨Ïù¥Ìä∏</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -39,19 +20,19 @@
             <div id="navbar" class="collapse navbar-collapse">
             	<ul class="navbar-nav mr-auto">
             		<li class="nav-item active">
-            			<a class="nav-link" href="/Lecture-Evaluation/">∏ﬁ¿Œ</a>
+            			<a class="nav-link" href="/Lecture-Evaluation/">Î©îÏù∏</a>
             		</li>
             		<li class="nav-item dropdown">
             			<a class="nav-link dropdown-toggle" id="dropdown" data-toggle="dropdown">
-            			»∏ø¯∞¸∏Æ
+            			ÌöåÏõêÍ¥ÄÎ¶¨
             			</a>
             			
             			<div class="dropdown-menu" aria-labelledby="dropdown">
             			
             			
             			<c:if test="${empty loginUser}">
-            				<a class="dropdown-item" href="../auth/form">∑Œ±◊¿Œ</a>
-                			<a class="dropdown-item" href="../user/form">»∏ø¯∞°¿‘</a>
+            				<a class="dropdown-item" href="../auth/form">Î°úÍ∑∏Ïù∏</a>
+                			<a class="dropdown-item" href="../user/form">ÌöåÏõêÍ∞ÄÏûÖ</a>
             				
             			</c:if>
             			<c:if test="${not empty loginUser }">
@@ -59,236 +40,58 @@
             			
             			
             		
-            		            				<a class="dropdown-item" href="../auth/logout">∑Œ±◊æ∆øÙ</a>
+            		            				<a class="dropdown-item" href="../auth/logout">Î°úÍ∑∏ÏïÑÏõÉ</a>
             			
             			</c:if>
             			
             			</div>	
             			</li>
             			<li class="nav-item active">
-            				<a class="nav-link" href="../board/form">∞‘Ω√∆«</a>
+            				<a class="nav-link" href="../board/list">Í≤åÏãúÌåê</a>
             				</li>
             			
             	</ul>
             	<form action="./index.jsp" method="get"class="form-inline my-2 my-lg-0">
-            		<input type="text" name="search" class="form-control mr-sm-2" type="search" placeholder="≥ªøÎ¿ª ¿‘∑¬«œººø‰."aria-label="search">
-            		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">∞Àªˆ</button>
+            		<input type="text" name="search" class="form-control mr-sm-2" type="search" placeholder="ÎÇ¥Ïö©ÏùÑ ÏûÖÎ†•ÌïòÏÑ∏Ïöî."aria-label="search">
+            		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Í≤ÄÏÉâ</button>
             	</form>
             </div>
         </nav>
-        <section class="container">
-        	<form method="get" action="./index.jsp" class="form-inline mt-3">
-        	
-        		<select name="lectureDivide" class="form-control mx-1 mt-2">
-        			<option value="¿¸√º"> ¿¸√º</option>
-        			<option value="¿¸∞¯">¿¸∞¯</option>
-        			<option value="±≥æÁ">±≥æÁ</option>
-        			<option value="±‚≈∏" >±‚≈∏</option>
-        		</select>
-        		<select name="searchType" class="form-control mx-1 mt-2">
-        			<option value="√÷Ω≈º¯"> √÷Ω≈º¯</option>
-        			<option value="√ﬂ√µº¯">√ﬂ√µº¯</option>
-        		</select>
-        		<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="≥ªøÎ¿ª ¿‘∑¬«œººø‰">
-        		<button type="submit" class="btn btn-primary mx-1 mt-2">∞Àªˆ</button>
+  
 
-        		<a class ="btn btn-primary mx-1 mt-2" data-toggle="modal" href="#registerModal">µÓ∑œ«œ±‚</a>
-        		<a class ="btn btn-danger mx-1 mt-2" data-toggle="modal" href="#reportModal">Ω≈∞Ì</a>
-	
-        	</form>
-        	   <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
-        	<div class="modal-dialog">
-        			<div class="modal-content">
-        				<div class="modal-header">
-        					<h5 class="modal-title" id="modal">∆Ú∞°µÓ∑œ</h5>
-        					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        						<span aria-hidden="true">&times;</span>
-        					
-        					
-        					</button>
-        				</div>
-        					<div class="modal-body">
-        						<form action="write" method="post">
-        							<div class="form-row">
-        								<div class="form-group col-sm-6">
-        									<label>∞≠¿«∏Ì</label>
-        									<input type="text" name="lectureName" class="form-control" maxlength="20">
-        								</div>
-        								
-        								<div class="form-group col-sm-6">
-        									<label>±≥ºˆ∏Ì</label>
-        									<input type="text" name="professorName" class="form-control" maxlength="20">
-        								
-        								</div>
-        							</div>
-        							<div class="form-row">
-        								<div class="form-group col-sm-4">
-        									<label>ºˆ∞≠ ø¨µµ</label>
-        									
-        									<select name="lectureYear" class= "form-control">
-        										<option value="2012">2012</option>
-        										<option value="2013">2013</option>
-        										<option value="2014">2014</option>
-        										<option value="2015">2015</option>
-        										<option value="2016">2016</option>
-        										<option value="2017">2017</option>
-        										<option value="2018">2018</option>
-        										<option value="2019">2019</option>
-        										<option value="2020" selected>2020</option>
-        										<option value="2021">2021</option>
-        										<option value="2022">2022</option>
-        										<option value="2023">2023</option>
-        										
-        									</select>
-        									
-        								</div>
-        								<div class="form-group col-sm-4">
-        									<label>ºˆ∞≠ «–±‚</label>
-        									<select name="semesterDivide" class="form-control">
-        										<option value="1«–±‚" selected>1«–±‚</option>
-        										<option value="ø©∏ß«–±‚" >ø©∏ß«–±‚</option>
-        										<option value="2«–±‚" >2«–±‚</option>
-        										<option value="∞‹øÔ«–±‚" >∞‹øÔ«–±‚</option>
-        										
-        										
-        									
-        									</select>
-        									
-        								</div>
-        								<div class="form-group col-sm-4">
-        									<label>∞≠¿« ±∏∫–</label>
-        									<select name="lectureDivide" class="form-control">
-        										<option value="¿¸∞¯" selected>¿¸∞¯</option>
-        										<option value="±≥æÁ" >±≥æÁ</option>
-        										<option value="±‚≈∏" >±‚≈∏</option>
-        									
-        										
-        										
-        									
-        									</select>
-        									
-        								</div>
-        								
-        							</div>
-        							<div class="form-group">
-        								<label>¡¶∏Ò</label>
-        								<input type="text" name="evaluationTitle" class="form-control"maxlength="30">
-        								
-        								
-        							</div>
-        							<div class="form-group">
-        								<label>≥ªøÎ</label>
-        								
-        								<textarea  name="evaluationContent" class="form-control"
-        								 maxlength="2048" style="height:180px;"></textarea>
-        								 
-        							</div>
-        							<div class="form-row">
-        								<div class="form-group col-sm-3">
-        									<label>¡æ«’</label>
-        									<select name="totalScore" class="form-control">
-        										<option value="A" selected>A</option>
-        										<option value="B" >B</option>
-        										<option value="C" >C</option>
-        											<option value="D" >D</option>
-        												<option value="F" >F</option>
-        									</select>
-        								</div>
-        								<div class="form-group col-sm-3">
-        									<label>¿Œº∫</label>
-        									<select name="characterScore" class="form-control">
-        										<option value="A" selected>A</option>
-        										<option value="B" >B</option>
-        										<option value="C" >C</option>
-        											<option value="D" >D</option>
-        												<option value="F" >F</option>
-        									</select>
-        								</div>
-        								<div class="form-group col-sm-3">
-        									<label>∞≠¿«</label>
-        									<select name="lectureScore" class="form-control">
-        										<option value="A" selected>A</option>
-        										<option value="B" >B</option>
-        										<option value="C" >C</option>
-        											<option value="D" >D</option>
-        												<option value="F" >F</option>
-        									</select>
-        								</div>
-        								<div class="form-group col-sm-3">
-        									<label>º∫¿˚</label>
-        									<select name="creditScore" class="form-control">
-        										<option value="A" selected>A</option>
-        										<option value="B" >B</option>
-        										<option value="C" >C</option>
-        											<option value="D" >D</option>
-        												<option value="F" >F</option>
-        									</select>
-        								</div>
-        							
-        							</div>
-        							
-        							<div class="modal-footer">
-        								<button type="button" class="btn btn-secondary"data-dismiss="modal">√Îº“</button>
-        								<button type="submit" class="btn btn-primary">µÓ∑œ«œ±‚</button>
-        							
-        							</div>
-        							
-        							
-        						</form>
-        					
-        					</div>
-        				
-        			</div>
-        	</div>
-        </div>
-           <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
-        	<div class="modal-dialog">
-        			<div class="modal-content">
-        				<div class="modal-header">
-        					<h5 class="modal-title" id="modal">Ω≈∞Ì«œ±‚</h5>
-        					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        						<span aria-hidden="true">&times;</span>
-        					
-        					
-        					</button>
-        				</div>
-        					<div class="modal-body">
-        						<form action="./reportAction.jsp" method="post">
-        							
-        							<div class="form-group">
-        								<label>Ω≈∞Ì ¡¶∏Ò</label>
-        								<input type="text" name="reportTitle" class="form-control"maxlength="30">
-        								
-        								
-        							</div>
-        							<div class="form-group">
-        								<label>Ω≈∞Ì ≥ªøÎ</label>
-        								
-        								<textarea  name="reportContent" class="form-control"
-        								 maxlength="2048" style="height:180px;"></textarea>
-        								 
-        							</div>
-        							
-        							
-        							<div class="modal-footer">
-        								<button type="button" class="btn btn-secondary"data-dismiss="modal">√Îº“</button>
-        								<button type="submit" class="btn btn-danger">Ω≈∞Ì«œ±‚</button>
-        							
-        							</div>
-        							
-        							
-        						</form>
-        					
-        					</div>
-        				
-        			</div>
-        	</div>
-        </div>
-		<footer class="bg-dark mt-4 p-5 text-center" style="color:#FFFFFF;">
-		
-			Copyright &copy; 2020 ±««ı¿± All Rights Reserved.
-		</footer>
+<script>
+    $(document).ready(function(){
+        $("#btnWrite").click(function(){
+            // ÌéòÏù¥ÏßÄ Ï£ºÏÜå Î≥ÄÍ≤Ω(Ïù¥Îèô)
+            location.href = "write";
+        });
+    });
+</script>
 
 
+<h2>Í≤åÏãúÍ∏Ä Î™©Î°ù</h2>
+<button type="button" id="btnWrite">Í∏ÄÏì∞Í∏∞</button>
+<table border="1" width="600px">
+    <tr>
+        <th>Î≤àÌò∏</th>
+        <th>Ï†úÎ™©</th>
+        <th>Ïù¥Î¶Ñ</th>
+        <th>ÏûëÏÑ±Ïùº</th>
+        <th>Ï°∞ÌöåÏàò</th>
+    </tr>
+    <c:forEach var="row" items="${list}">
+    <tr>
+        <td>${row.bno}</td>
+        <td><a href="${path}/board/view?bno=${row.bno}">${row.title}</a></td>
+        <td>${row.writer}</td>
+        <td>
+            <!-- ÏõêÌïòÎäî ÎÇ†ÏßúÌòïÏãùÏúºÎ°ú Ï∂úÎ†•ÌïòÍ∏∞ ÏúÑÌï¥ fmtÌÉúÍ∑∏ ÏÇ¨Ïö© -->
+            <fmt:formatDate value="${row.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+        </td>
+        <td>${row.viewcnt}</td>
+    </tr>    
+    </c:forEach>
+</table>
+<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

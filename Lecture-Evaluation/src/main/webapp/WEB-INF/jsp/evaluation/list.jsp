@@ -70,7 +70,7 @@
             				<a class="nav-link" href="../evaluation/list">강의평가</a>
             				</li>
             				<li class="nav-item active">
-            				<a class="nav-link" href="../board/form">게시판</a>
+            				<a class="nav-link" href="../board/list">게시판</a>
             				</li>
             				</c:if>
             			

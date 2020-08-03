@@ -28,6 +28,8 @@
     <mapper resource="Lecture/Evaluation/mapper/EvaluationMapper.xml"/>
     <mapper resource="Lecture/Evaluation/mapper/UserMapper.xml"/>
     <mapper resource="Lecture/Evaluation/mapper/LikeyMapper.xml"/>
+    <mapper resource="Lecture/Evaluation/mapper/BoardMapper.xml"/>
+    
   </mappers>
 </configuration>
 

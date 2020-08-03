@@ -9,7 +9,7 @@ import Lecture.Evaluation.domain.BoardVO;
 public interface BoardService {
 
 		//게시글 작성
-	    public void create(BoardVO vo) throws Exception;
+	    public int create(BoardVO vo) throws Exception;
 	    //  게시글 상세보기
 	    public BoardVO read(int bno) throws Exception;
 	    //  게시글 수정
@@ -19,7 +19,7 @@ public interface BoardService {
 	    // 게시글 전체 목록
 	    public List<BoardVO> listAll() throws Exception;
 	    //  게시글 조회
-	    public void increaseViewcnt(int bno, HttpSession session) throws Exception;
+	    public double increaseViewcnt(int bno, HttpSession session) throws Exception;
 	
 	 
 }

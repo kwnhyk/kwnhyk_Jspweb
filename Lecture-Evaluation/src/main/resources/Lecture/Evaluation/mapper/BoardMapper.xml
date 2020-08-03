@@ -12,6 +12,7 @@
     <result column="writer" property="writer"/>
     <result column="regdate" property="regdate"/>
     <result column="viewcnt" property="viewcnt"/>
+    
    
     
     
@@ -32,31 +33,35 @@
             regdate desc
     </select>
     <!-- 02. 게시글 작성 -->
-    <insert id="insert">
+    <insert id="create" parameterType="BoardVO">
         INSERT INTO tbl_board (
           bno, 
           title, 
           content, 
           writer
+          
         ) VALUES (
-          (SELECT NVL(MAX(bno)+1, 1)FROM tbl_board),
+         <!--  (SELECT IFNULL(MAX(bno)+1, 1)FROM tbl_board),-->
+         #{bno,jdbcType=INTEGER},
+        
           #{title},
           #{content},
           #{writer}
+          
         )
     </insert>
     <!--03. 게시글 상세보기 조회 -->
-    <select id="view" resultMap="BoardMap">
+    <select id="read" resultMap="BoardMap">
         SELECT * FROM tbl_board 
         WHERE bno = #{bno}
     </select>
     <!-- 04. 게시글 조회수 증가처리 -->
-    <update id="increaseViewcnt">
+    <update id="increaseViewcnt" parameterType="int">
         UPDATE tbl_board SET viewcnt = viewcnt + 1 
         WHERE bno = #{bno}
     </update>
     <!-- 05. 게시글 수정처리 -->
-    <update id="updateArticle">
+    <update id="update">
         UPDATE tbl_board SET
             title = #{title},
             content = #{content},
@@ -64,7 +69,7 @@
         WHERE bno = #{bno}
     </update>
     <!-- 06. 게시글 삭제처리 -->
-    <delete id="deleteArticle">
+    <delete id="delete">
         DELETE FROM tbl_board
         WHERE bno = #{bno}
     </delete>
