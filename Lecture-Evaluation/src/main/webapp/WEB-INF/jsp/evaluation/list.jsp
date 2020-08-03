@@ -150,6 +150,38 @@
         		
         	
         	</section>
+        	 <ul class ="pagination justify-content-center mt-3">
+        	<li class="page-item">
+
+ <a class="page-link disabled">이전</a>      	
+
+ 	
+
+ </li>
+ 
+ <li>
+ <c:if test="${list.size()<6}">
+ <%--
+ 	if(evaluationList.size()<6){
+ 		
+ 		
+ 	
+--%> 
+ <a class="page-link disabled">다음</a>      	
+ </c:if>
+<%--
+ 	}else{
+ 
+--%>
+ 
+ 
+<%--
+ 	
+ 	}
+--%>
+ </li>
+        </ul>
+      
         	<script>
         	function validateForm(){
         	
