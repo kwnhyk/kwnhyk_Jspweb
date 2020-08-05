@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+
 <html>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <head>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  
         <meta name="viewport" content="width=device-width, initial=scale=1,shrink-to-fit=no" />
         <title>강의평가 웹 사이트</title>
         <!-- 부트스트랩CSS추가 -->
@@ -26,6 +30,7 @@
 
 </head>
 <body>
+
 	
 
      <nav class="navbar navbar-expand-lg navbar-darkgray">

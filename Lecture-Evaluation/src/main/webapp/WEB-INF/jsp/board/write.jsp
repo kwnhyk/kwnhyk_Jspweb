@@ -34,7 +34,7 @@
 <body>
 
 <h2>게시글 작성</h2>
-<form name="form1" method="post" action="${path}/app/board/insert"enctype="multipart/form-data">
+<form name="form1" method="post" action="${path}/app/board/insert">
     <div>
         제목
         <input name="title" id="title" size="80" placeholder="제목을 입력해주세요">

@@ -8,60 +8,77 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Lecture.Evaluation.dao.BoardDao;
-import Lecture.Evaluation.domain.BoardVO;
+import Lecture.Evaluation.domain.BoardDTO;
 import Lecture.Evaluation.service.BoardService;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDao boardDao;
+	
+	
+	public BoardServiceImpl(BoardDao boardDao) {
+		this.boardDao= boardDao;
+	}
 	@Override
-	public int create(BoardVO vo) throws Exception {
+	public void insert(BoardDTO vo) throws Exception {
 		 String title = vo.getTitle();
 	        String content = vo.getContent();
-	        String writer = vo.getWriter();
-	        // *태그문자 처리 (< ==> &lt; > ==> &gt;)
+	      String writer = vo.getWriter();
+	      
+	      
+
+	      
+
+	     
+
+
+
+	      
+	    
+	      // *태그문자 처리 (< ==> &lt; > ==> &gt;)
 	        // replace(A, B) A를 B로 변경
-	        title = title.replace("<", "&lt;");
+	      title = title.replace("<", "&lt;");
 	        title = title.replace("<", "&gt;");
-	        writer = writer.replace("<", "&lt;");
-	        writer = writer.replace("<", "&gt;");
+	       writer = writer.replace("<", "&lt;");
+	      writer = writer.replace("<", "&gt;");
 	        // *공백문자 처리
 	        title = title.replace("  ",    "&nbsp;&nbsp;");
-	        writer = writer.replace("  ",    "&nbsp;&nbsp;");
+	       writer.replace("  ",    "&nbsp;&nbsp;");
 	        // *줄바꿈 문자처리
-	        content = content.replace("\n", "<br>");
-	        vo.setTitle(title);
+	       content = content.replace("\n", "<br>");
+	      vo.setTitle(title);
 	        vo.setContent(content);
 	        vo.setWriter(writer);
-	      return  boardDao.create(vo);
+	   
+	      boardDao.create(vo);
 		
 	}
 
 	@Override
-	public BoardVO read(int bno) throws Exception {
+	public BoardDTO read(Integer bno) throws Exception {
 	    return boardDao.read(bno);
 	}
 
 	@Override
-	public void update(BoardVO vo) throws Exception {
+	public void update(BoardDTO vo) throws Exception {
 		 boardDao.update(vo);
 		
 	}
 
 	@Override
-	public void delete(int bno) throws Exception {
+	public void delete(Integer bno) throws Exception {
 		boardDao.delete(bno);
 		
 	}
 
 	@Override
-	public List<BoardVO> listAll() throws Exception {
-		return boardDao.listAll();
+	public List<BoardDTO> listAll() throws Exception {
+		return boardDao.findAll();
 	}
 
 	@Override
-	public double increaseViewcnt(int bno, HttpSession session) throws Exception {
+	public void increaseViewcnt(int bno, HttpSession session) throws Exception {
 
 		 long update_time = 0;
 	        // 세션에 저장된 조회시간 검색
@@ -80,7 +97,7 @@ public class BoardServiceImpl implements BoardService {
 	            session.setAttribute("update_time_"+bno, current_time);
 	            
 	        }
-			return boardDao.increaseViewcnt(bno);
+			
 	    }
 	}
 
