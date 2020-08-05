@@ -78,7 +78,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void increaseViewcnt(int bno, HttpSession session) throws Exception {
+	public void increaseViewcnt(Integer bno, HttpSession session) throws Exception {
 
 		 long update_time = 0;
 	        // 세션에 저장된 조회시간 검색

@@ -19,7 +19,7 @@ public interface BoardService {
 	    // 게시글 전체 목록
 	    public List<BoardDTO> listAll() throws Exception;
 	    //  게시글 조회
-	    public void increaseViewcnt(int bno, HttpSession session) throws Exception;
+	    public void increaseViewcnt(Integer bno, HttpSession session) throws Exception;
 	
 	 
 }

@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시글 작성</title>
+
+<%@ include file="/WEB-INF/jsp/header.jsp" %>
 
 <script>
     $(document).ready(function(){
         $("#btnDelete").click(function(){
             if(confirm("삭제하시겠습니까?")){
-                document.form1.action = "${path}/board/delete.do";
+                document.form1.action = "${path}/app/board/delete";
                 document.form1.submit();
             }
         });
@@ -37,7 +33,7 @@
                 document.form1.writer.focus();
                 return;
             }
-            document.form1.action="${path}/board/update.do"
+            document.form1.action="${path}/app/board/update"
             // 폼에 입력한 데이터를 서버로 전송
             document.form1.submit();
         });
@@ -74,5 +70,6 @@
         <button type="button" id="btnDelete">삭제</button>
     </div>
 </form>
+<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

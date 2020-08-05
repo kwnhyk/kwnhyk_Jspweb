@@ -12,7 +12,7 @@ public interface BoardDao {
 	public BoardDTO read(Integer bno) throws Exception;
 	public void update(BoardDTO vo) throws Exception;
 	public void delete(Integer bno) throws Exception;
-	public void increaseViewcnt(int bno) throws Exception;
+	public void increaseViewcnt(Integer bno) throws Exception;
 	public List<BoardDTO> findAll() throws Exception;
 
 }

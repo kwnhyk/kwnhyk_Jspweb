@@ -28,7 +28,7 @@
     <c:forEach var="row" items="${list}">
     <tr>
         <td>${row.bno}</td>
-         <td><a href="${path}/board/view?bno=${row.bno}">${row.title}</a></td>
+         <td><a href="${path}/app/board/view?bno=${row.bno}">${row.title}</a></td>
          <td>${row.writer}</td>
        
       <!--       원하는 날짜형식으로 출력하기 위해 fmt태그 사용  -->

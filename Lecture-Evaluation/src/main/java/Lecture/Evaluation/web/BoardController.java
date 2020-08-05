@@ -57,7 +57,7 @@ public class BoardController {
 		return "redirect:list";
 	}
 	@GetMapping("view")
-	public ModelAndView view(@RequestParam int bno,HttpSession session)throws Exception{
+	public ModelAndView view(@RequestParam Integer bno,HttpSession session)throws Exception{
 		
 		
 	boardService.increaseViewcnt(bno, session);
@@ -72,9 +72,9 @@ public class BoardController {
 		return "redirect:list";
 	}
 	@RequestMapping("delete")
-	public String delete(@RequestParam int bno) throws Exception{
+	public String delete(@RequestParam Integer bno) throws Exception{
 		boardService.delete(bno);
-		return "reddirect:list";
+		return "redirect:list";
 	}
 
 
