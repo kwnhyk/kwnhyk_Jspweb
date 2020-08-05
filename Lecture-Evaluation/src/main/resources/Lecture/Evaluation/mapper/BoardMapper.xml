@@ -20,7 +20,7 @@
             title, 
             content,
             writer,
-           DATE_FORMAT(regdate,"%Y-%m-%d"),
+           regdate,
             viewcnt
        
            

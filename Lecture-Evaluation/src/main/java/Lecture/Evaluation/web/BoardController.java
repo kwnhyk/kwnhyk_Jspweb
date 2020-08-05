@@ -32,7 +32,7 @@ public class BoardController {
 	
 	@RequestMapping("list")
 	
-	public ModelAndView list(BoardDTO vo) throws Exception{
+	public ModelAndView list() throws Exception{
 		
 		logger.info("list..");
 		List<BoardDTO> list = boardService.listAll();
@@ -51,7 +51,7 @@ public class BoardController {
 		return "board/write";
 	}
 	@PostMapping("insert")
-	public String insert(BoardDTO vo)  throws Exception{
+	public String insert(@ModelAttribute BoardDTO vo)  throws Exception{
 		
 		boardService.insert(vo);
 		return "redirect:list";

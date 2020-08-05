@@ -17,7 +17,7 @@ public class BoardDTO implements Serializable {
 	private String title;
 	private String content;
 	private String writer;
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date regdate;
 	private Integer viewcnt;
 	private Integer bno;

@@ -33,7 +33,7 @@
        
       <!--       원하는 날짜형식으로 출력하기 위해 fmt태그 사용  -->
           
- <td><fmt:formatDate value = "${row.regdate}" pattern = "yyyy-MM-dd HH:mm:ss" var = "date"/>
+ <td><fmt:formatDate pattern = "yyyy-MM-dd HH:mm:ss" value = "${row.regdate}" />
  </td>
           
         
