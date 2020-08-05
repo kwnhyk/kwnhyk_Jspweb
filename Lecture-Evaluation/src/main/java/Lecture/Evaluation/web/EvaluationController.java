@@ -30,9 +30,13 @@ public class EvaluationController {
 
 	  
 	   @RequestMapping("list")
-	    public ModelAndView list(EvaluationDTO eval,@RequestParam(defaultValue="")String lectureDivide,
+	    public ModelAndView list(HttpSession session,@RequestParam(defaultValue="")String lectureDivide,
 	    		@RequestParam(defaultValue="최신순")String searchType,@RequestParam(defaultValue="")String search) throws Exception {
-		 
+		   String user =(String) session.getAttribute("loginUser");
+			 if(user !=null) {
+			    
+				
+			
 		   if(lectureDivide.equals("전체")) {
 			   lectureDivide ="";
 		   	 }
@@ -52,7 +56,12 @@ public class EvaluationController {
 		   System.out.println("이게 바로셀렉");
 		   System.out.println("map==" +map);
 		   return mav;
-		  
+			 }else
+			 {
+				 String url = "redirect:../auth/form";
+			        return new ModelAndView(url);
+				 
+			 }
 			 //  if(lectureDivide.equals("전체")){
 				 //  lectureDivide ="";
 				//   System.out.println("수업목록 =====>"+evalAll);

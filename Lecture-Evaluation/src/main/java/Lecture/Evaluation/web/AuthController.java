@@ -43,12 +43,13 @@ public class AuthController{
 	 
 	  
 	  @GetMapping("form")
-	  public String form(HttpSession session) {
+	  public String form(HttpSession session,Model model) {
 		 String user =(String) session.getAttribute("loginUser");
 		 if(user !=null) {
-		    
+		    model.addAttribute("loginOn",1);
 		    return "redirect:../evaluation/list";
 		  }
+		    model.addAttribute("loginOn",2);
 		 return "auth/form";
 	  }
 	

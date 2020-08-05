@@ -5,11 +5,48 @@
 <script>
     $(document).ready(function(){
         $("#btnDelete").click(function(){
-            if(confirm("삭제하시겠습니까?")){
-                document.form1.action = "${path}/app/board/delete";
-                document.form1.submit();
-            }
+        	const swalWithBootstrapButtons = Swal.mixin({
+        		  customClass: {
+        		    confirmButton: 'btn btn-success',
+        		    cancelButton: 'btn btn-danger'
+        		  },
+        		  buttonsStyling: false
+        		})
+
+        		swalWithBootstrapButtons.fire({
+        		  title: '삭제하시겠습니까?',
+        		  text: "삭제하면 돌릴수 없습니다",
+        		  icon: 'warning',
+        		  showCancelButton: true,
+        		  confirmButtonText: '네!',
+        		  cancelButtonText: '아니요',
+        		  reverseButtons: true
+        		}).then((result) => {
+        		  if (result.value) {
+        		    swalWithBootstrapButtons.fire(
+        		      '삭제!',
+        		      '게시물 삭제 완료',
+        		      'success'
+        		    )
+        		    document.form1.action= "${path}/app/board/list";
+        		    document.form1.submit();
+        		  } else if (
+        		    /* Read more about handling dismissals below */
+        		    result.dismiss === Swal.DismissReason.cancel
+        		  ) {
+        		    swalWithBootstrapButtons.fire(
+        		      '취소',
+        		      '게시물 삭제 취소 :)',
+        		      'error'
+        		    )
+        		  }
+        		})
+        		  
+           // if(confirm("삭제하시겠습니까?")){
+                
+           // }
         });
+    
         
         $("#btnUpdete").click(function(){
             //var title = document.form1.title.value; ==> name속성으로 처리할 경우
