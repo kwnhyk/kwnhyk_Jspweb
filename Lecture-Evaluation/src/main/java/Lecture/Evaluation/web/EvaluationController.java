@@ -32,7 +32,7 @@ public class EvaluationController {
 	   @RequestMapping("list")
 	    public ModelAndView list(HttpSession session,@RequestParam(defaultValue="")String lectureDivide,
 	    		@RequestParam(defaultValue="최신순")String searchType,@RequestParam(defaultValue="")String search) throws Exception {
-		   String user =(String) session.getAttribute("loginUser");
+		   UserDTO user =(UserDTO) session.getAttribute("loginUser");
 			 if(user !=null) {
 			    
 				
@@ -84,8 +84,9 @@ public class EvaluationController {
 	    @PostMapping("write")
 	    public String write(HttpSession session,@ModelAttribute("evalDTO") EvaluationDTO eval,Model model) throws Exception{
 	    	int result=-1;
-	    	
-	    	String writer = (String) session.getAttribute("loginUser");
+	    	 UserDTO user =(UserDTO) session.getAttribute("loginUser");
+	    	//UserDTO writer = (UserDTO) session.getAttribute("loginUser");
+	    	String writer = (String) user.getUserID();
 	    	 System.out.println("유저"+writer);
 	    	eval.setUserID(writer);
 	    	

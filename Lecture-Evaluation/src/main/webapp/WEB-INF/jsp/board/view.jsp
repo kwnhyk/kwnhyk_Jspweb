@@ -28,7 +28,7 @@
         		      '게시물 삭제 완료',
         		      'success'
         		    )
-        		    document.form1.action= "${path}/app/board/list";
+        		    document.form1.action= "${path}/app/board/delete";
         		    document.form1.submit();
         		  } else if (
         		    /* Read more about handling dismissals below */
@@ -54,7 +54,7 @@
             //var writer = document.form1.writer.value;
             var title = $("#title").val();
             var content = $("#content").val();
-            var writer = $("#writer").val();
+           
             if(title == ""){
                 alert("제목을 입력하세요");
                 document.form1.title.focus();
@@ -65,11 +65,7 @@
                 document.form1.content.focus();
                 return;
             }
-            if(writer == ""){
-                alert("이름을 입력하세요");
-                document.form1.writer.focus();
-                return;
-            }
+          
             document.form1.action="${path}/app/board/update"
             // 폼에 입력한 데이터를 서버로 전송
             document.form1.submit();
@@ -98,13 +94,17 @@
     </div>
     <div>
         이름
-        <input name="writer" id="writer" value="${dto.writer}" placeholder="이름을 입력해주세요">
+        ${dto.writer}
+       <!--  <input name="writer" id="writer" value="${dto.writer}" placeholder="이름을 입력해주세요"> -->
     </div>
     <div style="width:650px; text-align: center;">
         <!-- 게시물번호를 hidden으로 처리 -->
+      
         <input type="hidden" name="bno" value="${dto.bno}">
+         <c:if test="${loginUser.userID==dto.writer}">
         <button type="button" id="btnUpdete">수정</button>
         <button type="button" id="btnDelete">삭제</button>
+        </c:if>
     </div>
 </form>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

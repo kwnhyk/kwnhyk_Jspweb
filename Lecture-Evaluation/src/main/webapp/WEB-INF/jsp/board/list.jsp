@@ -16,7 +16,9 @@
 
 
 <h2>게시글 목록</h2>
+<c:if test="${loginUser!=null}">
 <button type="button" id="btnWrite">글쓰기</button>
+</c:if>
 <table border="1" width="600px">
     <tr>
         <th>번호</th>

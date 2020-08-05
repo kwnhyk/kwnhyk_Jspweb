@@ -20,7 +20,7 @@
     </head>
     <body>
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="app/">강의평가 웹 사이트</a>
+            <a class="navbar-brand" href="/Lecture-Evaluation/">강의평가 웹 사이트</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -32,7 +32,7 @@
             <div id="navbar" class="collapse navbar-collapse">
             	<ul class="navbar-nav mr-auto">
             		<li class="nav-item active">
-            			<a class="nav-link" href="app/evaluation/form">메인</a>
+            			<a class="nav-link" href="../evaluation/list">메인</a>
             		</li>
             		<li class="nav-item dropdown">
             			<a class="nav-link dropdown-toggle" id="dropdown" data-toggle="dropdown">
@@ -64,7 +64,7 @@
         </nav>
         <section class="container mt-3" style="max-width:560px;">
         	<div class ="alert alert-success mt-4" role="alert">
-        		이메일 주소 인증 메일 전송되었습니다. 이메일 인증해주세요.
+        		이메일 주소 인증 완료 되었습니다. ^^
         	</div>
         </section>
       

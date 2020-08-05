@@ -35,6 +35,13 @@
   </insert>
   
   <select id="findById" resultType="String" parameterType="String">
+    SELECT userID
+     FROM USER 
+     WHERE userID =#{userID}
+    
+   
+  </select>
+   <select id="UserfindById" resultMap="UserMap" >
     SELECT *
      FROM USER 
      WHERE userID =#{userID}

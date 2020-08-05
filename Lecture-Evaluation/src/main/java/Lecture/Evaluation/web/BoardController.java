@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import Lecture.Evaluation.domain.BoardDTO;
+import Lecture.Evaluation.domain.UserDTO;
 import Lecture.Evaluation.service.BoardService;
 @Controller
 @RequestMapping("/board")
@@ -32,8 +33,11 @@ public class BoardController {
 	
 	@RequestMapping("list")
 	
-	public ModelAndView list() throws Exception{
+	public ModelAndView list(HttpSession session) throws Exception{
+		 UserDTO user =(UserDTO) session.getAttribute("loginUser");
 		
+		 if(user !=null) {
+			    
 		logger.info("list..");
 		List<BoardDTO> list = boardService.listAll();
 		ModelAndView mav = new ModelAndView();
@@ -41,9 +45,13 @@ public class BoardController {
 		
 		mav.addObject("list",list);
 		mav.setViewName("board/list");
-		logger.info("왜 안돼~~~~~~");
+		logger.info("꿀~~~~~~");
 		return mav;
-		
+		 }else {
+			 String url = "redirect:../auth/form";
+		        return new ModelAndView(url);
+			 
+		 }
 	
 	}
 	@GetMapping("write")
@@ -51,8 +59,11 @@ public class BoardController {
 		return "board/write";
 	}
 	@PostMapping("insert")
-	public String insert(@ModelAttribute BoardDTO vo)  throws Exception{
-		
+	public String insert(@ModelAttribute BoardDTO vo,HttpSession session)  throws Exception{
+		 UserDTO user =(UserDTO) session.getAttribute("loginUser");
+		 
+	String writer=(String) user.getUserID();
+	vo.setWriter(writer);
 		boardService.insert(vo);
 		return "redirect:list";
 	}
@@ -67,7 +78,11 @@ public class BoardController {
 	return mav;
 	}
 	@PostMapping("update")
-	public String update(@ModelAttribute BoardDTO vo) throws Exception{
+	public String update(@ModelAttribute BoardDTO vo,HttpSession session) throws Exception{
+		 UserDTO user =(UserDTO) session.getAttribute("loginUser");
+		String writer=(String)user.getUserID();
+		
+		vo.setWriter(writer);
 		boardService.update(vo);
 		return "redirect:list";
 	}

@@ -44,7 +44,8 @@ public class AuthController{
 	  
 	  @GetMapping("form")
 	  public String form(HttpSession session,Model model) {
-		 String user =(String) session.getAttribute("loginUser");
+		  UserDTO user =(UserDTO) session.getAttribute("loginUser");
+		// String user =(String) session.getAttribute("loginUser");
 		 if(user !=null) {
 		    model.addAttribute("loginOn",1);
 		    return "redirect:../evaluation/list";
@@ -67,7 +68,7 @@ public class AuthController{
 	    }
 	    response.addCookie(cookie);
 	    UserDTO user = userService.getUser(userID, userPassword);
-	    String userid =userService.getId(userID);
+	  //  String userid =userService.getId(userID);
 	    System.out.println("User============>" + user);
 	    if (user != null) {
 	    	if(user.getUserEmailHash().equals("Y")) {
@@ -76,8 +77,8 @@ public class AuthController{
 	    //  if (user.getAlterKey().equals("Y")) {
 	        // 로그인 시 유저 정보가 세션에 "userID"로 저장됨.
 	    		
-	    		session.setAttribute("loginUser", userid);
-	        
+	    		session.setAttribute("loginUser", user);
+	    		model.addAttribute("user",user);
 	        System.out.println("good Y");
 	        String url = "redirect:../evaluation/list";
 	        return new ModelAndView(url);
@@ -98,12 +99,13 @@ public class AuthController{
 	       
 	    }
 	  }
-	@PostMapping(value = "keyalter")
+	@RequestMapping(value = "keyalter")
 	  public String keyalterConfirm(@RequestParam("userID") String id, String password,
 	      @RequestParam("userEmailHash") String key) throws Exception {
 
 	    mailsender.alterUserKey(id, key); // mailsender의 경우 @Autowired
-	    String user = userService.getId(id);
+	    UserDTO user = userService.get(id);
+	    
 	   // String userID = user.getUserID();
 	    
 	    return "user/emailSendAction";
@@ -148,7 +150,7 @@ public class AuthController{
 	      // 액세스토큰이 무효하다면, 다시 로그인 입력 폼으로 보낸다.
 	      session.invalidate();
 	     // model.addAttribute("refreshUrl", "2;url=form");
-	      return "/app/auth/form";
+	      return "auth/form";
 	    }
 
 	    UserDTO user = userService.get(email);
@@ -167,7 +169,7 @@ public class AuthController{
 	    session.setAttribute("loginUser", user);
 	  //  model.addAttribute("refreshUrl", "2;url=../../index.html");
 
-	    return "/app/auth/form";
+	    return "auth/form";
 	  }
   // 회원가입 컨트롤러
 /*	@RequestMapping(value = "/userRegisterAction", method = RequestMethod.POST)
