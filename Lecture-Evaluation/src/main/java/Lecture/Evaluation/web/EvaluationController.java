@@ -27,8 +27,44 @@ public class EvaluationController {
 	@Autowired
 	EvaluationService evaluationService;
 	
-
-	  
+		@PostMapping("like")
+		public String like(@RequestParam int evaluationID,Model model)throws Exception{
+			//String result=likey.like(evalID,userID,userIP);
+			//if(result=1){
+			//result=evaluationService.like(evaluationID);
+			//if(result=1){
+			
+			
+			//model.addAttribute("like",1);
+			//return "redirect:list";
+			//}
+			//}else{
+			//model.addAttribute("like",2);
+			//return "redirect:list";
+			
+			evaluationService.like(evaluationID);
+			model.addAttribute("like",1);
+			
+			return "redirect:list";
+		}
+	  @RequestMapping(value= "delete")
+	  public String delete(@RequestParam int evaluationID,Model model ,HttpSession session)throws Exception{
+		  
+		  UserDTO user= (UserDTO)session.getAttribute("loginUser");
+		  String userID=(String)user.getUserID();
+		  System.out.printf(" id=%s",userID);
+		  if(userID.equals(evaluationService.getUserID(evaluationID))) {
+			  model.addAttribute("delete",1);
+			  evaluationService.delete(evaluationID);
+			  return "redirect:list";
+		  }else
+		  {
+			  model.addAttribute("delete",2);
+			  return "redirect:list";
+		  }
+		 
+		 
+	  }
 	   @RequestMapping("list")
 	    public ModelAndView list(HttpSession session,@RequestParam(defaultValue="")String lectureDivide,
 	    		@RequestParam(defaultValue="최신순")String searchType,@RequestParam(defaultValue="")String search) throws Exception {

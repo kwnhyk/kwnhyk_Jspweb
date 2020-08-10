@@ -14,12 +14,24 @@
     });
 </script>
 
+<div class="container" style="overflow: hidden; position: relative;">
+ <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">게시글 목록</h3>
 
-<h2>게시글 목록</h2>
+
+	</div>
+		
+	</div>
+<div class="box-body">
+
 <c:if test="${loginUser!=null}">
-<button type="button" id="btnWrite">글쓰기</button>
+
+
+
+<button type="button" id="btnWrite" class="btn btn-success mt-5">글쓰기</button>
 </c:if>
-<table border="1" width="600px">
+<table class="table table-bordered table-hover" border="1" width="300px">
     <tr>
         <th>번호</th>
         <th>제목</th>
@@ -41,8 +53,13 @@
         
          <td>${row.viewcnt}</td>
          </tr>
-    </c:forEach>
-</table>
+          </c:forEach>
+        
+         </table>
+  </div>
+</div>
+</div>
+
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

@@ -27,7 +27,7 @@ public int insert(EvaluationDTO evaluationDTO) throws Exception;
 		
 		
 	
-	public EvaluationDTO findByevaluationId(int evaluationID) throws Exception;
+	public String findByevaluationId(int evaluationID) throws Exception;
 	
 	public int listSearchCount(int evaluationID) throws Exception;
 	

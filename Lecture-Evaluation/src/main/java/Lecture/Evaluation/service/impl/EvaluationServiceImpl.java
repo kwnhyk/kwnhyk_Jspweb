@@ -46,7 +46,7 @@ public class EvaluationServiceImpl implements EvaluationService {
 	public int listSearchCount(int evaluationID) throws Exception {
 		return evaluationDao.listSearchCount(evaluationID);
 	}@Override
-	public EvaluationDTO getUserID(int evaluationID) throws Exception {
+	public String getUserID(int evaluationID) throws Exception {
 		return evaluationDao.findByevaluationId(evaluationID);
 	}
 	@Override

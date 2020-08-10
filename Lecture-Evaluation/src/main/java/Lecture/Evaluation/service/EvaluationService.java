@@ -31,7 +31,7 @@ public interface EvaluationService {
 		
 		
 	
-	 EvaluationDTO getUserID(int evaluationID) throws Exception;
+	 String getUserID(int evaluationID) throws Exception;
 	
 	 int listSearchCount(int evaluationID) throws Exception;
 	

@@ -137,8 +137,10 @@
         						<span style="color:green;">(추천:${list.likeCount})</span>
         			</div>
         			<div class="col-3 text-right">
-        						<a onclick="return confirm('추천하시겠습니까?')"href="./likeAction.jsp?evaluationID=${list.evaluationID}">추천</a>
-        						<a onclick="return confirm('삭제하시겠습니까?')"href="./deleteAction.jsp?evaluationID=${list.evaluationID}">삭제</a>
+        			<input type='button' id='like' value='추천'>
+        			<a href="#" onclick="confirmDelete();">삭제</a>
+        			 	<a onclick="return confirm('삭제하시겠습니까?')"href="./delete?evaluationID=${list.evaluationID}">삭제</a>
+        						
         						
         						
         						</div>
@@ -150,6 +152,69 @@
         		
         	
         	</section>
+        	<script>
+        	
+        	function confirmDelete() {
+        	const swalWithBootstrapButtons = Swal.mixin({
+      		  customClass: {
+      		    confirmButton: 'btn btn-success',
+      		    cancelButton: 'btn btn-danger'
+      		  },
+      		  buttonsStyling: false
+      		})
+
+      		swalWithBootstrapButtons.fire({
+      		  title: '삭제하시겠습니까?',
+      		  text: "삭제하면 돌릴수 없습니다",
+      		  icon: 'warning',
+      		  showCancelButton: true,
+      		  confirmButtonText: '네!',
+      		  cancelButtonText: '아니요',
+      		  reverseButtons: true
+      		}).then((result) => {
+      		  if (result.value) {
+      			 $.ajax({
+     	            url: "../evaluation/delete",
+     	            type: "POST",
+     	           
+     	            cache: false,
+     	           
+     	            success: function () {
+     	               swalWithBootstrapButtons.fire(
+     	          		      '삭제!',
+     	          		      '게시물 삭제 완료',
+     	          		      'success'
+     	          		    )
+     	            },
+     	            failure: function (response) {
+     	               swalWithBootstrapButtons.fire(
+     	          		      '오류!',
+     	          		      '삭제오류',
+     	          		      'error'
+     	          		    )
+     	            }
+     	        });
+      		
+      		   
+      		  } else if (
+      		    /* Read more about handling dismissals below */
+      		    result.dismiss === Swal.DismissReason.cancel
+      		  ) {
+      		    swalWithBootstrapButtons.fire(
+      		      '취소',
+      		      '게시물 삭제 취소 :)',
+      		      'error'
+      		    )
+      		  }
+      		})
+      		  
+         // if(confirm("삭제하시겠습니까?")){
+              
+         // }
+      }
+        	
+     
+        	</script>
         	 <ul class ="pagination justify-content-center mt-3">
         	<li class="page-item">
 

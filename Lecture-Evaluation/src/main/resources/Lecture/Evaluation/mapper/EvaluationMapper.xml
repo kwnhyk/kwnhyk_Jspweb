@@ -100,7 +100,7 @@
    '0')
   </insert>
   
-  <select id="getUserID" resultMap="EvaluationMap" parameterType="int">
+  <select id="findByevaluationId" resultType="String" parameterType="int">
     SELECT userID
      FROM EVALUATION 
      WHERE evaluationID =#{evaluationID}

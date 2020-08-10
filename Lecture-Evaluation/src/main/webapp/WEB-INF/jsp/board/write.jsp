@@ -32,27 +32,31 @@
 </script>
 </head>
 <body>
+<div class="container" style="overflow: hidden; position: relative;">
+		<br> 
+			<b style="font-size: 30px;">게시글 작성</b>
+		</a>
+	</div>
 
-<h2>게시글 작성</h2>
-<form name="form1" method="post" action="${path}/app/board/insert">
+
+<div class="container">
+<form name="form1"class="text-center p-5" method="post" action="${path}/app/board/insert">
     <div>
         제목
-        <input name="title" id="title" size="80" placeholder="제목을 입력해주세요">
+        <input name="title" class="form-control" id="title" size="80" placeholder="제목을 입력해주세요">
     </div>
     <div>
         내용
-        <textarea name="content" id="content" rows="4" cols="80" placeholder="내용을 입력해주세요"></textarea>
+        <textarea name="content"class="form-control" id="content" rows="4" cols="80" placeholder="내용을 입력해주세요"></textarea>
     </div>
-    <div>
-       
-        
-      <!--  이름 <input name="writer" id="writer" placeholder="이름을 입력해주세요">-->
-    </div>
-    <div style="width:650px; text-align: center;">
-        <button type="button" id="btnSave">확인</button>
-        <button type="reset">취소</button>
-    </div>
+   
+    
+        <button type="button" id="btnSave"class="btn btn-info btn-block">확인</button>
+        <button type="reset" class="btn btn-danger btn-block">취소</button>
+    
 </form>
+</div>
+</div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>
