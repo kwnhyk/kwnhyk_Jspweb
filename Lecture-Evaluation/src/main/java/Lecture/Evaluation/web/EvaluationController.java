@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,19 +49,20 @@ public class EvaluationController {
 			return "redirect:list";
 		}
 	  @PostMapping("delete")
-	  public String delete(@RequestParam int evaluationID,Model model ,HttpSession session)throws Exception{
+	  public void delete(@RequestParam int evaluationID ,HttpServletResponse response ,HttpSession session)throws Exception{
 		  
 		  UserDTO user= (UserDTO)session.getAttribute("loginUser");
 		  String userID=(String)user.getUserID();
 		  System.out.printf(" id=%s",userID);
 		  if(userID.equals(evaluationService.getUserID(evaluationID))) {
-			  model.addAttribute("delete",1);
+			  response.setStatus(200);
 			  evaluationService.delete(evaluationID);
-			  return "redirect:list";
+			 // return "redirect:list";
 		  }else
 		  {
-			  model.addAttribute("delete",2);
-			  return "redirect:list";
+			  
+			  response.setStatus(400);
+			 // return "redirect:list";
 		  }
 		 
 		 
@@ -91,6 +93,7 @@ public class EvaluationController {
 		   mav.setViewName("evaluation/list");
 		   System.out.println("이게 바로셀렉");
 		   System.out.println("map==" +map);
+		  
 		   return mav;
 			 }else
 			 {

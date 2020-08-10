@@ -14,7 +14,7 @@
         <style type="text/css">	
       .jumbotron{	
       		
-        background-image: url(${pageContext.servletContext.contextPath}/images/jumbotron.jpg');	
+        background-image: url('${pageContext.servletContext.contextPath}/images/jumbotron.jpg');	
         background-size: cover;	
         text-shadow: black 0.2em 0.2em 0.2em;	
         color:white;	

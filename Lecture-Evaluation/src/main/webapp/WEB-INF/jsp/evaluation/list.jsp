@@ -180,23 +180,25 @@
      	          	data: {evaluationID : eval},
      	            cache: false,
      	           
-     	            success: function () {
-     	            	
-     	               swalWithBootstrapButtons.fire(
-     	          		      '삭제!',
-     	          		      '게시물 삭제 완료',
-     	          		      'success'
-     	          		    )
-     	          		 location.reload();
-     	          		    
-     	            },
-     	            failure: function (response) {
-     	               swalWithBootstrapButtons.fire(
-     	          		      '오류!',
-     	          		      '삭제오류',
-     	          		      'error'
-     	          		    )
-     	            }
+     	            
+     	           statusCode:{
+     	        		400:function(){
+	                		Swal.fire({
+	                			icon:'error',
+	                			title:'본인이 작성한 글이 아닙니다'
+	                		})
+	                	},
+	                	200:function(){
+	                	    Swal.fire({
+	                	            icon : 'success',
+	                	            title : '삭제완료!'
+	                	        }).then((result) => {
+	                                    if (result.value) {
+	                	        	           location.href="../evaluation/list";
+	                                    }
+	                          });
+	                  }
+	            	}//statusCode
      	           
      	        });
       		

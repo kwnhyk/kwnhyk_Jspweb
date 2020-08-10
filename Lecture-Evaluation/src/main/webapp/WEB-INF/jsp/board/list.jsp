@@ -17,7 +17,8 @@
 <div class="container" style="overflow: hidden; position: relative;">
  <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">게시글 목록</h3>
+        <br> 
+            <h2 class="box-title" >게시글 목록</h2>
 
 
 	</div>
