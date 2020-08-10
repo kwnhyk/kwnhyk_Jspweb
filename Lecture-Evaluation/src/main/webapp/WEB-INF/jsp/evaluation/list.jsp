@@ -138,8 +138,8 @@
         			</div>
         			<div class="col-3 text-right">
         			<input type='button' id='like' value='추천'>
-        			<a href="#" onclick="confirmDelete();">삭제</a>
-        			 	<a onclick="return confirm('삭제하시겠습니까?')"href="./delete?evaluationID=${list.evaluationID}">삭제</a>
+        			<a href="#" onclick="confirmDelete(${list.evaluationID})" >삭제</a>
+        			 	<!--  <a onclick="return confirm('삭제하시겠습니까?')"href="./delete?evaluationID=${list.evaluationID}">삭제</a>-->
         						
         						
         						
@@ -154,10 +154,11 @@
         	</section>
         	<script>
         	
-        	function confirmDelete() {
+        	function confirmDelete(list) {
+        		let eval = list;
         	const swalWithBootstrapButtons = Swal.mixin({
       		  customClass: {
-      		    confirmButton: 'btn btn-success',
+      		    confirmButton: 'btn btn-success mr-3',
       		    cancelButton: 'btn btn-danger'
       		  },
       		  buttonsStyling: false
@@ -170,21 +171,24 @@
       		  showCancelButton: true,
       		  confirmButtonText: '네!',
       		  cancelButtonText: '아니요',
-      		  reverseButtons: true
+      		  reverseButtons: false
       		}).then((result) => {
       		  if (result.value) {
       			 $.ajax({
      	            url: "../evaluation/delete",
      	            type: "POST",
-     	           
+     	          	data: {evaluationID : eval},
      	            cache: false,
      	           
      	            success: function () {
+     	            	
      	               swalWithBootstrapButtons.fire(
      	          		      '삭제!',
      	          		      '게시물 삭제 완료',
      	          		      'success'
      	          		    )
+     	          		 location.reload();
+     	          		    
      	            },
      	            failure: function (response) {
      	               swalWithBootstrapButtons.fire(
@@ -193,6 +197,7 @@
      	          		      'error'
      	          		    )
      	            }
+     	           
      	        });
       		
       		   

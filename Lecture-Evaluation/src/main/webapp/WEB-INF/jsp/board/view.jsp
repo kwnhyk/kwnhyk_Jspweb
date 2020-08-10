@@ -7,7 +7,7 @@
         $("#btnDelete").click(function(){
         	const swalWithBootstrapButtons = Swal.mixin({
         		  customClass: {
-        		    confirmButton: 'btn btn-success',
+        		    confirmButton: 'btn btn-success mr-3 ',
         		    cancelButton: 'btn btn-danger'
         		  },
         		  buttonsStyling: false
@@ -18,9 +18,9 @@
         		  text: "삭제하면 돌릴수 없습니다",
         		  icon: 'warning',
         		  showCancelButton: true,
-        		  confirmButtonText: '네!',
-        		  cancelButtonText: '아니요',
-        		  reverseButtons: true
+        		  confirmButtonText: '네! ' ,
+        		  cancelButtonText: '아니요  ',
+        		  reverseButtons: false
         		}).then((result) => {
         		  if (result.value) {
         		    swalWithBootstrapButtons.fire(

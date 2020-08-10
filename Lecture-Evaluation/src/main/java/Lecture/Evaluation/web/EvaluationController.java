@@ -47,7 +47,7 @@ public class EvaluationController {
 			
 			return "redirect:list";
 		}
-	  @RequestMapping(value= "delete")
+	  @PostMapping("delete")
 	  public String delete(@RequestParam int evaluationID,Model model ,HttpSession session)throws Exception{
 		  
 		  UserDTO user= (UserDTO)session.getAttribute("loginUser");

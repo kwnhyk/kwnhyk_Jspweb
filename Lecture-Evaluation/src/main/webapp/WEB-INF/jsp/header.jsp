@@ -9,9 +9,8 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <head>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  
-        <meta name="viewport" content="width=device-width, initial=scale=1,shrink-to-fit=no" />
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>강의평가 웹 사이트</title>
         <!-- 부트스트랩CSS추가 -->
         <link rel="stylesheet" href="/Lecture-Evaluation/css/bootstrap.min.css" >
