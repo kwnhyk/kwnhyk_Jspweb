@@ -75,7 +75,7 @@
 --- 
 
 #### :wrench: &nbsp;&nbsp;&nbsp;시스템 아키텍쳐
-<img src="https://github.com/kwnhyk/kwnhyk_Jspweb/blob/master/Lecture-Evaluation/docs/System.png?raw=true" width="90%">
+<img src="https://github.com/kwnhyk/kwnhyk_Jspweb/blob/master/Lecture-Evaluation/docs/system.png?raw=true" width="90%">
 
 <br/>
 
