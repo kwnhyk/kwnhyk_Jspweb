@@ -12,6 +12,11 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>강의평가 웹 사이트</title>
+        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <!-- 부트스트랩CSS추가 -->
         <link rel="stylesheet" href="/Lecture-Evaluation/css/bootstrap.min.css" >
         <!-- 커스텀CSS추가 -->

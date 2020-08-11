@@ -73,4 +73,24 @@
         DELETE FROM tbl_board
         WHERE bno = #{bno}
     </delete>
+    
+    <select id="countArticles" resultType="int">
+    <![CDATA[
+    SELECT
+        COUNT(bno)
+    FROM tbl_board
+    WHERE bno > 0
+    ]]>
+</select>
+<select id="listCriteria" resultMap="BoardMap">
+  SELECT *
+  FROM tbl_board
+  WHERE bno >0
+    
+  ORDER BY bno DESC, regdate DESC
+  LIMIT #{pageStart}, #{perPageNum}
+  
+  
+  
+  </select>
 </mapper>

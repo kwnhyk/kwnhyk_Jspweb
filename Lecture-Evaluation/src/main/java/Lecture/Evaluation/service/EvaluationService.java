@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import Lecture.Evaluation.domain.EvaluationDTO;
+import Lecture.Evaluation.page.Criteria;
 
 
 
@@ -17,7 +18,7 @@ public interface EvaluationService {
  int write(EvaluationDTO evaluationDTO) throws Exception;
 		List<EvaluationDTO> getAll()throws Exception;
 	
-	
+	List<EvaluationDTO> listCriteira(Criteria criteria)throws Exception;
 	
 	
 	

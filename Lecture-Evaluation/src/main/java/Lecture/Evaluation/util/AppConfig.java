@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -33,7 +34,17 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 	    );
 	    return vr;
 	  }
-	 }
+	 @Override
+	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	        registry.addResourceHandler("dist/**")
+	        .addResourceLocations("/resources/dist/");
+	        registry.addResourceHandler("plugins/**")
+	        .addResourceLocations("/resources/plugins/");
+	        registry.addResourceHandler("/docs/**")
+	        .addResourceLocations("/resources/docs/");
+	    }
+	}
+	 
 
 	 
 	  // Spring IoC 컨테이너에 수동으로 객체를 등록하고 싶다면,

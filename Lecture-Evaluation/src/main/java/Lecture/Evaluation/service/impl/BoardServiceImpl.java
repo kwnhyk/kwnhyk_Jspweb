@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import Lecture.Evaluation.dao.BoardDao;
 import Lecture.Evaluation.domain.BoardDTO;
+import Lecture.Evaluation.page.Criteria;
 import Lecture.Evaluation.service.BoardService;
 
 @Service
@@ -96,6 +97,14 @@ public class BoardServiceImpl implements BoardService {
 	        }
 			
 	    }
+	@Override
+	public List<BoardDTO> listCriteria(Criteria criteria) throws Exception {
+		return boardDao.listCriteria(criteria);
+	}
+	@Override
+	public int countBoard(Criteria criteria) throws Exception {
+		 return boardDao.countArticles(criteria);
+	}
 	}
 
 

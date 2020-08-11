@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import Lecture.Evaluation.dao.EvaluationDao;
 import Lecture.Evaluation.domain.EvaluationDTO;
+import Lecture.Evaluation.page.Criteria;
 import Lecture.Evaluation.service.EvaluationService;
 
 @Component
@@ -54,6 +55,9 @@ public class EvaluationServiceImpl implements EvaluationService {
 	public List<EvaluationDTO> getAll() throws Exception {
 		return evaluationDao.findAll();
 	}
-	
+	@Override
+	public List<EvaluationDTO> listCriteira(Criteria criteria) throws Exception {
+		return evaluationDao.listCriteria(criteria);
+	}
 	
 }

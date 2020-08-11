@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import Lecture.Evaluation.domain.BoardDTO;
+import Lecture.Evaluation.page.Criteria;
 
 public interface BoardService {
 
@@ -20,6 +21,6 @@ public interface BoardService {
 	    public List<BoardDTO> listAll() throws Exception;
 	    //  게시글 조회
 	    public void increaseViewcnt(Integer bno, HttpSession session) throws Exception;
-	
-	 
+	   public int countBoard(Criteria criteria) throws Exception;
+	   public List<BoardDTO> listCriteria(Criteria criteria) throws Exception;
 }

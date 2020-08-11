@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import Lecture.Evaluation.domain.BoardDTO;
 import Lecture.Evaluation.domain.UserDTO;
+import Lecture.Evaluation.page.Criteria;
+import Lecture.Evaluation.page.PageMaker;
 import Lecture.Evaluation.service.BoardService;
 @Controller
 @RequestMapping("/board")
@@ -33,19 +35,32 @@ public class BoardController {
 	
 	@RequestMapping("list")
 	
-	public ModelAndView list(HttpSession session) throws Exception{
+	public ModelAndView list(HttpSession session,Criteria criteria) throws Exception{
 		 UserDTO user =(UserDTO) session.getAttribute("loginUser");
 		
 		 if(user !=null) {
 			    
 		logger.info("list..");
-		List<BoardDTO> list = boardService.listAll();
+		 
+
+		    PageMaker pageMaker = new PageMaker();
+		    pageMaker.setCriteria(criteria);
+		    // 수정
+		    pageMaker.setTotalCount(boardService.countBoard(criteria));
+		    int count = boardService.countBoard(criteria);
+		   System.out.printf("count%d",count);
+
+		  
+
+		    
+		//List<BoardDTO> list = boardService.listAll();
 		ModelAndView mav = new ModelAndView();
 	
 		
-		mav.addObject("list",list);
+		mav.addObject("list",boardService.listCriteria(criteria));
+		mav.addObject("pageMaker",pageMaker);
 		mav.setViewName("board/list");
-		logger.info("꿀~~~~~~");
+		
 		return mav;
 		 }else {
 			 String url = "redirect:../auth/form";
