@@ -30,7 +30,11 @@
 
 
 
-<button type="button" id="btnWrite" class="btn btn-success mt-5">글쓰기</button>
+<button type="button" id="btnWrite" class="btn btn-success btn-flat mt-5">
+	<i class="fa fa-pencil"></i>
+
+
+글쓰기</button>
 </c:if>
 <table class="table table-bordered table-hover" border="1" width="300px">
     <tr>
@@ -43,7 +47,7 @@
     <c:forEach var="row" items="${list}">
     <tr>
         <td>${row.bno}</td>
-         <td><a href="${path}/app/board/view?bno=${row.bno}">${row.title}</a></td>
+         <td><a href="${path}/app/board/view?${pageMaker.makeQuery(pageMaker.criteria.page)}&bno=${row.bno}">${row.title}</a></td>
          <td>${row.writer}</td>
        
       <!--       원하는 날짜형식으로 출력하기 위해 fmt태그 사용  -->
@@ -62,22 +66,57 @@
  
  
  
-  <div class="box-footer" class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-    <div class="text-center" class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+  <div class="box-footer" id="example2_paginate">
+    <div class="text-center col-xs-4"  id="example2_paginate">
         <ul class="pagination">
             <c:if test="${pageMaker.prev}">
-                <li class="page-item"><a class="page-link" href="${path}/app/board/list?page=${pageMaker.startPage - 1}">이전</a></li>
+                <li class="page-item"><a class="page-link" href="${path}/app/board/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
             </c:if>
             <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                 <li class="<c:out value="${pageMaker.criteria.page == idx ? 'page-item active' : ''}" />">
-                    <a  class="page-link" href="${path}/app/board/list?page=${idx}">${idx}</a>
+                    <a  class="page-link" href="${path}/app/board/list${pageMaker.makeQuery(idx)}">${idx}</a>
                 </li>
             </c:forEach>
             <c:if test="${pageMaker.next && pageMaker.endPage > 0}"> 
-                <li class="paginate_button page-item"><a class="page-link" href="${path}/app/board/list?page=${pageMaker.endPage + 1}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="${path}/app/board/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
             </c:if>
         </ul>
     </div>
+</div>
+<div class="box-footer">
+<div class="form-group col-sm-3">
+	<select class="form-control" name="searchType" id="searchType">
+		<option value="n"<c:out value="${searchCriteria.searchType==null ? 'selected':'' }"/>>선택</option>
+		<option value="t"<c:out value="${searchCriteria.searchType==t ? 'selected':'' }"/>>제목</option>
+		<option value="c"<c:out value="${searchCriteria.searchType==c ? 'selected':'' }"/>>내용</option>
+		<option value="w"<c:out value="${searchCriteria.searchType==w ? 'selected':'' }"/>>작성자</option>
+		<option value="tc"<c:out value="${searchCriteria.searchType==tc ? 'selected':'' }"/>>제목+내용</option>
+		<option value="cw"<c:out value="${searchCriteria.searchType==cw ? 'selected':'' }"/>>내용+작성자</option>
+		<option value="tcw"<c:out value="${searchCriteria.searchType==tcw ? 'selected':'' }"/>>제목+내용+작성자</option>
+		
+	
+	
+	
+	
+	
+	</select>
+</div>
+<div class="form-group col-sm-10">
+	<div class="input-group">
+		<input type="text" class="form-control" name="search" id="keywordInput" value="${searchCriteria.search}"placeholder="검색어">
+		<span class="input-group-btn">
+			<button type="button" class="btn btn-primary btn-flat" id="searchBtn">
+				<i class="fa fa-search"></i>검색
+			</button>
+		
+		</span>
+	
+	
+	</div>
+</div>
+
+	
+
 </div>
 </div>
 

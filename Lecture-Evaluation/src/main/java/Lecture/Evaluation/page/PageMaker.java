@@ -1,5 +1,8 @@
 package Lecture.Evaluation.page;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -15,7 +18,7 @@ public class PageMaker {
 	    private int displayPageNum = 5;
 
 	    private Criteria criteria;
-
+	   
 	    
 	    public boolean isPrev() {
 			return prev;
@@ -96,9 +99,23 @@ public class PageMaker {
 	        UriComponents uriComponents = UriComponentsBuilder.newInstance()
 	                .queryParam("page", page)
 	                .queryParam("perPageNum", criteria.getPerPageNum())
+	                .queryParam("searchType",((SearchCriteria) criteria).getSearchType())
+	                .queryParam("search",encoding(((SearchCriteria) criteria).getSearch()))
 	                .build();
 
 	        return uriComponents.toUriString();
+	    }
+	    private String encoding(String search) {
+	    	
+	    	if(search==null || search.trim().length()==0) {
+	    		return"";
+	    	}
+	    	try {
+	    		return URLEncoder.encode(search,"UTF-8");
+	    		
+	    	}catch(UnsupportedEncodingException e) {
+	    		return "";
+	    	}
 	    }
 	}
 
