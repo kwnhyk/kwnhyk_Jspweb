@@ -58,24 +58,29 @@
         
          </table>
   </div>
-  <div class="box-footer">
-    <div class="text-center">
+ 
+ 
+ 
+ 
+  <div class="box-footer" class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+    <div class="text-center" class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
         <ul class="pagination">
             <c:if test="${pageMaker.prev}">
-                <li><a href="${path}/app/board/list?page=${pageMaker.startPage - 1}">이전</a></li>
+                <li class="page-item"><a class="page-link" href="${path}/app/board/list?page=${pageMaker.startPage - 1}">이전</a></li>
             </c:if>
             <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-                <li <c:out value="${pageMaker.criteria.page == idx ? 'class=active' : ''}"/>>
-                    <a href="${path}/app/board/list?page=${idx}">${idx}</a>
+                <li class="<c:out value="${pageMaker.criteria.page == idx ? 'page-item active' : ''}" />">
+                    <a  class="page-link" href="${path}/app/board/list?page=${idx}">${idx}</a>
                 </li>
             </c:forEach>
-            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                <li><a href="${path}/app/board/list?page=${pageMaker.endPage + 1}">다음</a></li>
+            <c:if test="${pageMaker.next && pageMaker.endPage > 0}"> 
+                <li class="paginate_button page-item"><a class="page-link" href="${path}/app/board/list?page=${pageMaker.endPage + 1}">다음</a></li>
             </c:if>
         </ul>
     </div>
 </div>
 </div>
+
 </div>
 
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

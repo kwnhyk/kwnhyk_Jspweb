@@ -51,7 +51,7 @@ public class BoardController {
 		   System.out.printf("count%d",count);
 
 		  
-
+		   
 		    
 		//List<BoardDTO> list = boardService.listAll();
 		ModelAndView mav = new ModelAndView();

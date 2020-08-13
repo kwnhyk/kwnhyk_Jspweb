@@ -36,9 +36,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 	  }
 	 @Override
 	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	        registry.addResourceHandler("dist/**")
+		 	registry.addResourceHandler("/resources/**")
+		 	.addResourceLocations("/resources/");
+	        registry.addResourceHandler("/dist/**")
 	        .addResourceLocations("/resources/dist/");
-	        registry.addResourceHandler("plugins/**")
+	        registry.addResourceHandler("/plugins/**")
 	        .addResourceLocations("/resources/plugins/");
 	        registry.addResourceHandler("/docs/**")
 	        .addResourceLocations("/resources/docs/");
