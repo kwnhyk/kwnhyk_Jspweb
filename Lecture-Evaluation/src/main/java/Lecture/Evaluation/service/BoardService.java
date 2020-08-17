@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import Lecture.Evaluation.domain.BoardDTO;
 import Lecture.Evaluation.page.Criteria;
+import Lecture.Evaluation.page.SearchCriteria;
 
 public interface BoardService {
 
@@ -23,4 +24,11 @@ public interface BoardService {
 	    public void increaseViewcnt(Integer bno, HttpSession session) throws Exception;
 	   public int countBoard(Criteria criteria) throws Exception;
 	   public List<BoardDTO> listCriteria(Criteria criteria) throws Exception;
+	   List<BoardDTO> listSearch(SearchCriteria searchCriteira) throws Exception;
+	   
+	 
+	   int countSearchedArticles(SearchCriteria searchCriteria) throws Exception;
+	   
+
+
 }

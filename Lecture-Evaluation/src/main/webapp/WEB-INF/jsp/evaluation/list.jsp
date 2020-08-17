@@ -20,7 +20,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
   
+<style type="text/css">	
+      .custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
 
+.custom-toggler.navbar-toggler {
+  border-color: rgb(255,102,203);
+} 
+</style>	
 
 </head>
 <body>
@@ -29,7 +37,7 @@
      <nav class="navbar navbar-expand-lg navbar-darkgray">
             <a class="navbar-brand" href="/Lecture-Evaluation/">강의평가 웹 사이트</a>
             <button
-                class="navbar-toggler"
+                class="navbar-toggler custom-toggler"
                 type="button"
                 data-toggle="collapse"
                 data-target="#navbar"

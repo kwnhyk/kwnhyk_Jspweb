@@ -12,6 +12,22 @@
             location.href = "write";
         });
     });
+    
+    $(document).ready(function(){
+    	$("#searchBtn").click(function(){
+    		self.location =
+    			"${path}/app/board/list${pageMaker.makeQuery(1)}"
+    			+"&searchType=" +$("select option:selected").val()
+    			+"search=" +encodeURIComponent($("#keywordInput").val());
+    			
+    		
+    		
+    	});
+    	
+    	
+    	
+    });
+    
 </script>
 
 <div class="container" style="overflow: hidden; position: relative;">

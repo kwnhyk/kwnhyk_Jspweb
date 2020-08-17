@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import Lecture.Evaluation.dao.BoardDao;
 import Lecture.Evaluation.domain.BoardDTO;
 import Lecture.Evaluation.page.Criteria;
+import Lecture.Evaluation.page.SearchCriteria;
 import Lecture.Evaluation.service.BoardService;
 
 @Service
@@ -105,6 +106,16 @@ public class BoardServiceImpl implements BoardService {
 	public int countBoard(Criteria criteria) throws Exception {
 		 return boardDao.countArticles(criteria);
 	}
+	@Override
+	public int countSearchedArticles(SearchCriteria searchCriteria) throws Exception {
+		
+		return boardDao.countSearchedArticles(searchCriteria);
+	}
+	@Override
+	public List<BoardDTO> listSearch(SearchCriteria searchCriteria) throws Exception {
+		return boardDao.listSearch(searchCriteria);
+	}
+	
 	}
 
 
