@@ -70,7 +70,19 @@
             // 폼에 입력한 데이터를 서버로 전송
             document.form1.submit();
         });
+        
+        $("#btnList").on("click", function(){
+            self.location =
+            "list?page=${searchCriteria.page}"
+            +"&perPageNum=${searchCriteria.perPageNum}"
+			+"&searchType=${searchCriteria.searchType}"
+			+"&search=${searchCriteria.search}";
+          
+          
+
+        });
     });
+
 </script>
 </head>
 <body>
@@ -98,18 +110,29 @@
         ${dto.writer}
        <!--  <input name="writer" id="writer" value="${dto.writer}" placeholder="이름을 입력해주세요"> -->
     </div>
+  
     <div style="width:650px; text-align: center;">
         <!-- 게시물번호를 hidden으로 처리 -->
       
         <input type="hidden" name="bno" value="${dto.bno}">
+        
+        <input type="hidden" name="page" value="${searchCriteria.page}">
+        <input type="hidden" name="perPageNum" value="${searchCriteria.perPageNum}">
+        <input type="hidden" name="searchType" value="${searchCriteria.searchType}">
+        <input type="hidden" name="search" value="${searchCriteria.search}">
+      </form>
          <c:if test="${loginUser.userID==dto.writer}">
-        <button type="button" id="btnUpdete">수정</button>
-        <button type="button" id="btnDelete">삭제</button>
+        <button type="button" class="btn-warning modBtn" id="btnUpdete"><i class="fa fa-edit">
+
+          수정</i></button>
+        <button type="button" class="btn-danger delBtn"id="btnDelete"><i class="fa fa-trash">
+
+          삭제</i></button>
         </c:if>
-        <button type="submit" class="btn btn-primary listBtn"><i class="fa fa-list">
+        <button type="button" class="btn btn-primary listBtn" id="btnList"><i class="fa fa-list">
         목록</i></button>
     </div>
-</form>
+
 
 </div>
 </div>

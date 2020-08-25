@@ -48,14 +48,14 @@
   <sql id="search">
  
   <if test="searchType !=null">
-  	<if test="searchType=='최신순'">
+  	<if test="searchType=='최신순'.toString()">
   	Like CONCAT ('%',#{lectureDivide},'%') AND
   	CONCAT(lectureName,professorName,evaluationTitle,evaluationContent)
   	LIKE CONCAT('%',#{search},'%')
   	ORDER BY evaluationID DESC
   	
   	</if>
-  	<if test="searchType=='추천순'">
+  	<if test="searchType=='추천순'.toString()">
   	Like CONCAT('%',#{lectureDivide},'%') AND
   	CONCAT(lectureName,professorName,evaluationTitle,evaluationContent)
   	LIKE CONCAT('%',#{search},'%')

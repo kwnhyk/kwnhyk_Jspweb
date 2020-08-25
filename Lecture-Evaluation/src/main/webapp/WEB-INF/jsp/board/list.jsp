@@ -108,13 +108,13 @@ $(document).ready(function(){
 <div class="box-footer">
 <div class="form-group col-sm-3">
 	<select class="form-control" name="searchType" id="searchType">
-		<option value="n"<c:out value="${searchCriteria.searchType==null ? 'selected':'' }"/>>선택</option>
-		<option value="t"<c:out value="${searchCriteria.searchType==t ? 'selected':'' }"/>>제목</option>
-		<option value="c"<c:out value="${searchCriteria.searchType==c ? 'selected':'' }"/>>내용</option>
-		<option value="w"<c:out value="${searchCriteria.searchType==w ? 'selected':'' }"/>>작성자</option>
-		<option value="tc"<c:out value="${searchCriteria.searchType==tc ? 'selected':'' }"/>>제목+내용</option>
-		<option value="cw"<c:out value="${searchCriteria.searchType==cw ? 'selected':'' }"/>>내용+작성자</option>
-		<option value="tcw"<c:out value="${searchCriteria.searchType==tcw ? 'selected':'' }"/>>제목+내용+작성자</option>
+		<option value="n"<c:if test="${searchCriteria.searchType== null }">selected</c:if>>선택</option>
+		<option value="t"<c:out value="${searchCriteria.searchType eq 't' ? 'selected':'' }"/>>제목</option>
+		<option value="c"<c:out value="${searchCriteria.searchType eq 'c' ? 'selected':'' }"/>>내용</option>
+		<option value="w"<c:out value="${searchCriteria.searchType eq 'w' ? 'selected':'' }"/>>작성자</option>
+		<option value="tc"<c:out value="${searchCriteria.searchType eq 'tc' ? 'selected':'' }"/>>제목+내용</option>
+		<option value="cw"<c:out value="${searchCriteria.searchType eq 'cw' ? 'selected':'' }"/>>내용+작성자</option>
+		<option value="tcw"<c:out value="${searchCriteria.searchType eq 'tcw' ? 'selected':'' }"/>>제목+내용+작성자</option>
 		
 	
 	
