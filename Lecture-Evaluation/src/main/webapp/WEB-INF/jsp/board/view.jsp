@@ -106,6 +106,8 @@
         <button type="button" id="btnUpdete">수정</button>
         <button type="button" id="btnDelete">삭제</button>
         </c:if>
+        <button type="submit" class="btn btn-primary listBtn"><i class="fa fa-list">
+        목록</i></button>
     </div>
 </form>
 

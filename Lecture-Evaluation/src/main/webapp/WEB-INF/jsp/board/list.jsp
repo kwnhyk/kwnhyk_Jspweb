@@ -13,22 +13,28 @@
         });
     });
     
-    $(document).ready(function(){
-    	$("#searchBtn").click(function(){
-    		self.location =
-    			"${path}/app/board/list${pageMaker.makeQuery(1)}"
-    			+"&searchType=" +$("select option:selected").val()
-    			+"search=" +encodeURIComponent($("#keywordInput").val());
-    			
-    		
-    		
-    	});
-    	
-    	
-    	
-    });
+ 
     
 </script>
+<script>
+
+
+$(document).ready(function(){
+	$("#searchBtn").on("click",function(event){
+		self.location =
+			"list${pageMaker.makeQuery(1)}"
+			+"&searchType="+$("select option:selected").val()
+			+"&search=" +encodeURIComponent($("#keywordInput").val());
+			
+		
+		
+	});
+	
+	
+	
+});
+</script>
+
 
 <div class="container" style="overflow: hidden; position: relative;">
  <div class="box box-primary">
@@ -63,7 +69,7 @@
     <c:forEach var="row" items="${list}">
     <tr>
         <td>${row.bno}</td>
-         <td><a href="${path}/app/board/view?${pageMaker.makeQuery(pageMaker.criteria.page)}&bno=${row.bno}">${row.title}</a></td>
+         <td><a href="${path}/app/board/view${pageMaker.makeSearch(pageMaker.criteria.page)}&bno=${row.bno}">${row.title}</a></td>
          <td>${row.writer}</td>
        
       <!--       원하는 날짜형식으로 출력하기 위해 fmt태그 사용  -->
@@ -86,15 +92,15 @@
     <div class="text-center col-xs-4"  id="example2_paginate">
         <ul class="pagination">
             <c:if test="${pageMaker.prev}">
-                <li class="page-item"><a class="page-link" href="${path}/app/board/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+                <li class="page-item"><a class="page-link" href="${path}/app/board/list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
             </c:if>
             <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                 <li class="<c:out value="${pageMaker.criteria.page == idx ? 'page-item active' : ''}" />">
-                    <a  class="page-link" href="${path}/app/board/list${pageMaker.makeQuery(idx)}">${idx}</a>
+                    <a  class="page-link" href="${path}/app/board/list${pageMaker.makeSearch(idx)}">${idx}</a>
                 </li>
             </c:forEach>
             <c:if test="${pageMaker.next && pageMaker.endPage > 0}"> 
-                <li class="page-item"><a class="page-link" href="${path}/app/board/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="${path}/app/board/list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
             </c:if>
         </ul>
     </div>

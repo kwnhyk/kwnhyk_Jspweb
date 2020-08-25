@@ -35,7 +35,7 @@ public class BoardController {
 	BoardService boardService;
 	
 	
-	@RequestMapping("list")
+	@GetMapping("list")
 	
 	public ModelAndView list(HttpSession session,@ModelAttribute("searchCriteria")SearchCriteria criteria) throws Exception{
 		 UserDTO user =(UserDTO) session.getAttribute("loginUser");
@@ -50,7 +50,7 @@ public class BoardController {
 		    // 수정
 		 //   pageMaker.setTotalCount(boardService.countBoard(criteria));
 		    pageMaker.setTotalCount(boardService.countSearchedArticles(criteria));
-		    int count = boardService.countBoard(criteria);
+		    int count = boardService.countSearchedArticles(criteria);
 		   System.out.printf("count%d",count);
 		   	
 		  

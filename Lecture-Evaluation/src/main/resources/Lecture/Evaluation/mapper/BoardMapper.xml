@@ -137,25 +137,25 @@
   		
   		</if>
   	 <if test="searchType == 'w'.toString()">
-            AND writer LIKE CONCAT('%', #{keyword}, '%')
+            AND writer LIKE CONCAT('%', #{search}, '%')
         </if>
         <if test="searchType == 'tc'.toString()">
             AND (
-                title LIKE CONCAT('%', #{keyword}, '%')
-                OR content LIKE CONCAT('%', #{keyword}, '%')
+                title LIKE CONCAT('%', #{search}, '%')
+                OR content LIKE CONCAT('%', #{search}, '%')
             )
         </if>
         <if test="searchType == 'cw'.toString()">
             AND (
-                content LIKE CONCAT('%', #{keyword}, '%')
-                OR writer LIKE CONCAT('%', #{keyword}, '%')
+                content LIKE CONCAT('%', #{search}, '%')
+                OR writer LIKE CONCAT('%', #{search}, '%')
             )
         </if>
         <if test="searchType == 'tcw'.toString()">
             AND (
-                title LIKE CONCAT('%', #{keyword}, '%')
-                OR content LIKE CONCAT('%', #{keyword}, '%')
-                OR writer LIKE CONCAT('%', #{keyword}, '%')
+                title LIKE CONCAT('%', #{search}, '%')
+                OR content LIKE CONCAT('%', #{search}, '%')
+                OR writer LIKE CONCAT('%', #{search}, '%')
             )
         </if>
     

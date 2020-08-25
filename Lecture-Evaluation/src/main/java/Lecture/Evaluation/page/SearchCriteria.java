@@ -1,8 +1,8 @@
 package Lecture.Evaluation.page;
 
 public class SearchCriteria extends Criteria {
-	private String searchType;
-	private String search;
+	private String searchType ="";
+	private String search = "";
 	public String getSearchType() {
 		return searchType;
 	}
