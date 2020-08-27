@@ -35,14 +35,14 @@
 						
      LIMIT 0 ,6
   </select>
-  <select id="listSearchCount" resultType="int">
+  <select id="listCount" resultType="int">
     SELECT
         count(evaluationID)
     FROM
         EVALUATION
     WHERE
         evaluationID > 0
-    <include refid="search"></include>        
+    
     </select>
   
   <sql id="search">

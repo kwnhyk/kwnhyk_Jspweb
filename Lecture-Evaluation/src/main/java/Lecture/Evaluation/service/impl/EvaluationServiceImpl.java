@@ -44,8 +44,8 @@ public class EvaluationServiceImpl implements EvaluationService {
 		return evaluationDao.updateLike(evaluationID);
 	}
 	@Override
-	public int listSearchCount(int evaluationID) throws Exception {
-		return evaluationDao.listSearchCount(evaluationID);
+	public int listCount(Criteria criteria) throws Exception {
+		return evaluationDao.listCount(criteria);
 	}@Override
 	public String getUserID(int evaluationID) throws Exception {
 		return evaluationDao.findByevaluationId(evaluationID);

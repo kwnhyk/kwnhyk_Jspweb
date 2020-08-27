@@ -34,7 +34,7 @@ public interface EvaluationService {
 	
 	 String getUserID(int evaluationID) throws Exception;
 	
-	 int listSearchCount(int evaluationID) throws Exception;
+	 int listCount(Criteria criteria) throws Exception;
 	
 	
 }

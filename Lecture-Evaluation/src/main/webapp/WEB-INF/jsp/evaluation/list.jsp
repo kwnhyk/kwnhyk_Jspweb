@@ -231,24 +231,36 @@
      
         	</script>
         	 <ul class ="pagination justify-content-center mt-3">
+        	<%--li class="page-item"> --%>
+        	<c:choose>
+        	<c:when test="${pageMaker.startPage==1}">
         	<li class="page-item">
-
- <a class="page-link disabled">이전</a>      	
-
- 	
-
- </li>
+        	<a class="page-link disabled">이전</a>
+        	</li>
+        	</c:when>
+        	<c:otherwise>
+                <li class="page-item"><a class="page-link" href="${path}/app/evaluation/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+            </c:otherwise>
+            </c:choose>
+            <c:choose>
+        	<c:when test="${pageMaker.totalCount<6}">
+        	<li class="page-item">
+        	<a class="page-link disabled">다음</a>
+        	</li>
+        	</c:when>
+        	
+ <c:otherwise> 
+                <li class="page-item"><a class="page-link" href="${path}/app/evaluation/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+            </c:otherwise>
+        	</c:choose>
  
- <li>
- <c:if test="${list.size()<6}">
- <%--
- 	if(evaluationList.size()<6){
- 		
- 		
+ <%-- a class="page-link disabled">이전</a>   --%>   	
+
  	
---%> 
- <a class="page-link disabled">다음</a>      	
- </c:if>
+
+ 
+ 
+ 
 <%--
  	}else{
  
@@ -259,7 +271,7 @@
  	
  	}
 --%>
- </li>
+
         </ul>
       
         	<script>

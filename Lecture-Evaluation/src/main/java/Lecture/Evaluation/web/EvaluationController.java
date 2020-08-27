@@ -19,6 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import Lecture.Evaluation.domain.EvaluationDTO;
 import Lecture.Evaluation.domain.UserDTO;
+import Lecture.Evaluation.page.Criteria;
+import Lecture.Evaluation.page.PageMaker;
+import Lecture.Evaluation.page.SearchCriteria;
 import Lecture.Evaluation.service.EvaluationService;
 
 @Controller
@@ -68,7 +71,7 @@ public class EvaluationController {
 		 
 	  }
 	   @RequestMapping("list")
-	    public ModelAndView list(HttpSession session,@RequestParam(defaultValue="")String lectureDivide,
+	    public ModelAndView list(HttpSession session,@ModelAttribute("Criteria")Criteria criteria,@RequestParam(defaultValue="")String lectureDivide,
 	    		@RequestParam(defaultValue="최신순")String searchType,@RequestParam(defaultValue="")String search) throws Exception {
 		   UserDTO user =(UserDTO) session.getAttribute("loginUser");
 			 if(user !=null) {
@@ -78,6 +81,9 @@ public class EvaluationController {
 		   if(lectureDivide.equals("전체")) {
 			   lectureDivide ="";
 		   	 }
+		   PageMaker pageMaker = new PageMaker();
+		   pageMaker.setCriteria(criteria);
+		   pageMaker.setTotalCount(evaluationService.listCount(criteria));
 		   // List<EvaluationDTO> evalAll = evaluationService.getAll();
 		  
 			   List<EvaluationDTO> list = evaluationService.list(lectureDivide,searchType,search);
@@ -90,6 +96,7 @@ public class EvaluationController {
 		   map.put("searchType", searchType);
 		   map.put("search", search);
 		   mav.addObject("map", map);
+		   mav.addObject("pageMaker",pageMaker);
 		   mav.setViewName("evaluation/list");
 		   System.out.println("이게 바로셀렉");
 		   System.out.println("map==" +map);
