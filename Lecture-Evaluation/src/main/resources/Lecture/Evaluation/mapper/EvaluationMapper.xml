@@ -35,6 +35,17 @@
 						
      LIMIT 0 ,6
   </select>
+  <select id="listSearch" resultMap="EvaluationMap">
+    SELECT 
+    *
+      
+    FROM 
+      EVALUATION
+    WHERE lectureDivide 
+    <include refid="search"></include>
+						
+     LIMIT #{pageStart},#{perPageNum}
+  </select>
   <select id="listCount" resultType="int">
     SELECT
         count(evaluationID)

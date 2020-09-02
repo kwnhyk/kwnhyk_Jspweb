@@ -70,8 +70,9 @@ public class EvaluationController {
 		 
 		 
 	  }
+	  
 	   @RequestMapping("list")
-	    public ModelAndView list(HttpSession session,@ModelAttribute("Criteria")Criteria criteria,@RequestParam(defaultValue="")String lectureDivide,
+	   public ModelAndView list(HttpSession session,@ModelAttribute("Criteria")Criteria criteria,@RequestParam(defaultValue="")String lectureDivide,
 	    		@RequestParam(defaultValue="최신순")String searchType,@RequestParam(defaultValue="")String search) throws Exception {
 		   UserDTO user =(UserDTO) session.getAttribute("loginUser");
 			 if(user !=null) {
@@ -127,6 +128,7 @@ public class EvaluationController {
 	 //   }
 	  
 	   }
+	  
 	    @PostMapping("write")
 	    public String write(HttpSession session,@ModelAttribute("evalDTO") EvaluationDTO eval,Model model) throws Exception{
 	    	int result=-1;

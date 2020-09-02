@@ -3,6 +3,7 @@ package Lecture.Evaluation.page;
 public class SearchCriteria extends Criteria {
 	private String searchType ="";
 	private String search = "";
+	private String lectureDivide ="";
 	public String getSearchType() {
 		return searchType;
 	}
@@ -18,6 +19,12 @@ public class SearchCriteria extends Criteria {
 	@Override
 	public String toString() {
 		return "SearchCriteria [searchType=" + searchType + ", search=" + search + "]";
+	}
+	public String getLectureDivide() {
+		return lectureDivide;
+	}
+	public void setLectureDivide(String lectureDivide) {
+		this.lectureDivide = lectureDivide;
 	}
 	
 	
