@@ -22,6 +22,7 @@ import Lecture.Evaluation.domain.UserDTO;
 import Lecture.Evaluation.page.Criteria;
 import Lecture.Evaluation.page.PageMaker;
 import Lecture.Evaluation.page.SearchCriteria;
+import Lecture.Evaluation.service.BoardService;
 import Lecture.Evaluation.service.EvaluationService;
 
 @Controller
@@ -72,7 +73,39 @@ public class EvaluationController {
 	  }
 	  
 	   @RequestMapping("list")
-	   public ModelAndView list(HttpSession session,@ModelAttribute("Criteria")Criteria criteria,@RequestParam(defaultValue="")String lectureDivide,
+	   public ModelAndView list(HttpSession session,
+			   @ModelAttribute("searchCriteria")SearchCriteria searchCriteria,String lectureDivide)throws Exception{
+		   UserDTO user =(UserDTO) session.getAttribute("loginUser");
+		   if(user !=null) {
+		   
+		  
+		   PageMaker pageMaker = new PageMaker();
+		   pageMaker.setCriteria(searchCriteria);
+		   pageMaker.setTotalCount(evaluationService.countSearchedArticles(searchCriteria));
+		  
+		  
+			  
+		   
+		   ModelAndView mav = new ModelAndView();
+		  
+		  
+		 
+		   mav.addObject("list",evaluationService.listSearch(searchCriteria));
+		   mav.addObject("pageMaker",pageMaker);
+		   mav.setViewName("evaluation/list");
+		   return mav;
+		   
+		   
+	   }else
+		 {
+			 String url = "redirect:../auth/form";
+		        return new ModelAndView(url);
+			 
+		 }
+		
+ }
+			   
+	   /*public ModelAndView list(HttpSession session,@ModelAttribute("Criteria")Criteria criteria,@RequestParam(defaultValue="")String lectureDivide,
 	    		@RequestParam(defaultValue="최신순")String searchType,@RequestParam(defaultValue="")String search) throws Exception {
 		   UserDTO user =(UserDTO) session.getAttribute("loginUser");
 			 if(user !=null) {
@@ -128,7 +161,7 @@ public class EvaluationController {
 	 //   }
 	  
 	   }
-	  
+	  */
 	    @PostMapping("write")
 	    public String write(HttpSession session,@ModelAttribute("evalDTO") EvaluationDTO eval,Model model) throws Exception{
 	    	int result=-1;

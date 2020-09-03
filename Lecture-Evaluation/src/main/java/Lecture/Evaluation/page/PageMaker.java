@@ -109,7 +109,7 @@ public class PageMaker {
 	                .queryParam("perPageNum", criteria.getPerPageNum())
 	                .queryParam("searchType",((SearchCriteria) criteria).getSearchType())
 	                .queryParam("search",encoding(((SearchCriteria) criteria).getSearch()))
-	                .queryParam("lectureDivide",((SearchCriteria) criteria).getLectureDivide())
+	                .queryParam("lectureDivide",encode(((SearchCriteria) criteria).getLectureDivide()))
 	                .build();
 
 	        return uriComponents.toUriString();
@@ -135,6 +135,21 @@ public class PageMaker {
 	    	}catch(UnsupportedEncodingException e) {
 	    		return "";
 	    	}
+	    }
+	    private String encode(String lectureDivide) {
+	    	if(lectureDivide==null || lectureDivide.trim().length()==0 ||lectureDivide.equals("전체")) {
+	    		return"";
+	    	}
+	    	 
+	    	try {
+	    		return URLEncoder.encode(lectureDivide,"UTF-8");
+	    		
+	    	}catch(UnsupportedEncodingException e) {
+	    		return "";
+	    	}
+	    	
+	    	 
+	    	
 	    }
 	}
 

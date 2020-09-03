@@ -3,6 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial=scale=1,shrink-to-fit=no" />
@@ -96,14 +97,14 @@
         	<form method="post" action="list" class="form-inline mt-3">
         	
         		<select name="lectureDivide" class="form-control mx-1 mt-2">
-        			<option value="전체"> 전체</option>
-        			<option value="전공"<c:if test="${map.lectureDivide =='전공'}">selected</c:if>>전공</option>
-        			<option value="교양"<c:out value="${map.lectureDivide =='교양'?'selected':'' }"/>>교양</option>
-        			<option value="기타"<c:if test="${map.lectureDivide =='기타'}">selected</c:if>>기타</option>
+        			<option value="전체"<c:if test="${searchCriteria.lectureDivide =='전체'}">selected</c:if>> 전체</option>
+        			<option value="전공"<c:if test="${searchCriteria.lectureDivide =='전공'}">selected</c:if>>전공</option>
+        			<option value="교양"<c:out value="${searchCriteria.lectureDivide =='교양'?'selected':'' }"/>>교양</option>
+        			<option value="기타"<c:if test="${searchCriteria.lectureDivide =='기타'}">selected</c:if>>기타</option>
         		</select>
         		<select name="searchType" class="form-control mx-1 mt-2">
         			<option value="최신순"> 최신순</option>
-        			<option value="추천순"<c:out value="${map.searchType =='추천순'?'selected':'' }"/>>추천순</option>
+        			<option value="추천순"<c:out value="${searchCriteria.searchType =='추천순'?'selected':'' }"/>>추천순</option>
         		</select>
         		<input type="text" name="search" class="form-control mx-1 mt-2" placeholder="내용을 입력하세요">
         		<button type="submit" class="btn btn-primary mx-1 mt-2">검색</button>
@@ -113,7 +114,7 @@
 	
         	</form>
         	
-        	  <c:forEach 	var="list" items="${map.list}">
+        	  <c:forEach 	var="list" items="${list}">
         
         	<div class="card bg-light mt-3">
         	<div class="card-header bg-light">
@@ -239,18 +240,18 @@
         	</li>
         	</c:when>
         	<c:otherwise>
-                <li class="page-item"><a class="page-link" href="${path}/app/evaluation/list${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/app/evaluation/list${pageMaker.makeDivide(pageMaker.startPage - 1)}">이전</a></li>
             </c:otherwise>
             </c:choose>
             <c:choose>
-        	<c:when test="${pageMaker.totalCount<6}">
+        	<c:when test="${pageMaker.next==false}">
         	<li class="page-item">
         	<a class="page-link disabled">다음</a>
         	</li>
         	</c:when>
         	
  <c:otherwise> 
-                <li class="page-item"><a class="page-link" href="${path}/app/evaluation/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/app/evaluation/list${pageMaker.makeDivide(pageMaker.criteria.page + 1)}">다음</a></li>
             </c:otherwise>
         	</c:choose>
  
