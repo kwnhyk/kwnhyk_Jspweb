@@ -16,15 +16,17 @@ public class SearchCriteria extends Criteria {
 	public void setSearch(String search) {
 		this.search = search;
 	}
-	@Override
-	public String toString() {
-		return "SearchCriteria [searchType=" + searchType + ", search=" + search + "]";
-	}
+	
 	public String getLectureDivide() {
 		return lectureDivide;
 	}
 	public void setLectureDivide(String lectureDivide) {
 		this.lectureDivide = lectureDivide;
+	}
+	@Override
+	public String toString() {
+		return "SearchCriteria [searchType=" + searchType + ", search=" + search + ", lectureDivide=" + lectureDivide
+				+ "]";
 	}
 	
 	

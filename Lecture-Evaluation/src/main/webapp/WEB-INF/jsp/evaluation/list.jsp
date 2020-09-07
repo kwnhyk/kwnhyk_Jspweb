@@ -97,7 +97,7 @@
         	<form method="post" action="list" class="form-inline mt-3">
         	
         		<select name="lectureDivide" class="form-control mx-1 mt-2">
-        			<option value="전체"<c:if test="${searchCriteria.lectureDivide =='전체'}">selected</c:if>> 전체</option>
+        			<option value="전체">전체</option>
         			<option value="전공"<c:if test="${searchCriteria.lectureDivide =='전공'}">selected</c:if>>전공</option>
         			<option value="교양"<c:out value="${searchCriteria.lectureDivide =='교양'?'selected':'' }"/>>교양</option>
         			<option value="기타"<c:if test="${searchCriteria.lectureDivide =='기타'}">selected</c:if>>기타</option>
@@ -244,7 +244,7 @@
             </c:otherwise>
             </c:choose>
             <c:choose>
-        	<c:when test="${pageMaker.next==false}">
+        	<c:when test="${pageMaker.next==true}">
         	<li class="page-item">
         	<a class="page-link disabled">다음</a>
         	</li>

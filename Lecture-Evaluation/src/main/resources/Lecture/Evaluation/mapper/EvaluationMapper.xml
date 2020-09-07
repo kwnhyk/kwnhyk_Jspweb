@@ -73,6 +73,10 @@
  
   <if test="searchType !=null">
   	
+
+  	
+  	
+  	
   	<if test="searchType=='최신순'.toString()">
   	Like CONCAT ('%',#{lectureDivide},'%') AND
   	CONCAT(lectureName,professorName,evaluationTitle,evaluationContent)

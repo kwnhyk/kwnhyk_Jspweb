@@ -73,12 +73,15 @@ public class EvaluationController {
 	  }
 	  
 	   @RequestMapping("list")
-	   public ModelAndView list(HttpSession session,
-			   @ModelAttribute("searchCriteria")SearchCriteria searchCriteria,String lectureDivide)throws Exception{
+	   public ModelAndView list(HttpSession session,@RequestParam(defaultValue="")String lectureDivide,
+			   @RequestParam(defaultValue="최신순")String searchType,
+			   @ModelAttribute("searchCriteria")SearchCriteria searchCriteria)throws Exception{
 		   UserDTO user =(UserDTO) session.getAttribute("loginUser");
 		   if(user !=null) {
-		   
-		  
+			  searchCriteria.setSearchType(searchType);
+			   if(lectureDivide.equals("전체")) {
+				   searchCriteria.setLectureDivide("");
+			   	 }
 		   PageMaker pageMaker = new PageMaker();
 		   pageMaker.setCriteria(searchCriteria);
 		   pageMaker.setTotalCount(evaluationService.countSearchedArticles(searchCriteria));
