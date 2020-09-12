@@ -21,6 +21,21 @@ public class BoardDTO implements Serializable {
 	private Date regdate;
 	private Integer viewcnt;
 	private Integer bno;
+	private String[] files;
+	private int fileCnt;
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+		setFileCnt(files.length);
+	}
+	public int getFileCnt() {
+		return fileCnt;
+	}
+	public void setFileCnt(int fileCnt) {
+		this.fileCnt = fileCnt;
+	}
 	public String getTitle() {
 		return title;
 	}
