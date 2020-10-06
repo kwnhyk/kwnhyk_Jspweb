@@ -2,6 +2,8 @@ package Lecture.Evaluation.util;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -27,7 +29,7 @@ public class UploadFileUtils {
 	String rootPath = getRootPath(originalFileName, request);
 	String datePath = getDatePath(rootPath);
 	
-	File target = new FIle(rootPath + datePath,uuidFileName);
+	File target = new File(rootPath + datePath,uuidFileName);
 	FileCopyUtils.copy(fileDate, target);
 	
 	if(MediaUtils.getMediaType(originalFileName) != null) {
@@ -53,7 +55,7 @@ public class UploadFileUtils {
 	public static HttpHeaders getHttpHeaders(String fileName)throws Exception{
 		
 		
-		MediaType mediaType = MediaUtills.getMediaType(fileName);
+		MediaType mediaType = MediaUtils.getMediaType(fileName);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		
 		if(mediaType !=null) {
