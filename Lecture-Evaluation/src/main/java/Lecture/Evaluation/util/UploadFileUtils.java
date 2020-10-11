@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
+import org.imgscalr.Scalr;
 import org.mybatis.logging.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -17,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFileUtils {
 
-	private static final Logger logger =LoggerFactory.getLogger(UploadFileUtils.class);
+	//private static final Logger logger =LoggerFactory.getLogger(UploadFileUtils.class);
 	
 	public static String uploadFile(MultipartFile file,HttpServletRequest request)throws Exception{
 		

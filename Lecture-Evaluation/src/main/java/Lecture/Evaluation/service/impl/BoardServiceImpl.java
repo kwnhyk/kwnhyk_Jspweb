@@ -6,7 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import Lecture.Evaluation.dao.ArticleFileDao;
 import Lecture.Evaluation.dao.BoardDao;
 import Lecture.Evaluation.domain.BoardDTO;
 import Lecture.Evaluation.page.Criteria;
@@ -17,11 +19,12 @@ import Lecture.Evaluation.service.BoardService;
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDao boardDao;
-	
+	ArticleFileDao articleFileDao;
 	
 	public BoardServiceImpl(BoardDao boardDao) {
 		this.boardDao= boardDao;
 	}
+	@Transactional
 	@Override
 	public void insert(BoardDTO vo) throws Exception {
 		 String title = vo.getTitle();
@@ -51,6 +54,11 @@ public class BoardServiceImpl implements BoardService {
 	       
 	   
 	      boardDao.create(vo);
+	      String[] files = vo.getFiles();
+	      if(files ==null)
+	    	  return;
+	      for(String fileName :files)
+	    	  articleFileDao.addFile(fileName);
 		
 	}
 
