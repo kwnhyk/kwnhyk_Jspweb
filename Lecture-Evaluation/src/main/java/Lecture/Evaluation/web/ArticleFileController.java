@@ -59,4 +59,19 @@ public class ArticleFileController {
         return entity;
     }
 
+ // 게시글 파일 삭제 : 게시글 작성 페이지
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public ResponseEntity<String> deleteFile(String fileName, HttpServletRequest request) {
+        ResponseEntity<String> entity = null;
+
+        try {
+            UploadFileUtils.deleteFile(fileName, request);
+            entity = new ResponseEntity<>("DELETED", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+        return entity;
+    }
 }
