@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
-
+<script type="text/javascript" src="/resources/dist/js/article_file_upload.js"></script>
 <script>
     $(document).ready(function(){
         $("#btnSave").click(function(){
@@ -30,6 +30,31 @@
         });
     });
 </script>
+<script id="fileTemplate" type="text/x-handlebars-template">
+    <li>
+        <span class="mailbox-attachment-icon has-img">
+            <img src="{{imgSrc}}" alt="Attachment">
+        </span>
+        <div class="mailbox-attachment-info">
+            <a href="{{originalFileUrl}}" class="mailbox-attachment-name">
+                <i class="fa fa-paperclip"></i> {{originalFileName}}
+            </a>
+            <a href="{{fullName}}" class="btn btn-default btn-xs pull-right delBtn">
+                <i class="fa fa-fw fa-remove"></i>
+            </a>
+        </div>
+    </li>
+</script>
+<style type="text/css">
+
+.fileDrop {
+    width: 100%;
+    height: 200px;
+    border: 2px dotted #0b58a2;
+}
+
+
+</style>
 </head>
 <body>
 <div class="container" style="overflow: hidden; position: relative;">
@@ -53,6 +78,29 @@
     
         <button type="button" id="btnSave"class="btn btn-info btn-block">확인</button>
         <button type="reset" class="btn btn-danger btn-block">취소</button>
+     <%--첨부파일 영역 추가--%>
+                <div class="form-group">
+                    <div class="fileDrop">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <p class="text-center"><i class="fa fa-paperclip"></i> 첨부파일을 드래그해주세요.</p>
+                    </div>
+                </div>
+                <%--첨부파일 영역 추가--%>
+            </div>
+            <div class="box-footer">
+                <ul class="mailbox-attachments clearfix uploadedFileList"></ul>
+            </div>
+            <div class="box-footer">
+                <button type="button" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
+                <div class="pull-right">
+                    <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
+                </div>
+            </div>
+        </div>     
     
 </form>
 </div>
