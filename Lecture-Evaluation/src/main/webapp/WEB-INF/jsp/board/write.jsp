@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
-<script type="text/javascript" src="/resources/dist/js/article_file_upload.js"></script>
+
 <script>
     $(document).ready(function(){
         $("#btnSave").click(function(){
@@ -28,6 +28,18 @@
             // 폼에 입력한 데이터를 서버로 전송
             document.form1.submit();
         });
+    });
+ // 게시글 저장 버튼 클릭 이벤트 처리
+    $("#writeForm").submit(function (event) {
+        event.preventDefault();
+        var that = $(this);
+        filesSubmit(that);
+    });
+ // 파일 삭제 버튼 클릭 이벤트
+    $(document).on("click", ".delBtn", function (event) {
+        event.preventDefault();
+        var that = $(this);
+        deleteFileWrtPage(that);
     });
 </script>
 <script id="fileTemplate" type="text/x-handlebars-template">
@@ -57,27 +69,36 @@
 </style>
 </head>
 <body>
-<div class="container" style="overflow: hidden; position: relative;">
+<%-- <div class="container" style="overflow: hidden; position: relative;">
 		<br> 
 			<b style="font-size: 30px;">게시글 작성</b>
 		</a>
 	</div>
 
 
-<div class="container">
-<form name="form1"class="text-center p-5" method="post" action="${path}/app/board/insert">
-    <div>
-        제목
-        <input name="title" class="form-control" id="title" size="80" placeholder="제목을 입력해주세요">
-    </div>
-    <div>
-        내용
-        <textarea name="content"class="form-control" id="content" rows="4" cols="80" placeholder="내용을 입력해주세요"></textarea>
-    </div>
+<%-- <div class="container">--%>
+
+<div class="col-lg-12">
+<form role="form1" id="writeForm" class="text-center p-5" method="post" action="${path}/app/board/insert">
+    <div class="box box-primary">
+     <div class="box-header with-border">
+                <h3 class="box-title">게시글 작성</h3>
+            </div>
+      <div class="box-body">
+                <div class="form-group">
+                    <label for="title">제목</label>
+                    <input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요">
+                </div>
+    			 <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea class="form-control" id="content" name="content" rows="15"
+                              placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
+                </div>
+               
    
     
-        <button type="button" id="btnSave"class="btn btn-info btn-block">확인</button>
-        <button type="reset" class="btn btn-danger btn-block">취소</button>
+       <%--  <button type="button" id="btnSave"class="btn btn-info btn-block">확인</button>
+        <button type="reset" class="btn btn-danger btn-block">취소</button>--%>
      <%--첨부파일 영역 추가--%>
                 <div class="form-group">
                     <div class="fileDrop">
@@ -97,13 +118,14 @@
                 <button type="button" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
                 <div class="pull-right">
                     <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
+                    <button type="button"id="btnSave" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
                 </div>
             </div>
-        </div>     
-    
-</form>
+        </div>
+    </form>
 </div>
+    
+
 </div>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>

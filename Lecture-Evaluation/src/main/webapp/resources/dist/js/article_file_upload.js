@@ -31,7 +31,7 @@ fileDropDiv.on("drop", function (event) {
 // 파일 업로드 AJAX 통신
 function uploadFile(formData) {
     $.ajax({
-        url: "/article/file/upload",
+        url: "/board/file/upload",
         data: formData,
         dataType: "text",
         // processData : 데이터를 일반적인 query string으로 변환처리할 것인지 결정
@@ -80,7 +80,7 @@ function filesSubmit(that) {
 
 // 파일 삭제(입력페이지) : 첨부파일만 삭제처리
 function deleteFileWrtPage(that) {
-    var url = "/article/file/delete";
+    var url = "/board/file/delete";
     deleteFile(url, that);
 }
 
@@ -110,16 +110,16 @@ function getFileInfo(fullName) {
 
     // 이미지 파일이면
     if (checkImageType(fullName)) {
-        imgSrc = "/article/file/display?fileName=" + fullName; // 썸네일 이미지 링크
+        imgSrc = "/board/file/display?fileName=" + fullName; // 썸네일 이미지 링크
         uuidFileName = fullName.substr(14);
         var originalImg = fullName.substr(0, 12) + fullName.substr(14);
         // 원본 이미지 요청 링크
-        originalFileUrl = "/article/file/display?fileName=" + originalImg;
+        originalFileUrl = "/board/file/display?fileName=" + originalImg;
     } else {
         imgSrc = "/resources/upload/files/file-icon.png"; // 파일 아이콘 이미지 링크
         uuidFileName = fullName.substr(12);
         // 파일 다운로드 요청 링크
-        originalFileUrl = "/article/file/display?fileName=" + fullName;
+        originalFileUrl = "/board/file/display?fileName=" + fullName;
     }
     originalFileName = uuidFileName.substr(uuidFileName.indexOf("_") + 1);
 
