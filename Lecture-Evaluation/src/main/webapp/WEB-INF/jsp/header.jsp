@@ -23,14 +23,13 @@
         <link rel="stylesheet" href="/Lecture-Evaluation/css/custom.css" >
              <!-- 커스텀Navbar추가 -->
         <link rel="stylesheet" href="/Lecture-Evaluation/css/custom-theme.min.css">
-         <!-- 제이쿼리 자바스크립트 추가하기 -->
+         <!-- 제이쿼리 자바스크립트 추가하기-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-               <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script>
+               <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script >
 <!-- sweet alert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
-  
-
+ 
 <!-- jQuery -->
 <script src="${path}/resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -39,10 +38,10 @@
 <link rel="stylesheet" href="${path}/resources/dist/css/lightbox.css">
 <%--lightbox js--%>
 <script src="${path}/resources/dist/js/lightbox.js"></script>
-<script type="text/javascript" src="${path}/resources/dist/js/article_file_upload.js"></script>
+
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
 <style type="text/css">	
       .custom-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");

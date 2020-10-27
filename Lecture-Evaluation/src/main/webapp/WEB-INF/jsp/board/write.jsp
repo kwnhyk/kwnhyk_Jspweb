@@ -1,8 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
+  
+
 
 <script>
     $(document).ready(function(){
+
+
+    	// 첨부파일 drag & drop 영역 선택자
+    	var fileDropDiv = $(".fileDrop");
+
+    	// 전체 페이지 첨부파일 drag & drop 기본 이벤트 방지
+    	$(".content-wrapper").on("dragenter dragover drop", function (event) {
+    	    event.preventDefault();
+    	});
+
+    	// 첨부파일 영역 drag & drop 기본 이벤트 방지
+    	fileDropDiv.on("dragenter dragover", function (event) {
+    	    event.preventDefault();
+    	});
+
+    	// 첨부파일 drag & drop 이벤트 처리 : 파일업로드 처리 -> 파일 출력
+    	fileDropDiv.on("drop", function (event) {
+    	    event.preventDefault();
+    	    // drop 이벤트 발생시 전달된 파일 데이터
+    	    var files = event.originalEvent.dataTransfer.files;
+    	    // 단일 파일 데이터만을 처리하기 때문 첫번째 파일만 저장
+    	    var file = files[0];
+    	    // formData 객체 생성, 파일데이터 저장
+    	    var formData = new FormData();
+    	    formData.append("file", file);
+    	    // 파일 업로드 AJAX 통신 메서드 호출
+    	    uploadFile(formData);
+    	});
+
         $("#btnSave").click(function(){
             //var title = document.form1.title.value; ==> name속성으로 처리할 경우
             //var content = document.form1.content.value;
@@ -42,6 +73,19 @@
         deleteFileWrtPage(that);
     });
 </script>
+
+<style type="text/css">
+
+.fileDrop {
+    width: 100%;
+    height: 200px;
+    border: 2px dotted #0b58a2;
+}
+
+
+</style>
+</head>
+<body>
 <script id="fileTemplate" type="text/x-handlebars-template">
     <li>
         <span class="mailbox-attachment-icon has-img">
@@ -57,18 +101,9 @@
         </div>
     </li>
 </script>
-<style type="text/css">
-
-.fileDrop {
-    width: 100%;
-    height: 200px;
-    border: 2px dotted #0b58a2;
-}
-
-
-</style>
-</head>
-<body>
+ <!--  handlebars -->
+<script src="${path}/resources/dist/js/handlebars-v4.7.6.js"></script>
+<script type="text/javascript" src="${path}/resources/dist/js/article_file_upload.js"></script>
 <%-- <div class="container" style="overflow: hidden; position: relative;">
 		<br> 
 			<b style="font-size: 30px;">게시글 작성</b>
@@ -127,7 +162,7 @@
     
 
 </div>
-</div>
+
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>
