@@ -12,11 +12,11 @@ public class AppWebApplicationInitializer
 
   String uploadTmpDir;
 
-  /*public AppWebApplicationInitializer() {
+  public AppWebApplicationInitializer() {
     uploadTmpDir = new File(System.getProperty("java.io.tmpdir")).getAbsolutePath();
     System.out.println("업로드 임시 폴더: " + uploadTmpDir);
   }
-  */
+  
 
   @Override
   protected Class<?>[] getRootConfigClasses() {

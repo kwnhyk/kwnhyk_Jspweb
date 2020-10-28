@@ -9,8 +9,9 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.imgscalr.Scalr;
-import org.mybatis.logging.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.FileCopyUtils;
@@ -18,67 +19,86 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFileUtils {
 
-	//private static final Logger logger =LoggerFactory.getLogger(UploadFileUtils.class);
-	
-	public static String uploadFile(MultipartFile file,HttpServletRequest request)throws Exception{
-		
-	String originalFileName = file.getOriginalFilename();
-	byte[] fileDate = file.getBytes();
-	
-	String uuidFileName = getUuidFileName(originalFileName);
-	
-	String rootPath = getRootPath(originalFileName, request);
-	String datePath = getDatePath(rootPath);
-	
-	File target = new File(rootPath + datePath,uuidFileName);
-	FileCopyUtils.copy(fileDate, target);
-	
-	if(MediaUtils.getMediaType(originalFileName) != null) {
-		uuidFileName = makeThumbnail(rootPath,datePath,uuidFileName);
-		
-	}
-	
-	return replaceSavedFilePath(datePath, uuidFileName);
-		
-		
-		
-	}
-	public static void deleteFile(String fileName,HttpServletRequest request) {
-		String rootPath = getRootPath(fileName,request);
-		MediaType mediaType = MediaUtils.getMediaType(fileName);
-		if(mediaType !=null) {
-			String originalImg = fileName.substring(0,12)+fileName.substring(14);
-			new File(rootPath+originalImg.replace('/', File.separatorChar)).delete();
-			
-		}
-		new File(rootPath +fileName.replace('/', File.separatorChar)).delete();
-	}
-	public static HttpHeaders getHttpHeaders(String fileName)throws Exception{
-		
-		
-		MediaType mediaType = MediaUtils.getMediaType(fileName);
-		HttpHeaders httpHeaders = new HttpHeaders();
-		
-		if(mediaType !=null) {
-			httpHeaders.setContentType(mediaType);
-			return httpHeaders;
-		}
-		fileName = fileName.substring(fileName.indexOf("_")+1);
-		httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		
-		httpHeaders.add("Content-Dispostion", "attachment);filename=\""+new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");
-		return httpHeaders;
-		}
-	public static String getRootPath(String fileName, HttpServletRequest request) {
-		String rootPath = "/resources/upload";
-		MediaType mediaType = MediaUtils.getMediaType(fileName);
-		if(mediaType !=null)
-			return request.getSession().getServletContext().getRealPath(rootPath+ "/images");
-		return request.getSession().getServletContext().getRealPath(rootPath+"/files");
-		
-	
-	}
-	 private static String getDatePath(String uploadPath) {
+	  private static final Logger logger = LogManager.getLogger(UploadFileUtils.class);
+
+	    // 파일 업로드 처리
+	    public static String uploadFile(MultipartFile file, HttpServletRequest request) throws Exception {
+
+	        String originalFileName = file.getOriginalFilename(); // 파일명
+	        byte[] fileData = file.getBytes();  // 파일 데이터
+
+	        // 1. 파일명 중복 방지 처리
+	        String uuidFileName = getUuidFileName(originalFileName);
+
+	        // 2. 파일 업로드 경로 설정
+	        String rootPath = getRootPath(originalFileName, request); // 기본경로 추출(이미지 or 일반파일)
+	        String datePath = getDatePath(rootPath); // 날짜 경로 추출, 날짜 폴더 생성
+
+	        // 3. 서버에 파일 저장
+	        File target = new File(rootPath + datePath, uuidFileName); // 파일 객체 생성
+	        FileCopyUtils.copy(fileData, target); // 파일 객체에 파일 데이터 복사
+
+	        // 4. 이미지 파일인 경우 썸네일이미지 생성
+	        if (MediaUtils.getMediaType(originalFileName) != null) {
+	            uuidFileName = makeThumbnail(rootPath, datePath, uuidFileName);
+	        }
+
+	        // 5. 파일 저장 경로 치환
+	        return replaceSavedFilePath(datePath, uuidFileName);
+	    }
+
+	    // 파일 삭제 처리
+	    public static void deleteFile(String fileName, HttpServletRequest request) {
+
+	        String rootPath = getRootPath(fileName, request); // 기본경로 추출(이미지 or 일반파일)
+
+	        // 1. 원본 이미지 파일 삭제
+	        MediaType mediaType = MediaUtils.getMediaType(fileName);
+	        if (mediaType != null) {
+	            String originalImg = fileName.substring(0, 12) + fileName.substring(14);
+	            new File(rootPath + originalImg.replace('/', File.separatorChar)).delete();
+	        }
+
+	        // 2. 파일 삭제(썸네일이미지 or 일반파일)
+	        new File(rootPath + fileName.replace('/', File.separatorChar)).delete();
+	    }
+
+	    // 파일 출력을 위한 HttpHeader 설정
+	    public static HttpHeaders getHttpHeaders(String fileName) throws Exception {
+
+	        MediaType mediaType = MediaUtils.getMediaType(fileName); // 파일타입 확인
+	        HttpHeaders httpHeaders = new HttpHeaders();
+
+	        // 이미지 파일 O
+	        if (mediaType != null) {
+	            httpHeaders.setContentType(mediaType);
+	            return httpHeaders;
+	        }
+
+	        // 이미지 파일 X
+	        fileName = fileName.substring(fileName.indexOf("_") + 1); // UUID 제거
+	        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM); // 다운로드 MIME 타입 설정
+	        // 파일명 한글 인코딩처리
+	        httpHeaders.add("Content-Disposition",
+	                        "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"),
+	                                "ISO-8859-1")+"\"");
+
+	        return httpHeaders;
+	    }
+
+	    // 기본 경로 추출
+	    public static String getRootPath(String fileName, HttpServletRequest request) {
+
+	        String rootPath = "upload";
+	        MediaType mediaType = MediaUtils.getMediaType(fileName); // 파일타입 확인
+	        if (mediaType != null)
+	            return request.getSession().getServletContext().getRealPath(rootPath + "/images"); // 이미지 파일 경로
+
+	        return request.getSession().getServletContext().getRealPath(rootPath + "/files"); // 일반파일 경로
+	    }
+
+	    // 날짜 폴더명 추출
+	    private static String getDatePath(String uploadPath) {
 
 	        Calendar calendar = Calendar.getInstance();
 	        String yearPath = File.separator + calendar.get(Calendar.YEAR);
@@ -89,7 +109,8 @@ public class UploadFileUtils {
 
 	        return datePath;
 	    }
-	// 날짜별 폴더 생성
+
+	    // 날짜별 폴더 생성
 	    private static void makeDateDir(String uploadPath, String... paths) {
 
 	        // 날짜별 폴더가 이미 존재하면 메서드 종료
@@ -137,4 +158,3 @@ public class UploadFileUtils {
 	    }
 
 	}
-

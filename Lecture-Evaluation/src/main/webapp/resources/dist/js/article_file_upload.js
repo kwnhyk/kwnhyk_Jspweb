@@ -31,11 +31,10 @@ fileDropDiv.on("drop", function (event) {
 
 // 파일 업로드 AJAX 통신
 function uploadFile(formData) {
-	// Handlebars 파일템플릿 컴파일
-	var fileTemplate = Handlebars.compile($("#fileTemplate").html());
+	
 
     $.ajax({
-        url: "/board/file/upload",
+        url: "/Lecture-Evaluation/app/board/file/upload",
         data: formData,
         dataType: "text",
         // processData : 데이터를 일반적인 query string으로 변환처리할 것인지 결정
@@ -48,14 +47,15 @@ function uploadFile(formData) {
         type: "POST",
         success: function (data) {
             printFiles(data); // 첨부파일 출력 메서드 호출
-            $(".noAttach").remove();
+            $(".noAttach").remove()
         }
     });
 }
 
 // 첨부파일 출력
 function printFiles(data) {
-
+	// Handlebars 파일템플릿 컴파일
+	var fileTemplate = Handlebars.compile($("#fileTemplate").html());
     // 파일 정보 처리
     var fileInfo = getFileInfo(data);
     // Handlebars 파일 템플릿에 파일 정보들을 바인딩하고 HTML 생성
@@ -85,7 +85,7 @@ function filesSubmit(that) {
 
 // 파일 삭제(입력페이지) : 첨부파일만 삭제처리
 function deleteFileWrtPage(that) {
-    var url = "${path}/app/board/file/delete";
+    var url = "file/delete";
     deleteFile(url, that);
 }
 
@@ -115,16 +115,16 @@ function getFileInfo(fullName) {
 
     // 이미지 파일이면
     if (checkImageType(fullName)) {
-        imgSrc = "${path}/app/board/file/display?fileName=" + fullName; // 썸네일 이미지 링크
+        imgSrc = "board/file/display?fileName=" + fullName; // 썸네일 이미지 링크
         uuidFileName = fullName.substr(14);
         var originalImg = fullName.substr(0, 12) + fullName.substr(14);
         // 원본 이미지 요청 링크
-        originalFileUrl = "/board/file/display?fileName=" + originalImg;
+        originalFileUrl = "board/file/display?fileName=" + originalImg;
     } else {
-        imgSrc = "${path}/resources/upload/files/file-icon.png"; // 파일 아이콘 이미지 링크
+        imgSrc = "/Lecture-Evaluation/upload/files/file-icon.png"; // 파일 아이콘 이미지 링크
         uuidFileName = fullName.substr(12);
         // 파일 다운로드 요청 링크
-        originalFileUrl = "${path}/app/board/file/display?fileName=" + fullName;
+        originalFileUrl = "board/file/display?fileName=" + fullName;
     }
     originalFileName = uuidFileName.substr(uuidFileName.indexOf("_") + 1);
 

@@ -15,17 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import Lecture.Evaluation.service.ArticleFileService;
 import Lecture.Evaluation.service.BoardService;
 import Lecture.Evaluation.util.UploadFileUtils;
 
 @RestController
 @RequestMapping("/board/file")
 public class ArticleFileController {
-
-
+	 
+	 
 	@Autowired
 	BoardService boardService;
-
+	ArticleFileService articleFileService;
     // 게시글 파일 업로드
     @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public ResponseEntity<String> uploadFile(MultipartFile file, HttpServletRequest request) {

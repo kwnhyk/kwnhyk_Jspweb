@@ -7,11 +7,16 @@
     <insert id="addFile">
         INSERT INTO tbl_article_file (
             file_name
-            , article_no
+            ,board_no
         ) VALUES (
             #{fileName}
-            , LAST_INSERT_ID()
+            ,LAST_INSERT_ID()
         )
     </insert>
-
+<select id="getArticleFiles" resultType="string">
+    SELECT file_name
+    FROM tbl_article_file
+    WHERE board_no = #{articleNo}
+    ORDER BY reg_date
+</select>
 </mapper>

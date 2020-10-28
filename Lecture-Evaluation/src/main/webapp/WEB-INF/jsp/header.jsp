@@ -18,14 +18,12 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <!-- 부트스트랩CSS추가 -->
-        <link rel="stylesheet" href="/Lecture-Evaluation/css/bootstrap.min.css" >
+        <link rel="stylesheet" href="${path}/css/bootstrap.min.css" >
         <!-- 커스텀CSS추가 -->
         <link rel="stylesheet" href="/Lecture-Evaluation/css/custom.css" >
              <!-- 커스텀Navbar추가 -->
         <link rel="stylesheet" href="/Lecture-Evaluation/css/custom-theme.min.css">
-         <!-- 제이쿼리 자바스크립트 추가하기-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-               <script src="/Lecture-Evaluation/js/bootstrap.min.js"></script >
+       
 <!-- sweet alert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://kit.fontawesome.com/764f0503e3.js" crossorigin="anonymous"></script>
@@ -34,10 +32,7 @@
 <script src="${path}/resources/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="${path}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<%--lightbox css--%>
-<link rel="stylesheet" href="${path}/resources/dist/css/lightbox.css">
-<%--lightbox js--%>
-<script src="${path}/resources/dist/js/lightbox.js"></script>
+
 
 <!-- AdminLTE App -->
 <script src="${path}/resources/dist/js/adminlte.min.js"></script>
