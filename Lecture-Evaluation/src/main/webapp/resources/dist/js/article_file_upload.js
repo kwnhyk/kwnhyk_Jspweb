@@ -115,16 +115,16 @@ function getFileInfo(fullName) {
 
     // 이미지 파일이면
     if (checkImageType(fullName)) {
-        imgSrc = "board/file/display?fileName=" + fullName; // 썸네일 이미지 링크
+        imgSrc = "/Lecture-Evaluation/upload/file/display?fileName=" + fullName; // 썸네일 이미지 링크
         uuidFileName = fullName.substr(14);
         var originalImg = fullName.substr(0, 12) + fullName.substr(14);
         // 원본 이미지 요청 링크
-        originalFileUrl = "board/file/display?fileName=" + originalImg;
+        originalFileUrl = "/Lecture-Evaluation/upload/file/display?fileName=" + originalImg;
     } else {
         imgSrc = "/Lecture-Evaluation/upload/files/file-icon.png"; // 파일 아이콘 이미지 링크
         uuidFileName = fullName.substr(12);
         // 파일 다운로드 요청 링크
-        originalFileUrl = "board/file/display?fileName=" + fullName;
+        originalFileUrl = "file/display?fileName=" + fullName;
     }
     originalFileName = uuidFileName.substr(uuidFileName.indexOf("_") + 1);
 
