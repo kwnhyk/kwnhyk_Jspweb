@@ -22,6 +22,8 @@ fileDropDiv.on("drop", function (event) {
     var files = event.originalEvent.dataTransfer.files;
     // 단일 파일 데이터만을 처리하기 때문 첫번째 파일만 저장
     var file = files[0];
+    //콘솔파일정보확인
+    console.log(file);
     // formData 객체 생성, 파일데이터 저장
     var formData = new FormData();
     formData.append("file", file);
@@ -37,6 +39,7 @@ function uploadFile(formData) {
         url: "/Lecture-Evaluation/app/board/file/upload",
         data: formData,
         dataType: "text",
+        enctype:'multipart/form-data',
         // processData : 데이터를 일반적인 query string으로 변환처리할 것인지 결정
         // 기본값은 true, application/x-www-form-urlencoded 타입
         // 자동변환 처리하지 않기 위해 false
@@ -115,24 +118,26 @@ function getFileInfo(fullName) {
 
     // 이미지 파일이면
     if (checkImageType(fullName)) {
-        imgSrc = "/Lecture-Evaluation/upload/file/display?fileName=" + fullName; // 썸네일 이미지 링크
+        imgSrc = "/Lecture-Evaluation/app/board/file/display?fileName=" + fullName; // 썸네일 이미지 링크
         uuidFileName = fullName.substr(14);
         var originalImg = fullName.substr(0, 12) + fullName.substr(14);
         // 원본 이미지 요청 링크
-        originalFileUrl = "/Lecture-Evaluation/upload/file/display?fileName=" + originalImg;
+        originalFileUrl = "/Lecture-Evaluation/app/board/file/display?fileName=" + originalImg;
     } else {
         imgSrc = "/Lecture-Evaluation/upload/files/file-icon.png"; // 파일 아이콘 이미지 링크
         uuidFileName = fullName.substr(12);
         // 파일 다운로드 요청 링크
-        originalFileUrl = "file/display?fileName=" + fullName;
+        originalFileUrl = "/Lecture-Evaluation/app/board/file/display?fileName=" + fullName;
     }
     originalFileName = uuidFileName.substr(uuidFileName.indexOf("_") + 1);
 
     return {originalFileName: originalFileName, imgSrc: imgSrc, originalFileUrl: originalFileUrl, fullName: fullName};
 }
 
+
 // 이미지 파일 유무 확인
 function checkImageType(fullName) {
     var pattern = /jpg$|gif$|png$|jpge$/i;
     return fullName.match(pattern);
 }
+

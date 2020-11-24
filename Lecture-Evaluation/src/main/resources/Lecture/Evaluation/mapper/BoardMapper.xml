@@ -12,6 +12,7 @@
     <result column="writer" property="writer" />
     <result column="regdate" property="regdate" />
   <result column="viewcnt" property="viewcnt" />
+  <result column="file_cnt" property="fileCnt" />
     </resultMap>
   
   <select id="findAll" resultType="Lecture.Evaluation.domain.BoardDTO">
@@ -21,7 +22,8 @@
             content,
             writer,
            regdate,
-            viewcnt
+            viewcnt,
+            file_cnt
        
            
 
@@ -39,7 +41,8 @@
           title, 
           content, 
           writer,
-          regdate
+          regdate,
+          file_cnt
          ) 
           VALUES (
          <!--  (SELECT IFNULL(MAX(bno)+1, 1)FROM tbl_board),-->
@@ -47,8 +50,18 @@
           #{title,jdbcType=VARCHAR},
           #{content},
          #{writer, jdbcType=VARCHAR},
-         now()
+         now(),
+         #{fileCnt}
          )
+    </insert>
+    <insert id="addFile">
+        INSERT INTO tbl_board_file (
+            file_name
+            ,bno
+        ) VALUES (
+            #{fileName}
+            ,LAST_INSERT_ID()
+        )
     </insert>
     <!--03. 게시글 상세보기 조회 -->
     <select id="read" resultMap="BoardMap">
@@ -100,7 +113,9 @@
   	content,
   	writer,
   	regdate,
-  	viewcnt
+  	viewcnt,
+  	file_cnt
+  	
   	FROM tbl_board
   	WHERE bno > 0
   	<include refid="search"/>
@@ -111,6 +126,7 @@
   
   
   </select>
+  
   <select id="countSearchedArticles" resultType="int">
   	SELECT
   		COUNT(bno)

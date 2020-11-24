@@ -52,14 +52,18 @@ public class BoardServiceImpl implements BoardService {
 	      vo.setTitle(title);
 	        vo.setContent(content);
 	       
-	   
-	      boardDao.create(vo);
+	    
 	      String[] files = vo.getFiles();
-	      if(files ==null)
+	      if(files ==null) {
+	    	  boardDao.create(vo);
 	    	  return;
-	      for(String fileName :files)
-	    	  articleFileDao.addFile(fileName);
+	      }
+	      vo.setFileCnt(files.length);
+	      boardDao.create(vo);
+	      for(String fileName :files) {
+	    	  boardDao.addFile(fileName);
 		
+	}
 	}
 
 	@Override

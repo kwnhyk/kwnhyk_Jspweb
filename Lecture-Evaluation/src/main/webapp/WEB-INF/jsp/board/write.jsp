@@ -1,71 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
+  <script language="javascript">
+	//유효성검사
+ /* function writeCheck(){
+  	  let form = document.form1;
+  	  let title = $("#title").val();
+  let content = $("#content").val();
+  let writer = $("#writer").val();
+  if(title == ""){
+    alert("제목을 입력하세요");
+    form.title.focus();
+    return;
+  }
+  if(content == ""){
+    alert("내용 입력하세요");
+   form.content.focus();
+    return;
+  }
+  if(writer == ""){
+    alert("이름을 입력하세요");
+    form.writer.focus();
+    return;
+  }
+  form.submit();
+  event.preventDefault();
   
+  var that = $(this);
+  filesSubmit(that);
+ 
+  }
+	*/
+	
 
-
-<script>
-    $(document).ready(function(){
-
-
-    	// 첨부파일 drag & drop 영역 선택자
-    	var fileDropDiv = $(".fileDrop");
-
-    	// 전체 페이지 첨부파일 drag & drop 기본 이벤트 방지
-    	$(".content-wrapper").on("dragenter dragover drop", function (event) {
-    	    event.preventDefault();
-    	});
-
-    	// 첨부파일 영역 drag & drop 기본 이벤트 방지
-    	fileDropDiv.on("dragenter dragover", function (event) {
-    	    event.preventDefault();
-    	});
-
-    	// 첨부파일 drag & drop 이벤트 처리 : 파일업로드 처리 -> 파일 출력
-    	fileDropDiv.on("drop", function (event) {
-    	    event.preventDefault();
-    	    // drop 이벤트 발생시 전달된 파일 데이터
-    	    var files = event.originalEvent.dataTransfer.files;
-    	    // 단일 파일 데이터만을 처리하기 때문 첫번째 파일만 저장
-    	    var file = files[0];
-    	    // formData 객체 생성, 파일데이터 저장
-    	    var formData = new FormData();
-    	    formData.append("file", file);
-    	    // 파일 업로드 AJAX 통신 메서드 호출
-    	    uploadFile(formData);
-    	});
-
-        $("#btnSave").click(function(){
-            //var title = document.form1.title.value; ==> name속성으로 처리할 경우
-            //var content = document.form1.content.value;
-            //var writer = document.form1.writer.value;
-            let title = $("#title").val();
-            let content = $("#content").val();
-            let writer = $("#writer").val();
-            if(title == ""){
-                alert("제목을 입력하세요");
-                document.form1.title.focus();
-                return;
-            }
-            if(content == ""){
-                alert("내용을 입력하세요");
-                document.form1.content.focus();
-                return;
-            }
-            if(writer == ""){
-                alert("이름을 입력하세요");
-                document.form1.writer.focus();
-                return;
-            }
-            // 폼에 입력한 데이터를 서버로 전송
-            document.form1.submit();
-        });
-    });
- // 게시글 저장 버튼 클릭 이벤트 처리
-    $("#writeForm").submit(function (event) {
-        event.preventDefault();
-        var that = $(this);
-        filesSubmit(that);
-    });
+  
+    
+    	
+    	
+         
+      
+        // 게시글 저장 버튼 클릭 이벤트 처리
+       // $("#writeForm").submit(function (event) {
+          //   event.preventDefault();
+          //  var that = $(this);
+          //  filesSubmit(that);
+         //});
+   
+	
+	  
+  //  $("#writeForm").submit(function (event) {
+    //    event.preventDefault();
+       
+   //    var that = $(this);
+     //  filesSubmit(that);
+  //  });
  // 파일 삭제 버튼 클릭 이벤트
     $(document).on("click", ".delBtn", function (event) {
         event.preventDefault();
@@ -73,6 +60,9 @@
         deleteFileWrtPage(that);
     });
 </script>
+  
+
+
 
 <style type="text/css">
 
@@ -86,24 +76,8 @@
 </style>
 </head>
 <body>
-<script id="fileTemplate" type="text/x-handlebars-template">
-    <li>
-        <span class="mailbox-attachment-icon has-img">
-            <img src="{{imgSrc}}" alt="Attachment">
-        </span>
-        <div class="mailbox-attachment-info">
-            <a href="{{originalFileUrl}}" class="mailbox-attachment-name">
-                <i class="fa fa-paperclip"></i> {{originalFileName}}
-            </a>
-            <a href="{{fullName}}" class="btn btn-default btn-xs pull-right delBtn">
-                <i class="fa fa-fw fa-remove"></i>
-            </a>
-        </div>
-    </li>
-</script>
- <!--  handlebars -->
-<script src="${path}/resources/dist/js/handlebars-v4.7.6.js"></script>
-<script type="text/javascript" src="${path}/resources/dist/js/article_file_upload.js"></script>
+
+ 
 <%-- <div class="container" style="overflow: hidden; position: relative;">
 		<br> 
 			<b style="font-size: 30px;">게시글 작성</b>
@@ -114,7 +88,7 @@
 <%-- <div class="container">--%>
 
 <div class="col-lg-12">
-<form role="form1" id="writeForm" class="text-center p-5" method="post" action="${path}/app/board/insert">
+<form role="form1" id="writeForm"enctype="multipart/form-data" class="text-center p-5" method="post" action="${path}/app/board/insert">
     <div class="box box-primary">
      <div class="box-header with-border">
                 <h3 class="box-title">게시글 작성</h3>
@@ -153,16 +127,81 @@
                 <button type="button" class="btn btn-primary listBtn"><i class="fa fa-list"></i> 목록</button>
                 <div class="pull-right">
                     <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
-                    <button type="button"id="btnSave" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
+                    <button type="submit" id="btnSave" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-    
-
+ 
 </div>
 
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>
+
+
+   <!--  handlebars -->
+<script src="${path}/resources/dist/js/handlebars-v4.7.6.js"></script>
+<script type="text/javascript" src="${path}/resources/dist/js/article_file_upload.js?v=<%=System.currentTimeMillis() %>"></script>
+<script id="fileTemplate" type="text/x-handlebars-template">
+    <li>
+        <span class="mailbox-attachment-icon has-img">
+            <img src="{{imgSrc}}" alt="Attachment">
+        </span>
+        <div class="mailbox-attachment-info">
+            <a href="{{originalFileUrl}}" class="mailbox-attachment-name">
+                <i class="fa fa-paperclip"></i> {{originalFileName}}
+            </a>
+            <a href="{{fullName}}" class="btn btn-default btn-xs pull-right delBtn">
+                <i class="fa fa-fw fa-remove"></i>
+            </a>
+        </div>
+    </li>
+</script>
+<script> 
+
+$(document).ready(function(){
+/*$("#btnSave").click(function(){
+	 
+    //var title = document.form1.title.value; ==> name속성으로 처리할 경우
+    //var content = document.form1.content.value;
+    //var writer = document.form1.writer.value;
+    let title = $("#title").val();
+    let content = $("#content").val();
+    let writer = $("#writer").val();
+    if(title == ""){
+        alert("제목을 입력하세요");
+       document.getElementById('title').focus();
+        return;
+    }
+    if(content == ""){
+        alert("내용을 입력하세요");
+        document.getElementById('content').focus();
+        return;
+    }
+    if(writer == ""){
+        alert("이름을 입력하세요");
+        document.getElementById('writer').focus();
+        return;
+    }
+});
+   */
+    // 폼에 입력한 데이터를 서버로 전송
+  // document.form1.submit();
+
+    $("#writeForm").submit(function (event) {
+        event.preventDefault();
+        var that = $(this);
+        var str = "";
+        $(".uploadedList .delBtn").each(function (index) {
+            str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href")+"'>"
+        });
+        that.append(str);
+        that.get(0).submit();
+    });
+    
+//});
+});
+
+</script>
 </body>
 </html>
