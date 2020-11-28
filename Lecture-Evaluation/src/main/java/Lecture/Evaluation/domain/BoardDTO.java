@@ -3,6 +3,7 @@ package Lecture.Evaluation.domain;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -79,8 +80,10 @@ public class BoardDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "BoardDTO [title=" + title + ", content=" + content + ", writer=" + writer + ", regdate=" + regdate
-				+ ", viewcnt=" + viewcnt + ", bno=" + bno + "]";
+				+ ", viewcnt=" + viewcnt + ", bno=" + bno + ", files=" + Arrays.toString(files) + ", fileCnt=" + fileCnt
+				+ "]";
 	}
+	
 	
 	
 	

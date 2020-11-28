@@ -56,11 +56,11 @@
     </insert>
     <insert id="addFile">
         INSERT INTO tbl_board_file (
-            file_name
-            ,bno
+            file_name,
+            bno
         ) VALUES (
-            #{fileName}
-            ,LAST_INSERT_ID()
+            #{fullName},
+            LAST_INSERT_ID()
         )
     </insert>
     <!--03. 게시글 상세보기 조회 -->

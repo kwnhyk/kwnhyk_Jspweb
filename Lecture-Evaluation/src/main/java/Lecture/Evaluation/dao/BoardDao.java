@@ -9,7 +9,7 @@ import Lecture.Evaluation.page.SearchCriteria;
 
 public interface BoardDao {
 
-	void addFile(String fileName) throws Exception;
+	public void addFile(String fullName) throws Exception;
 	public void create(BoardDTO vo) throws Exception;
 	public BoardDTO read(Integer bno) throws Exception;
 	public void update(BoardDTO vo) throws Exception;

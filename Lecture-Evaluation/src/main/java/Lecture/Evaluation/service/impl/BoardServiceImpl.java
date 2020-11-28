@@ -19,26 +19,15 @@ import Lecture.Evaluation.service.BoardService;
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDao boardDao;
-	ArticleFileDao articleFileDao;
 	
-	public BoardServiceImpl(BoardDao boardDao) {
-		this.boardDao= boardDao;
-	}
+	
+	
 	@Transactional
 	@Override
 	public void insert(BoardDTO vo) throws Exception {
 		 String title = vo.getTitle();
 	        String content = vo.getContent();
-	      
-	      
-	      
-
-	      
-
-	    
-
-	      
-	    
+	     
 	      // *태그문자 처리 (< ==> &lt; > ==> &gt;)
 	        // replace(A, B) A를 B로 변경
 	      title = title.replace("<", "&lt;");
@@ -52,18 +41,21 @@ public class BoardServiceImpl implements BoardService {
 	      vo.setTitle(title);
 	        vo.setContent(content);
 	       
-	    
+	        
 	      String[] files = vo.getFiles();
-	      if(files ==null) {
+	      if(files == null) {
 	    	  boardDao.create(vo);
 	    	  return;
 	      }
 	      vo.setFileCnt(files.length);
 	      boardDao.create(vo);
 	      for(String fileName :files) {
+	    	  
 	    	  boardDao.addFile(fileName);
+	    	  
 		
 	}
+	      System.out.println("들어갔니?");
 	}
 
 	@Override

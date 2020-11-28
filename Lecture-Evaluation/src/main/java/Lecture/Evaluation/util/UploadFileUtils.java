@@ -89,7 +89,7 @@ public class UploadFileUtils {
 	    // 기본 경로 추출
 	    public static String getRootPath(String fileName, HttpServletRequest request) {
 
-	        String rootPath = "upload";
+	        String rootPath = "/resources/upload";
 	        MediaType mediaType = MediaUtils.getMediaType(fileName); // 파일타입 확인
 	        if (mediaType != null)
 	            return request.getSession().getServletContext().getRealPath(rootPath + "/images"); // 이미지 파일 경로

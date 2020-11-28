@@ -78,12 +78,14 @@ public class BoardController {
 		return "board/write";
 	}
 	@PostMapping("insert")
-	public String insert(@ModelAttribute BoardDTO vo,HttpSession session)  throws Exception{
+	public String insert(@ModelAttribute ("vo") BoardDTO vo,HttpSession session)  throws Exception{
 		 UserDTO user =(UserDTO) session.getAttribute("loginUser");
 		 
 	String writer=(String) user.getUserID();
 	vo.setWriter(writer);
+	System.out.println(vo.toString());
 		boardService.insert(vo);
+		System.out.println("넘어가니?");
 		return "redirect:list";
 	}
 	@GetMapping("view")

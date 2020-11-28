@@ -83,6 +83,7 @@ function filesSubmit(that) {
         str += "<input type='hidden' name='files[" + index + "]' value='" + $(this).attr("href") + "'>"
     });
     that.append(str);
+    console.log(that);
     that.get(0).submit();
 }
 
@@ -124,7 +125,7 @@ function getFileInfo(fullName) {
         // 원본 이미지 요청 링크
         originalFileUrl = "/Lecture-Evaluation/app/board/file/display?fileName=" + originalImg;
     } else {
-        imgSrc = "/Lecture-Evaluation/upload/files/file-icon.png"; // 파일 아이콘 이미지 링크
+        imgSrc = "/Lecture-Evaluation/resources/upload/files/file-icon.png"; // 파일 아이콘 이미지 링크
         uuidFileName = fullName.substr(12);
         // 파일 다운로드 요청 링크
         originalFileUrl = "/Lecture-Evaluation/app/board/file/display?fileName=" + fullName;

@@ -88,7 +88,7 @@
 <%-- <div class="container">--%>
 
 <div class="col-lg-12">
-<form role="form1" id="writeForm"enctype="multipart/form-data" class="text-center p-5" method="post" action="${path}/app/board/insert">
+<form role="form1" id="writeForm" enctype="multipart/form-data" class="text-center p-5" method="post" action="${path}/app/board/insert">
     <div class="box box-primary">
      <div class="box-header with-border">
                 <h3 class="box-title">게시글 작성</h3>
@@ -134,7 +134,7 @@
     </form>
 </div>
  
-</div>
+
 
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 
@@ -191,12 +191,9 @@ $(document).ready(function(){
     $("#writeForm").submit(function (event) {
         event.preventDefault();
         var that = $(this);
-        var str = "";
-        $(".uploadedList .delBtn").each(function (index) {
-            str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href")+"'>"
-        });
-        that.append(str);
-        that.get(0).submit();
+       
+       	filesSubmit(that);
+        console.log("간다");
     });
     
 //});
