@@ -63,14 +63,18 @@ $(document).ready(function(){
         <th>번호</th>
         <th>제목</th>
         <th>이름</th>
+        <th>파일</th>
         <th style="width:150px">작성일</th>
         <th>조회수</th>
+        
     </tr>
     <c:forEach var="row" items="${list}">
     <tr>
         <td>${row.bno}</td>
          <td><a href="${path}/app/board/view${pageMaker.makeSearch(pageMaker.criteria.page)}&bno=${row.bno}">${row.title}</a></td>
          <td>${row.writer}</td>
+         <td>${row.fileCnt}</td>
+         
        
       <!--       원하는 날짜형식으로 출력하기 위해 fmt태그 사용  -->
           

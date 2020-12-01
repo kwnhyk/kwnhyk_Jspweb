@@ -20,8 +20,8 @@ public class ArticleFileServiceImpl implements ArticleFileService{
 	    }
 	 // 첨부파일 목록
 	    @Override
-	    public List<String> getArticleFiles(Integer articleNo) throws Exception {
-	        return articleFileDao.getArticleFiles(articleNo);
+	    public List<String> getArticleFiles(Integer bno) throws Exception {
+	        return articleFileDao.getArticleFiles(bno);
 	    }
 
 }

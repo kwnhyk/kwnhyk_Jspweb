@@ -19,7 +19,7 @@ import Lecture.Evaluation.service.BoardService;
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDao boardDao;
-	
+	ArticleFileDao articleDao;
 	
 	
 	@Transactional
@@ -71,6 +71,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void delete(Integer bno) throws Exception {
+		articleDao.deleteFiles(bno);
 		boardDao.delete(bno);
 		
 	}

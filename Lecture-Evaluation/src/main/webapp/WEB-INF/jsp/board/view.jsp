@@ -81,6 +81,8 @@
           
 
         });
+        var bno = "${borad.bno}";
+        getFiles(bno);
     });
 
 </script>
@@ -110,7 +112,11 @@
         ${dto.writer}
        <!--  <input name="writer" id="writer" value="${dto.writer}" placeholder="이름을 입력해주세요"> -->
     </div>
-  
+    <%--업로드 파일 정보영역 --%>
+  	<div class="box-footer uploadFiles">
+  	<ul class="mailbox-attachment clearfix uploadedFileList"></ul>
+  	</div>
+  	 <%--업로드 파일 정보영역 --%>
     <div style="width:650px; text-align: center;">
         <!-- 게시물번호를 hidden으로 처리 -->
       
@@ -137,5 +143,19 @@
 </div>
 </div>
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>
+<script src="${path}/resources/dist/js/handlebars-v4.7.6.js"></script>
+<script type="text/javascript" src="${path}/resources/dist/js/article_file_upload.js?v=<%=System.currentTimeMillis() %>"></script>
+<script id="fileTemplate" type="text/x-handlebars-template">
+    <li data-src="{{fullName}}">
+        <span class="mailbox-attachment-icon has-img">
+            <img src="{{imgSrc}}" alt="Attachment">
+        </span>
+        <div class="mailbox-attachment-info">
+            <a href="{{originalFileUrl}}" class="mailbox-attachment-name">
+                <i class="fa fa-paperclip"></i> {{originalFileName}}
+            </a>
+        </div>
+    </li>
+</script>
 </body>
 </html>

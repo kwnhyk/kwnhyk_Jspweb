@@ -2,6 +2,7 @@ package Lecture.Evaluation.web;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,8 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -75,4 +80,46 @@ public class ArticleFileController {
 
         return entity;
     }
+    //게시글 첨부 파일 목록
+    @GetMapping("list/{bno}")
+    public ResponseEntity<List<String>> getFiles(@PathVariable("bno")Integer bno){
+    	
+    	ResponseEntity<List<String>> entity =null;
+    	try {
+    		List<String> fileList = articleFileService.getArticleFiles(bno);
+    		entity = new ResponseEntity<>(fileList,HttpStatus.OK);
+    		
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    		entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    		
+    	}
+    	return entity;
+    	
+    	
+    
+    
+    
+    }
+    //게시글 파일 전체 삭제
+    @PostMapping("deleteAll")
+    public ResponseEntity<String> deleteAllFiles(@RequestParam("files[]")String[] files,HttpServletRequest request){
+    	
+    	if(files ==null || files.length==0)
+    		return new ResponseEntity<>("DELETED", HttpStatus.OK);
+    	ResponseEntity<String>entity =null;
+    	
+    	try {
+    		for(String fileName :files)
+    			UploadFileUtils.deleteFile(fileName,request);
+    		entity = new ResponseEntity<>("DLETED",HttpStatus.OK);
+    		
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    		entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+    		
+    	}
+    	return entity;
+    }
+    
 }

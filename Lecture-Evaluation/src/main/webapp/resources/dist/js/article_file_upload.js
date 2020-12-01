@@ -134,8 +134,18 @@ function getFileInfo(fullName) {
 
     return {originalFileName: originalFileName, imgSrc: imgSrc, originalFileUrl: originalFileUrl, fullName: fullName};
 }
-
-
+//파일 목록:조회 수정
+function getFiles(bno){
+	$.getJSON("/board/file/list/"+bno,function(list){
+		if(list.length ===0){
+			$(".uploadedFileList").html("<span class='noAttach'>첨부파일이 없습니다.</span>");
+		}
+		$(list).each(function(){
+			printFiles(this);
+			
+		})
+	});
+}
 // 이미지 파일 유무 확인
 function checkImageType(fullName) {
     var pattern = /jpg$|gif$|png$|jpge$/i;
