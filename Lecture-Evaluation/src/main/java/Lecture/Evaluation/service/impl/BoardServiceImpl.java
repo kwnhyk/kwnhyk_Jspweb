@@ -41,14 +41,14 @@ public class BoardServiceImpl implements BoardService {
 	      vo.setTitle(title);
 	        vo.setContent(content);
 	       
-	        
+	        boardDao.create(vo);
 	      String[] files = vo.getFiles();
 	      if(files == null) {
-	    	  boardDao.create(vo);
+	    	 
 	    	  return;
 	      }
-	      vo.setFileCnt(files.length);
-	      boardDao.create(vo);
+	      
+	   
 	      for(String fileName :files) {
 	    	  
 	    	  boardDao.addFile(fileName);
@@ -68,7 +68,7 @@ public class BoardServiceImpl implements BoardService {
 		 boardDao.update(vo);
 		
 	}
-
+	@Transactional
 	@Override
 	public void delete(Integer bno) throws Exception {
 		articleDao.deleteFiles(bno);
@@ -103,6 +103,10 @@ public class BoardServiceImpl implements BoardService {
 	        }
 			
 	    }
+	@Override
+	public List<String> getArticleFiles(Integer bno) throws Exception {
+		return boardDao.getArticleFiles(bno);
+	}
 	@Override
 	public List<BoardDTO> listCriteria(Criteria criteria) throws Exception {
 		return boardDao.listCriteria(criteria);

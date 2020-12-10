@@ -63,6 +63,12 @@
             LAST_INSERT_ID()
         )
     </insert>
+    <select id="getArticleFiles" resultType="string">
+    SELECT file_name
+    FROM tbl_board_file
+    WHERE bno = #{bno}
+    ORDER BY reg_date
+</select>
     <!--03. 게시글 상세보기 조회 -->
     <select id="read" resultMap="BoardMap">
         SELECT * FROM tbl_board 

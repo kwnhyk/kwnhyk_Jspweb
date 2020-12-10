@@ -29,7 +29,7 @@ public class BoardDTO implements Serializable {
 	}
 	public void setFiles(String[] files) {
 		this.files = files;
-		
+		 setFileCnt(files.length);
 	}
 	public int getFileCnt() {
 		return fileCnt;

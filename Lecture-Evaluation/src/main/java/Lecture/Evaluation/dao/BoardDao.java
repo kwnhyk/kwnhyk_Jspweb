@@ -8,7 +8,7 @@ import Lecture.Evaluation.page.Criteria;
 import Lecture.Evaluation.page.SearchCriteria;
 
 public interface BoardDao {
-
+	public List<String> getArticleFiles(Integer bno) throws Exception;
 	public void addFile(String fullName) throws Exception;
 	public void create(BoardDTO vo) throws Exception;
 	public BoardDTO read(Integer bno) throws Exception;

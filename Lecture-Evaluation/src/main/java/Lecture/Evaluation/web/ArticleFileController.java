@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,6 +34,7 @@ public class ArticleFileController {
 	BoardService boardService;
 	ArticleFileService articleFileService;
     // 게시글 파일 업로드
+	
     @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public ResponseEntity<String> uploadFile(MultipartFile file, HttpServletRequest request) {
         ResponseEntity<String> entity = null;
@@ -47,6 +49,7 @@ public class ArticleFileController {
     }
     
  // 게시글 첨부파일 출력
+	
     @RequestMapping(value = "/display", method = RequestMethod.GET)
     public ResponseEntity<byte[]> displayFile(String fileName, HttpServletRequest request) throws Exception {
 
@@ -81,12 +84,13 @@ public class ArticleFileController {
         return entity;
     }
     //게시글 첨부 파일 목록
-    @GetMapping("list/{bno}")
+   
+    @RequestMapping(value = "/list/{bno}", method = RequestMethod.GET)
     public ResponseEntity<List<String>> getFiles(@PathVariable("bno")Integer bno){
     	
     	ResponseEntity<List<String>> entity =null;
     	try {
-    		List<String> fileList = articleFileService.getArticleFiles(bno);
+    		List<String> fileList = boardService.getArticleFiles(bno);
     		entity = new ResponseEntity<>(fileList,HttpStatus.OK);
     		
     	}catch(Exception e) {

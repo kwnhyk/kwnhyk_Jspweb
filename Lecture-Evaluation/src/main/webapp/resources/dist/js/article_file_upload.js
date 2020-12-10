@@ -136,7 +136,7 @@ function getFileInfo(fullName) {
 }
 //파일 목록:조회 수정
 function getFiles(bno){
-	$.getJSON("/board/file/list/"+bno,function(list){
+	$.getJSON("/Lecture-Evaluation/app/board/file/list/"+bno,function(list){
 		if(list.length ===0){
 			$(".uploadedFileList").html("<span class='noAttach'>첨부파일이 없습니다.</span>");
 		}
@@ -146,6 +146,14 @@ function getFiles(bno){
 		})
 	});
 }
+//게시글 삭제 클릭 이벤트
+//$(".delBtn").on("click",function(){
+	
+	//삭제처리
+	//document.form1.attr("action","/Lecture-Evaluation/app/board/delete");
+	//formObj.submit();
+
+//});
 // 이미지 파일 유무 확인
 function checkImageType(fullName) {
     var pattern = /jpg$|gif$|png$|jpge$/i;

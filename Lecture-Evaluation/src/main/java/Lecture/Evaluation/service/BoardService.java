@@ -25,7 +25,8 @@ public interface BoardService {
 	   public int countBoard(Criteria criteria) throws Exception;
 	   public List<BoardDTO> listCriteria(Criteria criteria) throws Exception;
 	   List<BoardDTO> listSearch(SearchCriteria searchCriteira) throws Exception;
-	   
+	    // 첨부파일 목록
+	   public List<String> getArticleFiles(Integer bno) throws Exception;
 	 
 	   int countSearchedArticles(SearchCriteria searchCriteria) throws Exception;
 	   

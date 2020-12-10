@@ -5,6 +5,26 @@
 <script>
     $(document).ready(function(){
         $("#btnDelete").click(function(){
+        	//댓글이 달린 게시글 삭체처리 방지
+        	var replyCnt = $(".replyDiv").length;
+        	if(replyCnt >0){
+        		alert("댓글이 달린 게시글 삭제 불가");
+        		return;
+        		
+        	}
+        	//첨부파일명들 배열에 저장
+        	var arr =[];
+        	$(".uploadedFileList li").each(function(){
+        		arr.push($(this).attr("data-src"));
+        		
+        	});
+        	// 첨부파일 삭제요청
+        	if(arr.length>0){
+        		$.post("/Lecture-Evaluation/app/board/file/deleteAll",{files:arr},function(){
+        			
+        		});
+        	}
+        	
         	const swalWithBootstrapButtons = Swal.mixin({
         		  customClass: {
         		    confirmButton: 'btn btn-success mr-3 ',
@@ -81,8 +101,9 @@
           
 
         });
-        var bno = "${borad.bno}";
+        var bno = "${dto.bno}";
         getFiles(bno);
+  	
     });
 
 </script>
