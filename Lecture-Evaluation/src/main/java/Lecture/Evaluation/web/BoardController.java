@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -98,6 +99,15 @@ public class BoardController {
 	mav.addObject("dto",boardService.read(bno));
 	return mav;
 	}
+	@GetMapping("updatePage")
+	public String updatePage(@RequestParam Integer bno,@ModelAttribute("searchCriteria")SearchCriteria searchCriteria,Model model)throws Exception {
+		 logger.info(searchCriteria.toString());
+		 model.addAttribute("dto", boardService.read(bno));
+		
+		return "board/updatePage";
+		
+		
+	}
 	@PostMapping("update")
 	public String update(SearchCriteria searchCriteria,RedirectAttributes redirectAttributes,@ModelAttribute BoardDTO vo,HttpSession session) throws Exception{
 		 UserDTO user =(UserDTO) session.getAttribute("loginUser");
@@ -114,8 +124,8 @@ public class BoardController {
 		
 		return "redirect:list";
 	}
-	@RequestMapping("delete")
-	public String delete(SearchCriteria searchCriteria,RedirectAttributes redirectAttributes,@RequestParam Integer bno) throws Exception{
+	@PostMapping("delete")
+	public String delete(SearchCriteria searchCriteria,RedirectAttributes redirectAttributes,@RequestParam("bno") Integer bno) throws Exception{
 		
 		boardService.delete(bno);
 		redirectAttributes.addAttribute("page", searchCriteria.getPage());

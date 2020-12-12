@@ -92,6 +92,12 @@ function deleteFileWrtPage(that) {
     var url = "file/delete";
     deleteFile(url, that);
 }
+function deleteFileViewPage(that,bno){
+	var url = "file/delete/"+bno;
+	deleteFile(url,that);
+	
+	
+}
 
 // 파일 삭제 AJAX 통신
 function deleteFile(url, that) {

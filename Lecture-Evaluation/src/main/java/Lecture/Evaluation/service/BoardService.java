@@ -27,7 +27,8 @@ public interface BoardService {
 	   List<BoardDTO> listSearch(SearchCriteria searchCriteira) throws Exception;
 	    // 첨부파일 목록
 	   public List<String> getArticleFiles(Integer bno) throws Exception;
-	 
+	 //첨부파일 삭제
+	   public void deleteFile(String fileName, Integer bno)throws Exception;
 	   int countSearchedArticles(SearchCriteria searchCriteria) throws Exception;
 	   
 

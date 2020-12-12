@@ -193,7 +193,7 @@ $(document).ready(function(){
         var that = $(this);
        
        	filesSubmit(that);
-        console.log("간다");
+        console.log(that);
     });
     
 //});

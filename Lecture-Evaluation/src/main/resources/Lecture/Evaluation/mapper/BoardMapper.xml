@@ -69,6 +69,35 @@
     WHERE bno = #{bno}
     ORDER BY reg_date
 </select>
+<delete id="deleteFiles">
+	DELETE FROM tbl_board_file
+	WHERE bno = #{bno}
+
+
+</delete>
+<delete id="deleteFile">
+    DELETE FROM tbl_board_file
+    WHERE file_name = #{fileName}
+</delete>
+
+<insert id="replaceFile" parameterType="map">
+    INSERT INTO tbl_board_file (
+        file_name
+        ,bno
+    ) VALUES (
+        #{fileName}
+        ,#{bno}
+    )
+</insert>
+<update id="updateFileCnt">
+    UPDATE tbl_board
+    SET file_cnt = (
+        SELECT COUNT(bno)
+        FROM tbl_board_file
+        WHERE bno = #{bno}
+    )
+    WHERE bno = #{bno}
+</update>
     <!--03. 게시글 상세보기 조회 -->
     <select id="read" resultMap="BoardMap">
         SELECT * FROM tbl_board 

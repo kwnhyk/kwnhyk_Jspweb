@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import Lecture.Evaluation.dao.BoardDao;
 import Lecture.Evaluation.service.ArticleFileService;
 import Lecture.Evaluation.service.BoardService;
 import Lecture.Evaluation.util.UploadFileUtils;
@@ -105,6 +106,26 @@ public class ArticleFileController {
     
     
     }
+    //게시글 첨부파일 삭제
+    @RequestMapping(value = "/delete/{bno}", method = RequestMethod.POST)
+    public ResponseEntity<String> deleteFile(@PathVariable("bno") Integer bno,String fileName,HttpServletRequest request){
+    	
+    	ResponseEntity<String>entity=null;
+    	try {
+    		
+        	UploadFileUtils.deleteFile(fileName, request);
+        	boardService.deleteFile(fileName, bno);
+        	entity = new ResponseEntity<>("DELETED",HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+    	return entity;
+    	
+    	
+    }
+    
     //게시글 파일 전체 삭제
     @PostMapping("deleteAll")
     public ResponseEntity<String> deleteAllFiles(@RequestParam("files[]")String[] files,HttpServletRequest request){
@@ -116,7 +137,7 @@ public class ArticleFileController {
     	try {
     		for(String fileName :files)
     			UploadFileUtils.deleteFile(fileName,request);
-    		entity = new ResponseEntity<>("DLETED",HttpStatus.OK);
+    		entity = new ResponseEntity<>("DELETED",HttpStatus.OK);
     		
     	}catch(Exception e) {
     		e.printStackTrace();

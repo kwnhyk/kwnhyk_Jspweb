@@ -3,6 +3,8 @@
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 
 <script>
+	var bno = "${dto.bno}";
+	
     $(document).ready(function(){
         $("#btnDelete").click(function(){
         	//댓글이 달린 게시글 삭체처리 방지
@@ -66,31 +68,25 @@
                 
            // }
         });
-    
-        
-        $("#btnUpdete").click(function(){
-            //var title = document.form1.title.value; ==> name속성으로 처리할 경우
-            //var content = document.form1.content.value;
-            //var writer = document.form1.writer.value;
-            var title = $("#title").val();
-            var content = $("#content").val();
-           
-            if(title == ""){
-                alert("제목을 입력하세요");
-                document.form1.title.focus();
-                return;
-            }
-            if(content == ""){
-                alert("내용을 입력하세요");
-                document.form1.content.focus();
-                return;
-            }
-          
-            document.form1.action="${path}/app/board/update"
-            // 폼에 입력한 데이터를 서버로 전송
-            document.form1.submit();
+
+        var formObj = $("form[role='form']");
+        console.log(formObj);
+        $(".modBtn").on("click", function () {
+            formObj.attr("action", "updatePage");
+            formObj.attr("method", "get");
+            formObj.submit();
         });
+       
+       
         
+       
+          
+        
+          
+            	
+           
+      
+     
         $("#btnList").on("click", function(){
             self.location =
             "list?page=${searchCriteria.page}"
@@ -101,18 +97,37 @@
           
 
         });
-        var bno = "${dto.bno}";
+     // 첨부파일 삭제 버튼 클릭 이벤트
+        $(document).on("click", ".delBtn", function (event) {
+            event.preventDefault();
+            if (confirm("삭제하시겠습니까? 삭제된 파일은 복구할 수 없습니다.")) {
+                var that = $(this);
+                deleteFileViewPage(that,bno);
+            }
+        });
+    
+       
         getFiles(bno);
-  	
     });
 
 </script>
+
+<style type="text/css">
+
+.fileDrop {
+    width: 100%;
+    height: 200px;
+    border: 2px dotted #0b58a2;
+}
+
+
+</style>
 </head>
 <body>
 <div class="container" style="overflow: hidden; position: relative;">
 <br>
 <h2>게시글 보기</h2>
-<form name="form1" method="post">
+<form role="form"method="post"  id="viewForm">
     <div>        <!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
         작성일자 : <fmt:formatDate value="${dto.regdate}" pattern="yyyy-MM-dd a HH:mm:ss"/>
                 <!-- 날짜 형식 => yyyy 4자리연도, MM 월, dd 일, a 오전/오후, HH 24시간제, hh 12시간제, mm 분, ss 초 -->
@@ -120,19 +135,29 @@
     <div>
         조회수 : ${dto.viewcnt}
     </div>
-    <div>
-        제목
-        <input name="title" id="title" size="80" value="${dto.title}" placeholder="제목을 입력해주세요">
+     <div class="form-group">
+    <label for="title" class="control-label">제목</label>
+   
+        
+        <input name="title" id="title" class="form-control" value="${dto.title}" placeholder="제목을 입력해주세요">
     </div>
-    <div>
-        내용
-        <textarea name="content" id="content" rows="4" cols="80" placeholder="내용을 입력해주세요">${dto.content}</textarea>
+    
+      <div class="form-group">
+     <label for="content" class="control-label">내용</label>
+    
+        
+        <textarea name="content" id="content" rows="10" class="form-control" placeholder="내용을 입력해주세요">${dto.content}</textarea>
     </div>
-    <div>
-        이름
+   
+    <div class="form-group">
+    <label for="writer" class="control-label">작성자</label>
+  
+        
         ${dto.writer}
        <!--  <input name="writer" id="writer" value="${dto.writer}" placeholder="이름을 입력해주세요"> -->
     </div>
+   
+   
     <%--업로드 파일 정보영역 --%>
   	<div class="box-footer uploadFiles">
   	<ul class="mailbox-attachment clearfix uploadedFileList"></ul>
@@ -149,7 +174,7 @@
         <input type="hidden" name="search" value="${searchCriteria.search}">
       </form>
          <c:if test="${loginUser.userID==dto.writer}">
-        <button type="button" class="btn-warning modBtn" id="btnUpdete"><i class="fa fa-edit">
+        <button type="submit" class="btn-warning modBtn" id="btnUpdate"><i class="fa fa-edit">
 
           수정</i></button>
         <button type="button" class="btn-danger delBtn"id="btnDelete"><i class="fa fa-trash">
@@ -175,6 +200,7 @@
             <a href="{{originalFileUrl}}" class="mailbox-attachment-name">
                 <i class="fa fa-paperclip"></i> {{originalFileName}}
             </a>
+ 			
         </div>
     </li>
 </script>

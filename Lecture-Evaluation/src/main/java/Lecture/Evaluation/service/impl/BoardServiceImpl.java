@@ -62,20 +62,36 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDTO read(Integer bno) throws Exception {
 	    return boardDao.read(bno);
 	}
-
+	@Transactional
 	@Override
 	public void update(BoardDTO vo) throws Exception {
+		Integer bno = vo.getBno();
+		String[] files = vo.getFiles();
 		 boardDao.update(vo);
+		 boardDao.deleteFiles(bno);
+		 if(files ==null) 
+			 return ;
+		 
+		 for(String fileName:files) {
+			 boardDao.replaceFile(fileName,bno);
+		 }
+		 boardDao.updateFileCnt(bno);
 		
 	}
 	@Transactional
 	@Override
 	public void delete(Integer bno) throws Exception {
-		articleDao.deleteFiles(bno);
+		boardDao.deleteFiles(bno);
 		boardDao.delete(bno);
 		
 	}
-
+	@Transactional
+	@Override
+	public void deleteFile(String fileName, Integer bno) throws Exception {
+		boardDao.deleteFile(fileName);
+		boardDao.updateFileCnt(bno);
+	
+	}
 	@Override
 	public List<BoardDTO> listAll() throws Exception {
 		return boardDao.findAll();
