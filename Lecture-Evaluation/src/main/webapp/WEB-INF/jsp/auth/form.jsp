@@ -71,6 +71,7 @@ if(error != '') {
   }
 }
 
+
 	</script>
     <nav class="navbar navbar-expand-lg navbar-darkgray">
             <a class="navbar-brand" href="/Lecture-Evaluation/">강의평가 웹 사이트</a>
@@ -95,7 +96,7 @@ if(error != '') {
             			<div class="dropdown-menu" aria-labelledby="dropdown">
             			
             			<c:if test="${empty userID}">
-            				<a class="dropdown-item" href="/auth/form">로그인</a>
+            				<a class="dropdown-item" href="../auth/form">로그인</a>
                 			<a class="dropdown-item" href="../user/form">회원가입</a>
             			</c:if>
             
@@ -152,6 +153,11 @@ if(error != '') {
         		 data-onlogin="checkLoginState();"
         		 align="center">
         	</div>
+        	
+        </div>
+        <div class="form-group mt-3" align="center">
+        	<button type="button" id="btnJoin"class="btn btn-success">회원가입</button>
+        
         </div>
       
         	
@@ -198,7 +204,18 @@ if(error != '') {
   function requestAutoLogin(accessToken) {
       location.href = "facebookLogin?accessToken=" + accessToken;
   }
+  $(document).ready(function(){
+		
+		
+		
 
+	  $("#btnJoin").on("click",function(){
+	 	location.href="../user/form";
+	 	 
+	 	 
+	  });
+	 });
+	  
 </script>
 	
 

@@ -50,8 +50,8 @@
         		      '게시물 삭제 완료',
         		      'success'
         		    )
-        		    document.form1.action= "${path}/app/board/delete";
-        		    document.form1.submit();
+        		    formObj.attr("action", "${path}/app/board/delete");
+        		    formObj.submit();
         		  } else if (
         		    /* Read more about handling dismissals below */
         		    result.dismiss === Swal.DismissReason.cancel
