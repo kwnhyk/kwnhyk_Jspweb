@@ -8,9 +8,8 @@
 #### :dart: &nbsp;&nbsp;&nbsp;개요 및 특징​
 
 ##### ****
-https://www.notion.so/Lecture-Evaluation-3832bdc0ce604441b3738a135a7fe821#f40e51ceec044c099e76a44ffcef4eee
--
-
+![메인](https://user-images.githubusercontent.com/31877224/103603061-fb7a3400-4f50-11eb-81ff-dab001bd78a7.png)
+-온라인 강의를 평가하고 강의에 관련된 자료등을 저장하는 사이트
 ##### ****
 
 
