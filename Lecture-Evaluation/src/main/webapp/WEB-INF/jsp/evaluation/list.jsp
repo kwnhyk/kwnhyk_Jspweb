@@ -244,14 +244,14 @@
             </c:otherwise>
             </c:choose>
             <c:choose>
-        	<c:when test="${pageMaker.next==true}">
+        	<c:when test="${pageMaker.next && pageMaker.endPage > 0}">
         	<li class="page-item">
         	<a class="page-link disabled">다음</a>
         	</li>
         	</c:when>
         	
  <c:otherwise> 
-                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/app/evaluation/list${pageMaker.makeDivide(pageMaker.criteria.page + 1)}">다음</a></li>
+                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/app/evaluation/list${pageMaker.makeDivide(pageMaker.endPage + 1)}">다음</a></li>
             </c:otherwise>
         	</c:choose>
  
