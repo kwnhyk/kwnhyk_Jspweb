@@ -8,7 +8,7 @@
 #### :dart: &nbsp;&nbsp;&nbsp;개요 및 특징​
 
 ##### ****
-
+https://www.notion.so/Lecture-Evaluation-3832bdc0ce604441b3738a135a7fe821#f40e51ceec044c099e76a44ffcef4eee
 -
 
 ##### ****
@@ -36,7 +36,7 @@
     </tr>
     <tr align="left">
       <th>개발기간</th>
-      <th>2020.06.15 ~ 2020.0?.08</th>
+      <th>2020.06.12 ~ 2020.12.12</th>
     </tr>
     <tr align="left">
       <th>인원</th>
